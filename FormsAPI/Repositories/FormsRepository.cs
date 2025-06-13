@@ -32,24 +32,24 @@ namespace Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<Form>> GetByBatch(int batch, int batchSize = 20)
+        public async Task<IEnumerable<Form>> GetAllByBatch(int batch, int batchSize = 20)
         {
             return await _context.Forms.Skip(batch * batchSize).Take(batchSize).ToListAsync();
         }
 
-        public async Task<IEnumerable<Form>> GetByBatch_FormTagId(int id, int batch, int batchSize = 20)
+        public async Task<IEnumerable<Form>> FilterByBatch_FormTagId(int id, int batch, int batchSize = 20)
         {
-            return await _context.Forms.Skip(batch * batchSize).Where(f=>f.FormTags.Any(ft=>ft.Id==id)).Take(batchSize).ToListAsync();
+            return await _context.Forms.Where(f => f.FormTags.Any(ft => ft.Id == id)).Skip(batch * batchSize).Take(batchSize).ToListAsync();
         }
 
-        public async Task<IEnumerable<Form>> GetByBatch_TopicId(int id, int batch, int batchSize = 20)
+        public async Task<IEnumerable<Form>> FilterByBatch_TopicId(int id, int batch, int batchSize = 20)
         {
-            return await _context.Forms.Skip(batch * batchSize).Where(f => f.TopicId== id).Take(batchSize).ToListAsync();
+            return await _context.Forms.Where(f => f.TopicId == id).Skip(batch * batchSize).Take(batchSize).ToListAsync();
         }
 
-        public async Task<IEnumerable<Form>> GetByBatch_Title(string title, int batch, int batchSize = 20)
+        public async Task<IEnumerable<Form>> FilterByBatch_Title(string title, int batch, int batchSize = 20)
         {
-            return await _context.Forms.Skip(batch * batchSize).Where(f=>EF.Functions.Like(f.Title,$"%{title}%")).Take(batchSize).ToListAsync();
+            return await _context.Forms.Where(f => EF.Functions.Like(f.Title, $"%{title}%")).Skip(batch * batchSize).Take(batchSize).ToListAsync();
         }
 
         public override Task<IEnumerable<Form>?> GetAll()

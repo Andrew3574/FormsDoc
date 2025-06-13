@@ -29,7 +29,7 @@ namespace Repositories
         {
             return await _context.Tags.ToListAsync();
         }
-        public async Task<IEnumerable<Tag>?> GetByName(string name)
+        public async Task<IEnumerable<Tag>?> FilterByName(string name)
         {
             return await _context.Tags.Where(t => EF.Functions.Like(t.Name, $"%{name}%")).ToListAsync();
         }

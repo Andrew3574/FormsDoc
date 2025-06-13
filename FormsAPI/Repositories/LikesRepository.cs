@@ -29,7 +29,7 @@ namespace Repositories
 
         public async Task<bool> isLiked(int formId, int userid)
         {
-            return await _context.Likes.ContainsAsync(new Like{FormId=formId,UserId=userid});
+            return await _context.Likes.AnyAsync(l=>l.FormId==formId && l.UserId==userid);
         }
 
         public override Task<IEnumerable<Like>?> GetAll()

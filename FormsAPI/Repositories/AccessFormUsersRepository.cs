@@ -37,6 +37,11 @@ namespace Repositories
             return await _context.AccessformUsers.FirstOrDefaultAsync(a=>a.Id==id);
         }
 
+        public async Task<IEnumerable<AccessformUser>?> GetByFormId(int id)
+        {
+            return await _context.AccessformUsers.Where(a => a.FormId == id).ToListAsync();
+        }
+
         public override Task Update(AccessformUser entity)
         {
             throw new NotImplementedException();
