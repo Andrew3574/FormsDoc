@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Models;
 
-public partial class FormQuestionAnswer
+public partial class LongTextAnswer
 {
     public int Id { get; set; }
 
@@ -11,7 +11,7 @@ public partial class FormQuestionAnswer
 
     public int? FormQuestionId { get; set; }
 
-    public string? Answer { get; set; }
+    public string Answer { get; set; } = null!;
 
     public virtual FormAnswer? AnswerNavigation { get; set; }
 

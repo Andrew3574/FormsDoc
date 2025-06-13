@@ -121,7 +121,6 @@ D:\SummerCourse\CourseProject\FormsAPI\FormsAPI\obj\Debug\net8.0\FormsAPI.Genera
 D:\SummerCourse\CourseProject\FormsAPI\FormsAPI\obj\Debug\net8.0\FormsAPI.AssemblyInfoInputs.cache
 D:\SummerCourse\CourseProject\FormsAPI\FormsAPI\obj\Debug\net8.0\FormsAPI.AssemblyInfo.cs
 D:\SummerCourse\CourseProject\FormsAPI\FormsAPI\obj\Debug\net8.0\FormsAPI.csproj.CoreCompileInputs.cache
-D:\SummerCourse\CourseProject\FormsAPI\FormsAPI\obj\Debug\net8.0\FormsAPI.MvcApplicationPartsAssemblyInfo.cs
 D:\SummerCourse\CourseProject\FormsAPI\FormsAPI\obj\Debug\net8.0\FormsAPI.MvcApplicationPartsAssemblyInfo.cache
 D:\SummerCourse\CourseProject\FormsAPI\FormsAPI\obj\Debug\net8.0\scopedcss\bundle\FormsAPI.styles.css
 D:\SummerCourse\CourseProject\FormsAPI\FormsAPI\obj\Debug\net8.0\staticwebassets.build.json
@@ -140,3 +139,9 @@ D:\SummerCourse\CourseProject\FormsAPI\FormsAPI\obj\Debug\net8.0\refint\FormsAPI
 D:\SummerCourse\CourseProject\FormsAPI\FormsAPI\obj\Debug\net8.0\FormsAPI.pdb
 D:\SummerCourse\CourseProject\FormsAPI\FormsAPI\obj\Debug\net8.0\FormsAPI.genruntimeconfig.cache
 D:\SummerCourse\CourseProject\FormsAPI\FormsAPI\obj\Debug\net8.0\ref\FormsAPI.dll
+D:\SummerCourse\CourseProject\FormsAPI\FormsAPI\obj\Debug\net8.0\FormsAPI.sourcelink.json
+D:\SummerCourse\CourseProject\FormsAPI\FormsAPI\bin\Debug\net8.0\Models.dll
+D:\SummerCourse\CourseProject\FormsAPI\FormsAPI\bin\Debug\net8.0\Repositories.dll
+D:\SummerCourse\CourseProject\FormsAPI\FormsAPI\bin\Debug\net8.0\Models.pdb
+D:\SummerCourse\CourseProject\FormsAPI\FormsAPI\bin\Debug\net8.0\Repositories.pdb
+D:\SummerCourse\CourseProject\FormsAPI\FormsAPI\obj\Debug\net8.0\FormsAPI.MvcApplicationPartsAssemblyInfo.cs

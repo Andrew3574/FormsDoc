@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Models.Enums;
+using System;
 using System.Collections.Generic;
 
 namespace Models;
@@ -9,6 +10,10 @@ public partial class User
 
     public string Email { get; set; } = null!;
 
+    public UserRole Role { get; set; } = UserRole.user;
+
+    public UserState State { get; set; } = UserState.active;
+
     public string Name { get; set; } = null!;
 
     public string Surname { get; set; } = null!;
@@ -16,6 +21,8 @@ public partial class User
     public string Passwordhash { get; set; } = null!;
 
     public string? ImageUrl { get; set; }
+
+    public virtual ICollection<AccessformUser> AccessformUsers { get; set; } = new List<AccessformUser>();
 
     public virtual ICollection<Comment> Comments { get; set; } = new List<Comment>();
 

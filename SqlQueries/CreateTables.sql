@@ -34,6 +34,13 @@ create table Forms(
 	version int default 1
 );
 
+create table AccessForm_Users(
+	id serial primary key,
+	form_id int references forms(id) on delete cascade,
+	user_id int references users(id) on delete cascade,
+	unique (form_id, user_id)
+);
+
 create table Likes(
 	id serial primary key,
 	user_id int references Users(id) on delete cascade,
@@ -65,20 +72,52 @@ create table Form_Questions(
 	question_type_id int references Question_Types(id) on delete cascade,
 	question text not null,
 	description text,
-	display_state boolean
+	display_state boolean,
+	position int not null
 );
+
+--------------------------------------
+create table Form_Question_Options(
+	id serial primary key,
+	Form_Question_id int references Form_Questions(id) on delete cascade,
+	option_value text not null,
+	position int not null
+);
+--------------------------------------
 
 create table Form_Answers(
 	id serial primary key,
 	user_id int references users(id) on delete cascade,
-	form_id int references forms(id) on delete cascade
+	form_id int references forms(id) on delete cascade,
+	asnwered_at timestamptz(0) default now()
 );
 
-create table Form_Question_Answers(
+create table Short_Text_Answers(
 	id serial primary key,
 	answer_id int references form_answers(id) on delete cascade,
 	form_Question_id int references Form_Questions(id) on delete cascade,
-	answer text
+	answer varchar(50) not null
+);
+
+create table Long_Text_Answers(
+	id serial primary key,
+	answer_id int references form_answers(id) on delete cascade,
+	form_Question_id int references Form_Questions(id) on delete cascade,
+	answer varchar(200) not null
+);
+
+create table Integer_Answers(
+	id serial primary key,
+	answer_id int references form_answers(id) on delete cascade,
+	form_Question_id int references Form_Questions(id) on delete cascade,
+	answer int not null
+);
+
+create table Checkbox_Answers(
+	id serial primary key,
+	answer_id int references form_answers(id) on delete cascade,
+	form_Question_id int references Form_Questions(id) on delete cascade,
+	answer boolean default false
 );
 
 insert into topics(name) values('Education'),
@@ -90,4 +129,4 @@ insert into tags(name) values('Personality'),
 insert into Question_Types(name) values('text'),
 ('textarea'),('uinteger'),('checkbox');
 
-create unique index on users(email);
+--create unique index on users(email);

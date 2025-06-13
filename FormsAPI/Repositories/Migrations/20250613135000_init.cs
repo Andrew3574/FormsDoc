@@ -63,6 +63,8 @@ namespace Repositories.Migrations
                     id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     email = table.Column<string>(type: "character varying(32)", maxLength: 32, nullable: false),
+                    Role = table.Column<string>(type: "text", nullable: false),
+                    State = table.Column<string>(type: "text", nullable: false),
                     name = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
                     surname = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
                     passwordhash = table.Column<string>(type: "character varying(32)", maxLength: 32, nullable: false),
@@ -85,7 +87,8 @@ namespace Repositories.Migrations
                     description = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true),
                     image_url = table.Column<string>(type: "character varying(32)", maxLength: 32, nullable: true),
                     version = table.Column<int>(type: "integer", nullable: true, defaultValue: 1),
-                    topic_id = table.Column<int>(type: "integer", nullable: true)
+                    topic_id = table.Column<int>(type: "integer", nullable: true),
+                    Accessibility = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -97,6 +100,32 @@ namespace Repositories.Migrations
                         principalColumn: "id");
                     table.ForeignKey(
                         name: "forms_user_id_fkey",
+                        column: x => x.user_id,
+                        principalTable: "users",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "accessform_users",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    form_id = table.Column<int>(type: "integer", nullable: true),
+                    user_id = table.Column<int>(type: "integer", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("accessform_users_pkey", x => x.id);
+                    table.ForeignKey(
+                        name: "accessform_users_form_id_fkey",
+                        column: x => x.form_id,
+                        principalTable: "forms",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "accessform_users_user_id_fkey",
                         column: x => x.user_id,
                         principalTable: "users",
                         principalColumn: "id",
@@ -137,7 +166,8 @@ namespace Repositories.Migrations
                     id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     user_id = table.Column<int>(type: "integer", nullable: true),
-                    form_id = table.Column<int>(type: "integer", nullable: true)
+                    form_id = table.Column<int>(type: "integer", nullable: true),
+                    asnwered_at = table.Column<DateTime>(type: "timestamp(0) with time zone", precision: 0, nullable: true, defaultValueSql: "now()")
                 },
                 constraints: table =>
                 {
@@ -166,7 +196,8 @@ namespace Repositories.Migrations
                     question_type_id = table.Column<int>(type: "integer", nullable: true),
                     question = table.Column<string>(type: "text", nullable: false),
                     description = table.Column<string>(type: "text", nullable: true),
-                    display_state = table.Column<bool>(type: "boolean", nullable: true)
+                    display_state = table.Column<bool>(type: "boolean", nullable: true),
+                    position = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -237,31 +268,153 @@ namespace Repositories.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "form_question_answers",
+                name: "checkbox_answers",
                 columns: table => new
                 {
                     id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     answer_id = table.Column<int>(type: "integer", nullable: true),
                     form_question_id = table.Column<int>(type: "integer", nullable: true),
-                    answer = table.Column<string>(type: "text", nullable: true)
+                    answer = table.Column<bool>(type: "boolean", nullable: true, defaultValue: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("form_question_answers_pkey", x => x.id);
+                    table.PrimaryKey("checkbox_answers_pkey", x => x.id);
                     table.ForeignKey(
-                        name: "form_question_answers_answer_id_fkey",
+                        name: "checkbox_answers_answer_id_fkey",
                         column: x => x.answer_id,
                         principalTable: "form_answers",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "form_question_answers_form_question_id_fkey",
+                        name: "checkbox_answers_form_question_id_fkey",
                         column: x => x.form_question_id,
                         principalTable: "form_questions",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "form_question_options",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    form_question_id = table.Column<int>(type: "integer", nullable: true),
+                    option_value = table.Column<string>(type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("form_question_options_pkey", x => x.id);
+                    table.ForeignKey(
+                        name: "form_question_options_form_question_id_fkey",
+                        column: x => x.form_question_id,
+                        principalTable: "form_questions",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "integer_answers",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    answer_id = table.Column<int>(type: "integer", nullable: true),
+                    form_question_id = table.Column<int>(type: "integer", nullable: true),
+                    answer = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("integer_answers_pkey", x => x.id);
+                    table.ForeignKey(
+                        name: "integer_answers_answer_id_fkey",
+                        column: x => x.answer_id,
+                        principalTable: "form_answers",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "integer_answers_form_question_id_fkey",
+                        column: x => x.form_question_id,
+                        principalTable: "form_questions",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "long_text_answers",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    answer_id = table.Column<int>(type: "integer", nullable: true),
+                    form_question_id = table.Column<int>(type: "integer", nullable: true),
+                    answer = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("long_text_answers_pkey", x => x.id);
+                    table.ForeignKey(
+                        name: "long_text_answers_answer_id_fkey",
+                        column: x => x.answer_id,
+                        principalTable: "form_answers",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "long_text_answers_form_question_id_fkey",
+                        column: x => x.form_question_id,
+                        principalTable: "form_questions",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "short_text_answers",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    answer_id = table.Column<int>(type: "integer", nullable: true),
+                    form_question_id = table.Column<int>(type: "integer", nullable: true),
+                    answer = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("short_text_answers_pkey", x => x.id);
+                    table.ForeignKey(
+                        name: "short_text_answers_answer_id_fkey",
+                        column: x => x.answer_id,
+                        principalTable: "form_answers",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "short_text_answers_form_question_id_fkey",
+                        column: x => x.form_question_id,
+                        principalTable: "form_questions",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "accessform_users_form_id_user_id_key",
+                table: "accessform_users",
+                columns: new[] { "form_id", "user_id" },
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_accessform_users_user_id",
+                table: "accessform_users",
+                column: "user_id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_checkbox_answers_answer_id",
+                table: "checkbox_answers",
+                column: "answer_id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_checkbox_answers_form_question_id",
+                table: "checkbox_answers",
+                column: "form_question_id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_comments_form_id",
@@ -284,13 +437,8 @@ namespace Repositories.Migrations
                 column: "user_id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_form_question_answers_answer_id",
-                table: "form_question_answers",
-                column: "answer_id");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_form_question_answers_form_question_id",
-                table: "form_question_answers",
+                name: "IX_form_question_options_form_question_id",
+                table: "form_question_options",
                 column: "form_question_id");
 
             migrationBuilder.CreateIndex(
@@ -324,6 +472,16 @@ namespace Repositories.Migrations
                 column: "user_id");
 
             migrationBuilder.CreateIndex(
+                name: "IX_integer_answers_answer_id",
+                table: "integer_answers",
+                column: "answer_id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_integer_answers_form_question_id",
+                table: "integer_answers",
+                column: "form_question_id");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_likes_form_id",
                 table: "likes",
                 column: "form_id");
@@ -333,6 +491,26 @@ namespace Repositories.Migrations
                 table: "likes",
                 columns: new[] { "user_id", "form_id" },
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_long_text_answers_answer_id",
+                table: "long_text_answers",
+                column: "answer_id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_long_text_answers_form_question_id",
+                table: "long_text_answers",
+                column: "form_question_id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_short_text_answers_answer_id",
+                table: "short_text_answers",
+                column: "answer_id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_short_text_answers_form_question_id",
+                table: "short_text_answers",
+                column: "form_question_id");
 
             migrationBuilder.CreateIndex(
                 name: "users_email_idx",
@@ -345,25 +523,40 @@ namespace Repositories.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "accessform_users");
+
+            migrationBuilder.DropTable(
+                name: "checkbox_answers");
+
+            migrationBuilder.DropTable(
                 name: "comments");
 
             migrationBuilder.DropTable(
-                name: "form_question_answers");
+                name: "form_question_options");
 
             migrationBuilder.DropTable(
                 name: "form_tags");
 
             migrationBuilder.DropTable(
+                name: "integer_answers");
+
+            migrationBuilder.DropTable(
                 name: "likes");
+
+            migrationBuilder.DropTable(
+                name: "long_text_answers");
+
+            migrationBuilder.DropTable(
+                name: "short_text_answers");
+
+            migrationBuilder.DropTable(
+                name: "tags");
 
             migrationBuilder.DropTable(
                 name: "form_answers");
 
             migrationBuilder.DropTable(
                 name: "form_questions");
-
-            migrationBuilder.DropTable(
-                name: "tags");
 
             migrationBuilder.DropTable(
                 name: "forms");

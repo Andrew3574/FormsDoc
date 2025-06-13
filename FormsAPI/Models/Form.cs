@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Models.Enums;
+using System;
 using System.Collections.Generic;
 
 namespace Models;
@@ -20,6 +21,10 @@ public partial class Form
     public int? Version { get; set; }
 
     public int? TopicId { get; set; }
+
+    public FormAccessibility Accessibility { get; set; } = FormAccessibility.@public;
+
+    public virtual ICollection<AccessformUser> AccessformUsers { get; set; } = new List<AccessformUser>();
 
     public virtual ICollection<Comment> Comments { get; set; } = new List<Comment>();
 
