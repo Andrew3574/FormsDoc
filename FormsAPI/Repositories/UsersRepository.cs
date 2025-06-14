@@ -26,6 +26,11 @@ namespace Repositories
             _context.Users.Remove(entity);
             await _context.SaveChangesAsync();
         }
+        public async Task DeleteRange(IEnumerable<User> entities)
+        {
+            _context.Users.RemoveRange(entities);
+            await _context.SaveChangesAsync();
+        }
 
         public override Task<IEnumerable<User>?> GetAll()
         {
@@ -41,9 +46,15 @@ namespace Repositories
         {
             return await _context.Users.Where(u=>EF.Functions.Like(u.Email,$"%{email}%")).ToListAsync();
         }
+
         public async Task<User?> GetByEmail(string email)
         {
             return await _context.Users.Where(u=>u.Email==email).FirstOrDefaultAsync();
+        }
+
+        public async Task<IEnumerable<User>?> GetByEmail(IEnumerable<string> emails)
+        {
+            return await _context.Users.Where(u => emails.Contains(u.Email)).ToListAsync();
         }
 
         public async Task<IEnumerable<User>?> GetByBatch(int batch,int batchSize=20)
@@ -54,6 +65,11 @@ namespace Repositories
         public override async Task Update(User entity)
         {
             _context.Users.Update(entity);
+            await _context.SaveChangesAsync();
+        }
+        public async Task UpdateRange(IEnumerable<User> entities)
+        {
+            _context.Users.UpdateRange(entities);
             await _context.SaveChangesAsync();
         }
     }

@@ -145,3 +145,14 @@ D:\SummerCourse\CourseProject\FormsAPI\FormsAPI\bin\Debug\net8.0\Repositories.dl
 D:\SummerCourse\CourseProject\FormsAPI\FormsAPI\bin\Debug\net8.0\Models.pdb
 D:\SummerCourse\CourseProject\FormsAPI\FormsAPI\bin\Debug\net8.0\Repositories.pdb
 D:\SummerCourse\CourseProject\FormsAPI\FormsAPI\obj\Debug\net8.0\FormsAPI.MvcApplicationPartsAssemblyInfo.cs
+D:\SummerCourse\CourseProject\FormsAPI\FormsAPI\bin\Debug\net8.0\AutoMapper.dll
+D:\SummerCourse\CourseProject\FormsAPI\FormsAPI\bin\Debug\net8.0\BouncyCastle.Cryptography.dll
+D:\SummerCourse\CourseProject\FormsAPI\FormsAPI\bin\Debug\net8.0\MailKit.dll
+D:\SummerCourse\CourseProject\FormsAPI\FormsAPI\bin\Debug\net8.0\Microsoft.IdentityModel.Abstractions.dll
+D:\SummerCourse\CourseProject\FormsAPI\FormsAPI\bin\Debug\net8.0\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\SummerCourse\CourseProject\FormsAPI\FormsAPI\bin\Debug\net8.0\Microsoft.IdentityModel.Logging.dll
+D:\SummerCourse\CourseProject\FormsAPI\FormsAPI\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
+D:\SummerCourse\CourseProject\FormsAPI\FormsAPI\bin\Debug\net8.0\MimeKit.dll
+D:\SummerCourse\CourseProject\FormsAPI\FormsAPI\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
+D:\SummerCourse\CourseProject\FormsAPI\FormsAPI\bin\Debug\net8.0\System.Security.Cryptography.Pkcs.dll
+D:\SummerCourse\CourseProject\FormsAPI\FormsAPI\bin\Debug\net8.0\runtimes\win\lib\net8.0\System.Security.Cryptography.Pkcs.dll

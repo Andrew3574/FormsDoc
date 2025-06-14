@@ -17,7 +17,7 @@ namespace FormsAPI.Services.Auth
                 new Claim(JwtHeaderParameterNames.Jku, user.Email),
                 new Claim(ClaimTypes.Email, user.Email),
                 new Claim("State", user.State.ToString()),
-                new Claim("Role", user.Role.ToString())
+                new Claim(ClaimTypes.Role, user.Role.ToString())
             };
             var token = new JwtSecurityToken(
               issuer: "MyAuthServer",

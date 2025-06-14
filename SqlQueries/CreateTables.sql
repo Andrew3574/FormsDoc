@@ -9,7 +9,7 @@ create table users(
 	state state default 'active',
 	name varchar(20) not null,
 	surname varchar(20) not null,
-	passwordhash varchar(32) not null,
+	passwordhash varchar(256) not null,
 	image_url varchar(32)
 );
 create table Topics(

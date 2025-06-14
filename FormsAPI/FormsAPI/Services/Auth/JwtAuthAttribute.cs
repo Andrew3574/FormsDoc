@@ -19,63 +19,74 @@ namespace FormsAPI.Services.Auth
 
         public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
         {
-            var token = context.HttpContext.Request.Cookies["jwt"];
-            if (string.IsNullOrEmpty(token))
+            if (!context.HttpContext.Request.Cookies.TryGetValue("jwt", out string? token))
             {
-                context.Result = new RedirectToActionResult("Login", "Account", null);
+                SetErrorResult(context, "Token not found");
                 return;
             }
-            await ValidateClaims(token, context);
-
-            await next();
+            if(await IsClaimsValidated(token!, context))
+            {
+                await next();
+            }
+            return;
         }
 
-        private async Task ValidateClaims(string token, ActionExecutingContext context)
+        private async Task<bool> IsClaimsValidated(string token, ActionExecutingContext context)
         {
             ClaimsPrincipal? claims = JwtAuthenticationService.ValidateToken(token);
-            CheckAuthentication(claims, context);
-            CheckAuthorization(claims, context);
-            await ValidateUser(claims, context);
+            if (IsAuthenticated(claims, context) && IsAuthorized(claims, context) && await IsUserValidated(claims, context))
+            {
+                return true;
+            }
+            return false;
         }
 
-        private void CheckAuthentication(ClaimsPrincipal? claims, ActionExecutingContext context)
+        private bool IsAuthenticated(ClaimsPrincipal? claims, ActionExecutingContext context)
         {
             if (claims == null || !claims.Identity!.IsAuthenticated)
             {
-                context.Result = new RedirectToActionResult("Login", "Account", null);
-                return;
+                SetErrorResult(context, "Invalid token");
+                return false;
             }
             if (string.IsNullOrEmpty(claims?.Claims?.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value))
             {
-                context.Result = new RedirectToActionResult("Login", "Account", null);
-                return;
+                SetErrorResult(context, "Authenticate to proceed");
+                return false;
             }
+            return true;
         }
 
-        private void CheckAuthorization(ClaimsPrincipal? claims, ActionExecutingContext context)
+        private bool IsAuthorized(ClaimsPrincipal? claims, ActionExecutingContext context)
         {
             var role = claims?.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value;
             if (string.IsNullOrEmpty(role) || !_role.Contains(role))
             {
-                context.Result = new UnauthorizedObjectResult("Insufficient access");
-                return;
+                SetErrorResult(context,"Insufficient access");
+                return false;
             }
+            return true;
         }
 
-        private async Task ValidateUser(ClaimsPrincipal? claims, ActionExecutingContext context)
+        private async Task<bool> IsUserValidated(ClaimsPrincipal? claims, ActionExecutingContext context)
         {
             var userRepository = context.HttpContext.RequestServices.GetService<UsersRepository>();
             var user = await userRepository!.GetByEmail(claims?.Claims?.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value!);
             if (user == null)
             {
-                context.Result = new UnauthorizedObjectResult("User not found.");
-                return;
+                SetErrorResult(context, "User not found");
+                return false;
             }
             if (user.State == UserState.blocked)
             {
-                context.Result = new RedirectToActionResult("Login", "Account", null);
-                return;
+                SetErrorResult(context, "You were blocked");
+                return false;
             }
+            return true;
+        }
+        private void SetErrorResult(ActionExecutingContext context, string message, int statusCode = 400)
+        {
+            context.HttpContext.Response.Headers.Append("ErrorMessage", message);
+            context.HttpContext.Response.StatusCode = statusCode;
         }
     }
 }

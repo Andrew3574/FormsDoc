@@ -1,4 +1,5 @@
-﻿using System.Security.Cryptography;
+﻿using OnixLabs.Core.Text;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace FormsAPI.Services
@@ -12,13 +13,13 @@ namespace FormsAPI.Services
             _key = configuration["PasswordKey"]!;
         }
 
-        public byte[] HashPassword(string password)
+        public string HashPassword(string password)
         {
             var key = Encoding.UTF8.GetBytes(_key);
 
             using (var hmac = new HMACSHA3_256(key))
             {
-                return hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
+                return hmac.ComputeHash(Encoding.UTF8.GetBytes(password)).ToBase16().ToString();
             }
         }
     }

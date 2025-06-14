@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using Microsoft.EntityFrameworkCore;
 using Models;
+using Models.Enums;
 
 namespace Repositories.Data;
 
@@ -157,7 +159,12 @@ public partial class FormsDbContext : DbContext
                 .HasDefaultValue(1)
                 .HasColumnName("version");
             entity.Property(f => f.Accessibility)
-                .HasConversion<string>();
+                .HasColumnName("accessibility")
+                .HasColumnType("accessibility")            
+                .HasConversion(
+                    v => v.ToString(),
+                    v => (FormAccessibility)Enum.Parse(typeof(FormAccessibility), v))
+                .HasDefaultValue(FormAccessibility.@public);
 
             entity.HasOne(d => d.Topic).WithMany(p => p.Forms)
                 .HasForeignKey(d => d.TopicId)
@@ -406,15 +413,25 @@ public partial class FormsDbContext : DbContext
                 .HasMaxLength(20)
                 .HasColumnName("name");
             entity.Property(e => e.Passwordhash)
-                .HasMaxLength(32)
+                .HasMaxLength(256)
                 .HasColumnName("passwordhash");
             entity.Property(e => e.Surname)
                 .HasMaxLength(20)
                 .HasColumnName("surname");
-            entity.Property(f => f.Role)
-                .HasConversion<string>();
-            entity.Property(f => f.State)
-                .HasConversion<string>();
+            entity.Property(e => e.Role)
+            .HasColumnName("role") 
+            .HasColumnType("role")    
+            .HasConversion(
+                v => v.ToString(), 
+                v => (UserRole)Enum.Parse(typeof(UserRole), v))
+            .HasDefaultValue(UserRole.user);
+            entity.Property(e => e.State)
+                .HasColumnName("state")
+                .HasColumnType("state")
+                .HasConversion(
+                    v => v.ToString(),
+                    v => (UserState)Enum.Parse(typeof(UserState), v))
+                .HasDefaultValue(UserState.active);
         });
 
         OnModelCreatingPartial(modelBuilder);
