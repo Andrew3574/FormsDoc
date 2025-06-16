@@ -1,0 +1,57 @@
+﻿@model LoginModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+    <title>Login</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            padding: 30px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container col-md-4">
+        <h2 class="text-center">Password recovery</h2>
+        <p class="text-center">via Email</p>
+
+        <form method="post">
+            @if (!string.IsNullOrEmpty(ViewData["ErrorMessage"]?.ToString()))
+            {
+                <div class="alert alert-danger" role="alert">
+                    @ViewData["ErrorMessage"]
+                </div>
+            }
+
+            <div class="form-group visually-hidden">
+                <label class="form-label">E-mail</label>
+                <input name="email" value="@Model.Email" type="email" class="form-control" placeholder="test@example.com" required />
+            </div>
+            <div class="form-group">
+                <input name="password" type="password" class="form-control" placeholder="password" required />
+            </div>
+            <button asp-action="RecoverPassword" type="submit" class="btn btn-primary btn-block">Send</button>
+            
+        </form>
+    </div>
+</body>
+</html>

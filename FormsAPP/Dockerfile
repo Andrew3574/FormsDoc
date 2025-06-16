@@ -4,13 +4,15 @@
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 USER $APP_UID
 WORKDIR /app
-EXPOSE 8080
-EXPOSE 8081
+EXPOSE 5873
+ENV ASPNETCORE_URLS=http://:+5873
+ENV ASPNETCORE_ENVIRONMENT=Development
+ENV FormsApi__apiUrl=http://forms_api:8080/api/
 
 
 # Этот этап используется для сборки проекта службы
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
-ARG BUILD_CONFIGURATION=Release
+ARG BUILD_CONFIGURATION=Development 
 WORKDIR /src
 COPY ["FormsAPP/FormsAPP.csproj", "FormsAPP/"]
 RUN dotnet restore "./FormsAPP/FormsAPP.csproj"
@@ -20,8 +22,8 @@ RUN dotnet build "./FormsAPP.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 # Этот этап используется для публикации проекта службы, который будет скопирован на последний этап
 FROM build AS publish
-ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./FormsAPP.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+ARG BUILD_CONFIGURATION=Development 
+RUN dotnet publish "./FormsAPP.csproj" -c $BUILD_CONFIGURATION -o /app/publish 
 
 # Этот этап используется в рабочей среде или при запуске из VS в обычном режиме (по умолчанию, когда конфигурация отладки не используется)
 FROM base AS final

@@ -14,7 +14,7 @@ namespace FormsAPI.Services
 
         public async Task SendAsync(string email, string subject, string message)
         {
-            var emailMessage = ConfigureEmailMessage(email, subject, message);
+            using var emailMessage = ConfigureEmailMessage(email, subject, message);
             using (var client = new SmtpClient())
             {
                 try
@@ -43,8 +43,8 @@ namespace FormsAPI.Services
 
         private MimeMessage ConfigureEmailMessage(string email, string subject, string message)
         {
-            using MimeMessage emailMessage = new MimeMessage();
-            emailMessage.From.Add(new MailboxAddress("Администрация сайта Task4", "7heproffi123@gmail.com"));
+            MimeMessage emailMessage = new MimeMessage();
+            emailMessage.From.Add(new MailboxAddress("Администрация сайта FormsProject", "7heproffi123@gmail.com"));
             emailMessage.To.Add(new MailboxAddress("", email));
             emailMessage.Subject = subject;
             emailMessage.Body = new TextPart("plain") {Text = message};

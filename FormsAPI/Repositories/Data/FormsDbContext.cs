@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Models;
 using Models.Enums;
+using Npgsql;
 
 namespace Repositories.Data;
 
@@ -50,16 +52,14 @@ public partial class FormsDbContext : DbContext
 
     public virtual DbSet<User> Users { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseNpgsql("host=localhost;username=postgres;password=qy5k--zhr8a98L;database=FormsDb;port=5432");
-
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder
-            .HasPostgresEnum("accessibility", new[] { "public", "restricted" })
-            .HasPostgresEnum("role", new[] { "user", "admin" })
-            .HasPostgresEnum("state", new[] { "active", "blocked" });
+        var roleConverter = new EnumToStringConverter<UserRole>();
+        var stateConverter = new EnumToStringConverter<UserState>();
+
+        modelBuilder.HasPostgresEnum("accessibility", new[] { "public", "restricted" });
+        modelBuilder.HasPostgresEnum("role", new[] { "user", "admin" });
+        modelBuilder.HasPostgresEnum("state", new[] { "active", "blocked" });
 
         modelBuilder.Entity<AccessformUser>(entity =>
         {
@@ -160,11 +160,7 @@ public partial class FormsDbContext : DbContext
                 .HasColumnName("version");
             entity.Property(f => f.Accessibility)
                 .HasColumnName("accessibility")
-                .HasColumnType("accessibility")            
-                .HasConversion(
-                    v => v.ToString(),
-                    v => (FormAccessibility)Enum.Parse(typeof(FormAccessibility), v))
-                .HasDefaultValue(FormAccessibility.@public);
+                .HasColumnType("accessibility");
 
             entity.HasOne(d => d.Topic).WithMany(p => p.Forms)
                 .HasForeignKey(d => d.TopicId)
@@ -244,25 +240,23 @@ public partial class FormsDbContext : DbContext
 
         modelBuilder.Entity<FormTag>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("fromtags_pkey");
+            entity.HasKey(e => e.Id).HasName("formtags_pkey");
 
             entity.ToTable("form_tags");
 
-            entity.Property(e => e.Id)
-                .HasDefaultValueSql("nextval('fromtags_id_seq'::regclass)")
-                .HasColumnName("id");
+            entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.FormId).HasColumnName("form_id");
             entity.Property(e => e.TagId).HasColumnName("tag_id");
 
             entity.HasOne(d => d.Form).WithMany(p => p.FormTags)
                 .HasForeignKey(d => d.FormId)
                 .OnDelete(DeleteBehavior.Cascade)
-                .HasConstraintName("fromtags_form_id_fkey");
+                .HasConstraintName("formtags_form_id_fkey");
 
             entity.HasOne(d => d.Tag).WithMany(p => p.FormTags)
                 .HasForeignKey(d => d.TagId)
                 .OnDelete(DeleteBehavior.Cascade)
-                .HasConstraintName("fromtags_tag_id_fkey");
+                .HasConstraintName("formtags_tag_id_fkey");
         });
 
         modelBuilder.Entity<IntegerAnswer>(entity =>
@@ -419,18 +413,12 @@ public partial class FormsDbContext : DbContext
                 .HasMaxLength(20)
                 .HasColumnName("surname");
             entity.Property(e => e.Role)
-            .HasColumnName("role") 
-            .HasColumnType("role")    
-            .HasConversion(
-                v => v.ToString(), 
-                v => (UserRole)Enum.Parse(typeof(UserRole), v))
-            .HasDefaultValue(UserRole.user);
+                .HasColumnName("role")
+                .HasColumnType("role")
+                .HasDefaultValue(UserRole.user);
             entity.Property(e => e.State)
                 .HasColumnName("state")
                 .HasColumnType("state")
-                .HasConversion(
-                    v => v.ToString(),
-                    v => (UserState)Enum.Parse(typeof(UserState), v))
                 .HasDefaultValue(UserState.active);
         });
 
@@ -438,4 +426,6 @@ public partial class FormsDbContext : DbContext
     }
 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+
+    
 }

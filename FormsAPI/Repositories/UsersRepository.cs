@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Models;
+using Models.Enums;
 using Repositories.Data;
 using System;
 using System.Collections.Generic;
@@ -54,7 +55,7 @@ namespace Repositories
 
         public async Task<IEnumerable<User>?> GetByEmail(IEnumerable<string> emails)
         {
-            return await _context.Users.Where(u => emails.Contains(u.Email)).ToListAsync();
+            return await _context.Users.AsNoTracking().Where(u => emails.Contains(u.Email)).ToListAsync();
         }
 
         public async Task<IEnumerable<User>?> GetByBatch(int batch,int batchSize=20)

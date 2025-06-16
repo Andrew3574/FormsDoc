@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
+using Models.Enums;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
@@ -7,7 +8,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Repositories.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class initDb : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -63,11 +64,11 @@ namespace Repositories.Migrations
                     id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     email = table.Column<string>(type: "character varying(32)", maxLength: 32, nullable: false),
-                    Role = table.Column<string>(type: "text", nullable: false),
-                    State = table.Column<string>(type: "text", nullable: false),
+                    role = table.Column<UserRole>(type: "role", nullable: false, defaultValue: UserRole.user),
+                    state = table.Column<UserState>(type: "state", nullable: false, defaultValue: UserState.active),
                     name = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
                     surname = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
-                    passwordhash = table.Column<string>(type: "character varying(32)", maxLength: 32, nullable: false),
+                    passwordhash = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: false),
                     image_url = table.Column<string>(type: "character varying(32)", maxLength: 32, nullable: true)
                 },
                 constraints: table =>
@@ -88,7 +89,7 @@ namespace Repositories.Migrations
                     image_url = table.Column<string>(type: "character varying(32)", maxLength: 32, nullable: true),
                     version = table.Column<int>(type: "integer", nullable: true, defaultValue: 1),
                     topic_id = table.Column<int>(type: "integer", nullable: true),
-                    Accessibility = table.Column<string>(type: "text", nullable: false)
+                    accessibility = table.Column<FormAccessibility>(type: "accessibility", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -220,21 +221,22 @@ namespace Repositories.Migrations
                 name: "form_tags",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "integer", nullable: false, defaultValueSql: "nextval('fromtags_id_seq'::regclass)"),
+                    id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     form_id = table.Column<int>(type: "integer", nullable: true),
                     tag_id = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("fromtags_pkey", x => x.id);
+                    table.PrimaryKey("formtags_pkey", x => x.id);
                     table.ForeignKey(
-                        name: "fromtags_form_id_fkey",
+                        name: "formtags_form_id_fkey",
                         column: x => x.form_id,
                         principalTable: "forms",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "fromtags_tag_id_fkey",
+                        name: "formtags_tag_id_fkey",
                         column: x => x.tag_id,
                         principalTable: "tags",
                         principalColumn: "id",

@@ -1,0 +1,39 @@
+services:
+  forms_api:
+    container_name: forms_api
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080" 
+    environment:
+      - ASPNETCORE_URLS=http://+:8080 
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__default=Host=postgres;Username=postgres;Password=123;Database=db;Port=5432;
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:latest
+    container_name: postgres_db
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123
+      POSTGRES_DB: db
+    ports:
+      - "5432:5432"
+  
+  pgadmin:
+    image: dpage/pgadmin4
+    depends_on:
+      - postgres
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=anderson64217@gmail.com
+      - PGADMIN_DEFAULT_PASSWORD=1234
+    ports:
+      - "105:80"
+
+volumes:
+  db_data:

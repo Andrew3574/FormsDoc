@@ -12,6 +12,7 @@ create table users(
 	passwordhash varchar(256) not null,
 	image_url varchar(32)
 );
+
 create table Topics(
 	id serial primary key,
 	name varchar(32) not null
@@ -76,14 +77,12 @@ create table Form_Questions(
 	position int not null
 );
 
---------------------------------------
 create table Form_Question_Options(
 	id serial primary key,
 	Form_Question_id int references Form_Questions(id) on delete cascade,
 	option_value text not null,
 	position int not null
 );
---------------------------------------
 
 create table Form_Answers(
 	id serial primary key,

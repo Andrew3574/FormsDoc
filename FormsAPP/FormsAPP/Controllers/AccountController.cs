@@ -66,6 +66,52 @@ namespace FormsAPP.Controllers
             return RedirectToAction("Login", "Account");
         }
 
+        public IActionResult EmailConfirmation()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EmailConfirmation(string email)
+        {
+            var response = await _httpClient.PostAsJsonAsync("Account/GetCode", email);
+            if (response.IsSuccessStatusCode)
+            {
+                ViewData["SuccessMessage"] = await response.Content.ReadAsStringAsync();
+                return View("EmailConfirmation", new RecoveryModel { Email = email, Code="" });
+            }
+            ViewData["ErrorMessage"] = await response.Content.ReadAsStringAsync();
+            return View(email);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> RecoveryCodeConfirmation(RecoveryModel model)
+        {
+            var response = await _httpClient.PostAsJsonAsync("Account/CheckCode", model);
+            if (response.IsSuccessStatusCode)
+            {
+                return View("RecoveryPaswordPage", new LoginModel { Email = model.Email });
+            }
+            ViewData["ErrorMessage"] = await response.Content.ReadAsStringAsync();
+            return View("EmailConfirmation",model);
+        }
+
+        public IActionResult RecoveryPaswordPage(LoginModel model)
+        {
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> RecoverPassword(LoginModel model)
+        {
+            var response = await _httpClient.PostAsJsonAsync("Account/RecoverPassword", model);
+            if (response.IsSuccessStatusCode)
+            {
+                return RedirectToAction("Login","Account",model);
+            }
+            ViewData["ErrorMessage"] = await response.Content.ReadAsStringAsync();
+            return View("RecoveryPasswordPage",model);
+        }
         private void SetTokenByRememberMe(bool rememberMe, string token)
         {
             if (rememberMe)

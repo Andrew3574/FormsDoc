@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Models.Enums;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Repositories.Data;
 
@@ -132,9 +133,9 @@ namespace Repositories.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Accessibility")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<FormAccessibility>("Accessibility")
+                        .HasColumnType("accessibility")
+                        .HasColumnName("accessibility");
 
                     b.Property<DateTime?>("CreatedAt")
                         .ValueGeneratedOnAdd()
@@ -292,8 +293,9 @@ namespace Repositories.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
-                        .HasColumnName("id")
-                        .HasDefaultValueSql("nextval('fromtags_id_seq'::regclass)");
+                        .HasColumnName("id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<int?>("FormId")
                         .HasColumnType("integer")
@@ -304,7 +306,7 @@ namespace Repositories.Migrations
                         .HasColumnName("tag_id");
 
                     b.HasKey("Id")
-                        .HasName("fromtags_pkey");
+                        .HasName("formtags_pkey");
 
                     b.HasIndex("FormId");
 
@@ -529,17 +531,21 @@ namespace Repositories.Migrations
 
                     b.Property<string>("Passwordhash")
                         .IsRequired()
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)")
                         .HasColumnName("passwordhash");
 
-                    b.Property<string>("Role")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<UserRole>("Role")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("role")
+                        .HasDefaultValue(UserRole.user)
+                        .HasColumnName("role");
 
-                    b.Property<string>("State")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<UserState>("State")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("state")
+                        .HasDefaultValue(UserState.active)
+                        .HasColumnName("state");
 
                     b.Property<string>("Surname")
                         .IsRequired()
@@ -686,13 +692,13 @@ namespace Repositories.Migrations
                         .WithMany("FormTags")
                         .HasForeignKey("FormId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .HasConstraintName("fromtags_form_id_fkey");
+                        .HasConstraintName("formtags_form_id_fkey");
 
                     b.HasOne("Models.Tag", "Tag")
                         .WithMany("FormTags")
                         .HasForeignKey("TagId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .HasConstraintName("fromtags_tag_id_fkey");
+                        .HasConstraintName("formtags_tag_id_fkey");
 
                     b.Navigation("Form");
 

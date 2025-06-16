@@ -14,3 +14,5 @@ D:\SummerCourse\CourseProject\FormsAPI\Repositories\obj\Debug\net8.0\Repositorie
 D:\SummerCourse\CourseProject\FormsAPI\Repositories\obj\Debug\net8.0\refint\Repositories.dll
 D:\SummerCourse\CourseProject\FormsAPI\Repositories\obj\Debug\net8.0\Repositories.pdb
 D:\SummerCourse\CourseProject\FormsAPI\Repositories\obj\Debug\net8.0\ref\Repositories.dll
+D:\SummerCourse\CourseProject\FormsAPI\Repositories\bin\Debug\net8.0\Repositories.runtimeconfig.json
+D:\SummerCourse\CourseProject\FormsAPI\Repositories\obj\Debug\net8.0\Repositories.genruntimeconfig.cache

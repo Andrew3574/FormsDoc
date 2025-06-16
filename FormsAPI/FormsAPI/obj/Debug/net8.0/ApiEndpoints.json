@@ -1,9 +1,25 @@
 [
   {
     "ContainingType": "FormsAPI.Controllers.AccountController",
-    "Method": "GetUserInfo",
-    "RelativePath": "api/Account/GetUserInfo/{email}",
-    "HttpMethod": "GET",
+    "Method": "CheckRecoveryCode",
+    "RelativePath": "api/Account/CheckCode",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userDto",
+        "Type": "FormsAPI.ModelsDTO.RecoveryDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FormsAPI.Controllers.AccountController",
+    "Method": "SendRecoveryCode",
+    "RelativePath": "api/Account/GetCode",
+    "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
@@ -17,8 +33,45 @@
   },
   {
     "ContainingType": "FormsAPI.Controllers.AccountController",
+    "Method": "GetUserInfo",
+    "RelativePath": "api/Account/GetUserInfo/{email}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "email",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "email",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FormsAPI.Controllers.AccountController",
     "Method": "Login",
     "RelativePath": "api/Account/Login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userDto",
+        "Type": "FormsAPI.ModelsDTO.LoginDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FormsAPI.Controllers.AccountController",
+    "Method": "RecoverPassword",
+    "RelativePath": "api/Account/RecoverPassword",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
