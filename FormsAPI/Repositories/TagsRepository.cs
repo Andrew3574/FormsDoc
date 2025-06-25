@@ -31,7 +31,20 @@ namespace Repositories
         }
         public async Task<IEnumerable<Tag>?> FilterByName(string name)
         {
-            return await _context.Tags.Where(t => EF.Functions.Like(t.Name, $"%{name}%")).ToListAsync();
+            return await _context.Tags.Where(t => EF.Functions.Like(t.Name, $"%{name}%")).Take(5).ToListAsync();
+        }
+
+        public async Task<IEnumerable<Tag>> GetOrCreateByName(IEnumerable<string> tags)
+        {
+            var existingTags = _context.Tags.Where(t => tags.Contains(t.Name));
+            if(existingTags.Count() != tags.Count())
+            {
+                var notExistingTags = GetNotExistingTags(existingTags, tags);
+                _context.Tags.AddRange(notExistingTags);
+                await _context.SaveChangesAsync();
+                existingTags.Concat(notExistingTags);
+            }
+            return existingTags;
         }
 
         public override async Task<Tag?> GetById(int id)
@@ -43,5 +56,12 @@ namespace Repositories
         {
             throw new NotImplementedException();
         }
+
+        private IEnumerable<Tag> GetNotExistingTags(IEnumerable<Tag> existingTags, IEnumerable<string> tags)
+        {
+            var notExistingTagNames = tags.Except(existingTags.Select(et => et.Name));
+            return notExistingTagNames.Select(t => new Tag { Name = t });
+        }
+
     }
 }

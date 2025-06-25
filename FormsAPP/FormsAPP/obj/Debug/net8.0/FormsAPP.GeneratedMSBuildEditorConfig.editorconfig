@@ -28,12 +28,28 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/SummerCourse/CourseProject/FormsAPP/FormsAPP/Views/Account/RecoveryPaswordPage.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxSZWNvdmVyeVBhc3dvcmRQYWdlLmNzaHRtbA==
+[D:/SummerCourse/CourseProject/FormsAPP/FormsAPP/Views/Account/RecoveryPasswordPage.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxSZWNvdmVyeVBhc3N3b3JkUGFnZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/SummerCourse/CourseProject/FormsAPP/FormsAPP/Views/Account/Register.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxSZWdpc3Rlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/SummerCourse/CourseProject/FormsAPP/FormsAPP/Views/Account/UserProfile.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxVc2VyUHJvZmlsZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/SummerCourse/CourseProject/FormsAPP/FormsAPP/Views/Forms/CreateForm.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRm9ybXNcQ3JlYXRlRm9ybS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/SummerCourse/CourseProject/FormsAPP/FormsAPP/Views/Forms/CreateFormAnswer.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRm9ybXNcQ3JlYXRlRm9ybUFuc3dlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/SummerCourse/CourseProject/FormsAPP/FormsAPP/Views/Forms/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRm9ybXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/SummerCourse/CourseProject/FormsAPP/FormsAPP/Views/Home/Index.cshtml]
@@ -50,6 +66,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [D:/SummerCourse/CourseProject/FormsAPP/FormsAPP/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/SummerCourse/CourseProject/FormsAPP/FormsAPP/Views/Users/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/SummerCourse/CourseProject/FormsAPP/FormsAPP/Views/_ViewImports.cshtml]

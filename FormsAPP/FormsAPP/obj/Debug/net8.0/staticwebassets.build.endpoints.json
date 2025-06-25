@@ -249,6 +249,170 @@
       ]
     },
     {
+      "Route": "images/forms_icon.rjsm1a5h0r.webp",
+      "AssetFile": "images/forms_icon.webp",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "137960"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/webp"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"+SwiION27Pj0nx7SKRZTEQfeBaLpkxrtOVYLMj1bJcA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 17 Jun 2025 18:31:36 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "rjsm1a5h0r"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-+SwiION27Pj0nx7SKRZTEQfeBaLpkxrtOVYLMj1bJcA="
+        },
+        {
+          "Name": "label",
+          "Value": "images/forms_icon.webp"
+        }
+      ]
+    },
+    {
+      "Route": "images/forms_icon.webp",
+      "AssetFile": "images/forms_icon.webp",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "137960"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/webp"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"+SwiION27Pj0nx7SKRZTEQfeBaLpkxrtOVYLMj1bJcA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 17 Jun 2025 18:31:36 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-+SwiION27Pj0nx7SKRZTEQfeBaLpkxrtOVYLMj1bJcA="
+        }
+      ]
+    },
+    {
+      "Route": "images/profile_icon.png",
+      "AssetFile": "images/profile_icon.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "16865"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"yzIYL1QkcjXObTeCB5/o5SaYq71p+VjYgCjvXgk9hkY=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 16 Jun 2025 16:26:37 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-yzIYL1QkcjXObTeCB5/o5SaYq71p+VjYgCjvXgk9hkY="
+        }
+      ]
+    },
+    {
+      "Route": "images/profile_icon.x9x7he8w55.png",
+      "AssetFile": "images/profile_icon.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "16865"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"yzIYL1QkcjXObTeCB5/o5SaYq71p+VjYgCjvXgk9hkY=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 16 Jun 2025 16:26:37 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "x9x7he8w55"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-yzIYL1QkcjXObTeCB5/o5SaYq71p+VjYgCjvXgk9hkY="
+        },
+        {
+          "Name": "label",
+          "Value": "images/profile_icon.png"
+        }
+      ]
+    },
+    {
       "Route": "js/site.js",
       "AssetFile": "js/site.js",
       "Selectors": [],

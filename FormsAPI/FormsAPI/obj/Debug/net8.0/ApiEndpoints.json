@@ -9,7 +9,7 @@
     "Parameters": [
       {
         "Name": "userDto",
-        "Type": "FormsAPI.ModelsDTO.RecoveryDTO",
+        "Type": "FormsAPI.ModelsDTO.Account.RecoveryDTO",
         "IsRequired": true
       }
     ],
@@ -33,21 +33,16 @@
   },
   {
     "ContainingType": "FormsAPI.Controllers.AccountController",
-    "Method": "GetUserInfo",
-    "RelativePath": "api/Account/GetUserInfo/{email}",
+    "Method": "GetUserProfileInfo",
+    "RelativePath": "api/Account/GetUserProfileInfo",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "email",
+        "Name": "token",
         "Type": "System.String",
-        "IsRequired": true
-      },
-      {
-        "Name": "email",
-        "Type": "",
-        "IsRequired": true
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -62,7 +57,7 @@
     "Parameters": [
       {
         "Name": "userDto",
-        "Type": "FormsAPI.ModelsDTO.LoginDTO",
+        "Type": "FormsAPI.ModelsDTO.Account.LoginDTO",
         "IsRequired": true
       }
     ],
@@ -78,7 +73,7 @@
     "Parameters": [
       {
         "Name": "userDto",
-        "Type": "FormsAPI.ModelsDTO.LoginDTO",
+        "Type": "FormsAPI.ModelsDTO.Account.LoginDTO",
         "IsRequired": true
       }
     ],
@@ -94,11 +89,190 @@
     "Parameters": [
       {
         "Name": "userDto",
-        "Type": "FormsAPI.ModelsDTO.RegisterDTO",
+        "Type": "FormsAPI.ModelsDTO.Account.RegisterDTO",
         "IsRequired": true
       }
     ],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FormsAPI.Controllers.FormsController",
+    "Method": "CommentAction",
+    "RelativePath": "api/Forms/CommentAction",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "commentDto",
+        "Type": "FormsAPI.ModelsDTO.Forms.CreateCommentDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FormsAPI.Controllers.FormsController",
+    "Method": "CreateAnswer",
+    "RelativePath": "api/Forms/CreateAnswer",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "answerDTO",
+        "Type": "FormsAPI.Models.FormAnswers.CreateFormAnswerDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FormsAPI.Controllers.FormsController",
+    "Method": "CreateForm",
+    "RelativePath": "api/Forms/CreateForm",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "formDTO",
+        "Type": "FormsAPI.ModelsDTO.Forms.CreateFormDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FormsAPI.Controllers.FormsController",
+    "Method": "FilterTagsByName",
+    "RelativePath": "api/Forms/FilterTagsByName",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "query",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[FormsAPI.ModelsDTO.Forms.FilterTagDTO, FormsAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "FormsAPI.Controllers.FormsController",
+    "Method": "FilterUsersByEmail",
+    "RelativePath": "api/Forms/FilterUsersByEmail",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "query",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[FormsAPI.ModelsDTO.Forms.FilterUserDTO, FormsAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "FormsAPI.Controllers.FormsController",
+    "Method": "FormTemplateInfo",
+    "RelativePath": "api/Forms/FormTemplateInfo",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "formId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "userId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FormsAPI.Controllers.FormsController",
+    "Method": "GetFormsByBatch",
+    "RelativePath": "api/Forms/GetByBatch/{batch}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "batch",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FormsAPI.Controllers.FormsController",
+    "Method": "LikeAction",
+    "RelativePath": "api/Forms/LikeAction",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "likeDto",
+        "Type": "FormsAPI.ModelsDTO.Forms.LikeDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FormsAPI.Controllers.FormsController",
+    "Method": "UploadImage",
+    "RelativePath": "api/Forms/UploadImage",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "file",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.String",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   },
   {
     "ContainingType": "FormsAPI.Controllers.UsersController",
@@ -109,8 +283,8 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "emails",
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "Name": "indexes",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": true
       }
     ],
@@ -125,8 +299,24 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "emails",
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "Name": "indexes",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FormsAPI.Controllers.UsersController",
+    "Method": "DemoteToUser",
+    "RelativePath": "api/Users/DemoteToUser",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "indexes",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": true
       }
     ],
@@ -143,7 +333,7 @@
       {
         "Name": "email",
         "Type": "System.String",
-        "IsRequired": true
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -151,7 +341,7 @@
   {
     "ContainingType": "FormsAPI.Controllers.UsersController",
     "Method": "GetUsersByBatch",
-    "RelativePath": "api/Users/GetByBatch",
+    "RelativePath": "api/Users/GetByBatch/{batch}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -166,6 +356,22 @@
   },
   {
     "ContainingType": "FormsAPI.Controllers.UsersController",
+    "Method": "PromoteUser",
+    "RelativePath": "api/Users/PromoteToAdmin",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "indexes",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FormsAPI.Controllers.UsersController",
     "Method": "Unblock",
     "RelativePath": "api/Users/Unblock",
     "HttpMethod": "POST",
@@ -173,8 +379,8 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "emails",
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "Name": "indexes",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": true
       }
     ],

@@ -2,14 +2,16 @@ using FormsAPI.Extensions;
 using FormsAPI.ModelProfiles;
 using FormsAPI.Services;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualBasic;
 using Models.Enums;
 using Repositories;
 using Repositories.Data;
 using System.Text.Json;
+using System.Threading.Tasks;
 
 public class Program
 {
-    private static void Main(string[] args)
+    private static async Task Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
         ConfigureServices(builder);
@@ -21,7 +23,6 @@ public class Program
             app.UseSwagger();
             app.UseSwaggerUI();
             app.ApplyMigrations();
-
         }
 
         app.UseAuthorization();
@@ -52,8 +53,10 @@ public class Program
         builder.Services.AddMemoryCache();
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
-        builder.Services.AddScoped<EmailService>();
+        builder.Services.AddScoped<EmailService>(); 
+        builder.Services.AddSingleton<ImageService>(); 
         builder.Services.AddSingleton<EncryptionService>();
+        builder.Services.AddSingleton<ElasticsearchService>();
         builder.Services.AddScoped<AccessFormUsersRepository>();
         builder.Services.AddScoped<CheckBoxesRepository>();
         builder.Services.AddScoped<CommentsRepository>();
@@ -71,5 +74,6 @@ public class Program
         builder.Services.AddScoped<TopicsRepository>();
         builder.Services.AddScoped<UsersRepository>();
         builder.Services.AddAutoMapper(typeof(UserProfile));
+        builder.Services.AddAutoMapper(typeof(FormsProfile));
     }
 }

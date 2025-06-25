@@ -22,6 +22,8 @@ public partial class User
 
     public string? ImageUrl { get; set; }
 
+    public DateTime Lastlogin { get; set; }
+
     public virtual ICollection<AccessformUser> AccessformUsers { get; set; } = new List<AccessformUser>();
 
     public virtual ICollection<Comment> Comments { get; set; } = new List<Comment>();

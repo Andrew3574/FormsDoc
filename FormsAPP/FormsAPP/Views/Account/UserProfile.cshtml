@@ -1,0 +1,45 @@
+﻿@using FormsAPP.Models.Users
+@model UserModel
+
+<div class="profile-container">
+
+    @if (!string.IsNullOrEmpty(Model.ImageUrl))
+    {
+        <img class="profile-image" src="@Model.ImageUrl" alt="Profile ImageUrl" />
+    }
+    else
+    {
+        <img class="profile-image" src="~/images/profile_icon.png" alt="Profile ImageUrl" />
+    }
+
+    <div class="profile-info">
+        <h2>@Model.Name @Model.Surname</h2>
+        <p>Email: @Model.Email</p>
+    </div>
+
+    <a class="btn btn-outline-danger" asp-action="Logout">Log out</a>
+</div>
+
+<style>
+    .profile-container {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        padding: 20px;
+        max-width: 800px;
+        min-width:300px;
+        margin: 0 auto;
+    }
+
+    .profile-image {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 3px solid #ddd;
+    }
+
+    .profile-info {
+        flex-grow: 1;
+    }
+</style>

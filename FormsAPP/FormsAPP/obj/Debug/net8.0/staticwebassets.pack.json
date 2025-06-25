@@ -13,6 +13,14 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "D:\\SummerCourse\\CourseProject\\FormsAPP\\FormsAPP\\wwwroot\\images\\forms_icon.webp",
+      "PackagePath": "staticwebassets\\images\\forms_icon.webp"
+    },
+    {
+      "Id": "D:\\SummerCourse\\CourseProject\\FormsAPP\\FormsAPP\\wwwroot\\images\\profile_icon.png",
+      "PackagePath": "staticwebassets\\images\\profile_icon.png"
+    },
+    {
       "Id": "D:\\SummerCourse\\CourseProject\\FormsAPP\\FormsAPP\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },

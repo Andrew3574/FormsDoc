@@ -42,15 +42,23 @@ namespace Repositories
         {
             return await _context.Users.FirstOrDefaultAsync(u=>u.Id==id);
         }
+        public async Task<IEnumerable<User>?> GetById(IEnumerable<int> indexes)
+        {
+            return await _context.Users.Where(u => indexes.Contains(u.Id)).ToListAsync();
+        }
 
         public async Task<IEnumerable<User>?> FilterByEmail(string email)
         {
-            return await _context.Users.Where(u=>EF.Functions.Like(u.Email,$"%{email}%")).ToListAsync();
+            return await _context.Users.Where(u=>EF.Functions.Like(u.Email,$"%{email}%")).Take(5).ToListAsync();
         }
 
-        public async Task<User?> GetByEmail(string email)
+        public async Task<User?> GetByEmail(string? email)
         {
-            return await _context.Users.Where(u=>u.Email==email).FirstOrDefaultAsync();
+            if (!string.IsNullOrEmpty(email))
+            {
+                return await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
+            }
+            return null;
         }
 
         public async Task<IEnumerable<User>?> GetByEmail(IEnumerable<string> emails)

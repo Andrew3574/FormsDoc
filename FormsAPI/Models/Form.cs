@@ -10,7 +10,7 @@ public partial class Form
 
     public int? UserId { get; set; }
 
-    public DateTime? CreatedAt { get; set; }
+    public DateTime CreatedAt { get; set; }
 
     public string Title { get; set; } = null!;
 

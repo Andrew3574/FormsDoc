@@ -1,4 +1,5 @@
-﻿@model LoginModel
+﻿@using FormsAPP.Models.Account
+@model LoginModel
 
 @{
     Layout = null;
@@ -40,10 +41,10 @@
                     <h2 class="text-center">Sign In to The App</h2>
                     <p class="text-center">Start your journey</p>
 
-                    @if (!string.IsNullOrEmpty(ViewData["ErrorMessage"]?.ToString()))
+                    @if (!string.IsNullOrEmpty(TempData["ErrorMessage"]?.ToString()))
                     {
                         <div class="alert alert-danger" role="alert">
-                            @ViewData["ErrorMessage"]
+                            @TempData["ErrorMessage"]
                         </div>
                     }
 
@@ -62,7 +63,9 @@
                             <input asp-for="RememberMe" type="checkbox" class="form-check-input" id="rememberMe" />
                             <label asp-for="RememberMe" class="form-check-label">Remember me</label>
                         </div>
-                        <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                        <br />
+                        <button type="submit" class="btn btn-primary btn-block">Sign In</button>                        
+                        <a asp-controller="Forms" asp-action="Index" class="btn btn-outline-secondary btn-block">Proceed as a Guest</a>
                         <br />
                         <a asp-action="Register">Don't have an account?</a> |
                         <a asp-action="EmailConfirmation">Forgot password?</a>

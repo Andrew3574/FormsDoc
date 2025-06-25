@@ -118,7 +118,9 @@ public partial class FormsDbContext : DbContext
             entity.Property(e => e.CreatedAt)
                 .HasPrecision(0)
                 .HasDefaultValueSql("now()")
-                .HasColumnName("created_at");
+                .HasColumnName("created_at"); 
+            entity.Property(e => e.Text)
+                .HasColumnName("text");
             entity.Property(e => e.FormId).HasColumnName("form_id");
             entity.Property(e => e.UserId).HasColumnName("user_id");
 
@@ -148,7 +150,7 @@ public partial class FormsDbContext : DbContext
                 .HasMaxLength(100)
                 .HasColumnName("description");
             entity.Property(e => e.ImageUrl)
-                .HasMaxLength(32)
+                .HasMaxLength(256)
                 .HasColumnName("image_url");
             entity.Property(e => e.Title)
                 .HasMaxLength(32)
@@ -401,7 +403,7 @@ public partial class FormsDbContext : DbContext
                 .HasMaxLength(32)
                 .HasColumnName("email");
             entity.Property(e => e.ImageUrl)
-                .HasMaxLength(32)
+                .HasMaxLength(256)
                 .HasColumnName("image_url");
             entity.Property(e => e.Name)
                 .HasMaxLength(20)
@@ -420,6 +422,10 @@ public partial class FormsDbContext : DbContext
                 .HasColumnName("state")
                 .HasColumnType("state")
                 .HasDefaultValue(UserState.active);
+            entity.Property(e => e.Lastlogin)
+                .HasDefaultValueSql("now()")
+                .HasColumnType("timestamptz(0) with time zone")
+                .HasColumnName("lastlogin");
         });
 
         OnModelCreatingPartial(modelBuilder);

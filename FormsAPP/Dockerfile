@@ -6,8 +6,7 @@ USER $APP_UID
 WORKDIR /app
 EXPOSE 5873
 ENV ASPNETCORE_URLS=http://:+5873
-ENV ASPNETCORE_ENVIRONMENT=Development
-ENV FormsApi__apiUrl=http://forms_api:8080/api/
+ENV FormsApi__apiUrl=http://46.21.247.63:8080/api/
 
 
 # Этот этап используется для сборки проекта службы

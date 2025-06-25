@@ -60,5 +60,10 @@ namespace FormsAPI.Services.Auth
             }
         }
 
+        public static string? GetEmailByToken(string token)
+        {
+            return ValidateToken(token)?.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
+        }
+
     }
 }

@@ -12,7 +12,7 @@ namespace FormsAPI.Services.Auth
     {
         private readonly string _role;
 
-        public JwtAuthAttribute(string role = "user")
+        public JwtAuthAttribute(string role = "user,admin")
         {
             _role = role.ToLower();
         }

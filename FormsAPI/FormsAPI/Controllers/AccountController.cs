@@ -1,13 +1,16 @@
 ﻿using AutoMapper;
 using FormsAPI.ModelsDTO;
+using FormsAPI.ModelsDTO.Account;
 using FormsAPI.Services;
 using FormsAPI.Services.Auth;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using Models;
+using Models.Enums;
 using OnixLabs.Core.Text;
 using Repositories;
+using System.Security.Claims;
 
 
 namespace FormsAPI.Controllers
@@ -41,8 +44,7 @@ namespace FormsAPI.Controllers
                     userDto.Password = _encryptionService.HashPassword(userDto.Email + userDto.Password);
                     User user = _mapper.Map<User>(userDto);
                     await _usersRepository.Create(user);
-                    var token = JwtAuthenticationService.GenerateJSONWebToken(user);
-                    return Ok(token);
+                    return Ok();
                 }
                 catch (Exception)
                 {
@@ -61,8 +63,10 @@ namespace FormsAPI.Controllers
                     var user = await _usersRepository.GetByEmail(userDto.Email);
                     if (IsLoginSuccessful(user, userDto,out string message))
                     {
-                        var token = JwtAuthenticationService.GenerateJSONWebToken(user!);
-                        return Ok(token);
+                        user!.Lastlogin = DateTime.UtcNow;
+                        await _usersRepository.Update(user);
+                        var authDto = new AuthDTO() {UserId = user.Id, Email=userDto.Email, Role=user.Role.ToString(), Token = JwtAuthenticationService.GenerateJSONWebToken(user!) };
+                        return Ok(authDto);
                     }
                     return BadRequest(message);
                 }
@@ -74,27 +78,25 @@ namespace FormsAPI.Controllers
             return BadRequest("Invalid data input");
         }
 
-        /// <summary>
-        /// Returns user data for user page
-        /// </summary>
-        /// <param name="email"></param>
-        /// <returns></returns>
-        [JwtAuth]
-        [HttpGet("GetUserInfo/{email:alpha}")]
-        public async Task<ActionResult> GetUserInfo([FromBody]string email)
+        [HttpGet("GetUserProfileInfo")]
+        public async Task<ActionResult> GetUserProfileInfo([FromQuery]string token)
         {
-            if(!string.IsNullOrEmpty(email))
+            if(!string.IsNullOrEmpty(token))
             {
+                var email = JwtAuthenticationService.GetEmailByToken(token);
                 var user = await _usersRepository.GetByEmail(email);
-                return Ok(user);    
+                if(user != null)
+                {
+                    return Ok(_mapper.Map<UserDTO>(user));
+                }
             }
-            return BadRequest("user not found");
+            return BadRequest();
         }
 
         [HttpPost("GetCode")]
         public async Task<ActionResult> SendRecoveryCode([FromBody]string email)
         {
-            var user = _usersRepository.GetByEmail(email);
+            var user = await _usersRepository.GetByEmail(email);
             if(user != null)
             {
                 var code = await _emailService.SendRecoveryCode(email);
@@ -148,7 +150,7 @@ namespace FormsAPI.Controllers
                 message = "Wrong password";
                 return false;
             }
-            if(user.State == Models.Enums.UserState.blocked)
+            if(user.State == UserState.blocked)
             {
                 message = "You were blocked";
                 return false;

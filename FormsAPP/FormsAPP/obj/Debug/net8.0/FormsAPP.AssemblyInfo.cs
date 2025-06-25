@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FormsAPP")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d48040c31553fae71cc999c4cbdb4ef3d497af4d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6f7f95b6802a037a36e41518097d97b9f3ea0d53")]
 [assembly: System.Reflection.AssemblyProductAttribute("FormsAPP")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FormsAPP")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -33,3 +33,7 @@ D:\SummerCourse\CourseProject\FormsAPP\FormsAPP\obj\Debug\net8.0\refint\FormsAPP
 D:\SummerCourse\CourseProject\FormsAPP\FormsAPP\obj\Debug\net8.0\FormsAPP.pdb
 D:\SummerCourse\CourseProject\FormsAPP\FormsAPP\obj\Debug\net8.0\FormsAPP.genruntimeconfig.cache
 D:\SummerCourse\CourseProject\FormsAPP\FormsAPP\obj\Debug\net8.0\ref\FormsAPP.dll
+D:\SummerCourse\CourseProject\FormsAPP\FormsAPP\bin\Debug\net8.0\libman.json
+D:\SummerCourse\CourseProject\FormsAPP\FormsAPP\bin\Debug\net8.0\AutoMapper.dll
+D:\SummerCourse\CourseProject\FormsAPP\FormsAPP\obj\Debug\net8.0\FormsAPP.csproj.AssemblyReference.cache
+D:\SummerCourse\CourseProject\FormsAPP\FormsAPP\obj\Debug\net8.0\FormsAPP.csproj.Up2Date

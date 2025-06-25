@@ -1,0 +1,636 @@
+﻿@using FormsAPP.Models.Forms
+@model CreateFormModel
+
+@{
+    Layout = null;
+    Dictionary<int, string> Topics = new Dictionary<int, string>()
+    {
+        {1,"Education"},
+        {2,"Quiz"},
+        {3,"Other"}
+    };
+    Dictionary<int, string> Accessibility = new Dictionary<int, string>()
+    {
+        {0,"Public"},
+        {1,"Restricted"}
+    };
+    Dictionary<int, string> QuestionTypes = new Dictionary<int, string>()
+    {
+        {1,"Text (Short Answer)"},
+        {2,"Paragraph (Long Answer)"},
+        {3,"Number"},
+        {4,"Checkboxes"}
+    };
+    SelectList TopicItems = new SelectList(Topics, "Key", "Value");
+    SelectList AccessibilityItems = new SelectList(Accessibility, "Key", "Value");
+    SelectList QuestionTypeItems = new SelectList(QuestionTypes, "Key", "Value");
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Form</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        .tag-item {
+            display: inline-block;
+            background: #e9ecef;
+            padding: 5px 10px;
+            border-radius: 20px;
+            margin-right: 5px;
+            margin-bottom: 5px;
+        }
+
+        .tag-remove {
+            cursor: pointer;
+            margin-left: 5px;
+        }
+
+        .question-card {
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 15px;
+            background-color: #f8f9fa;
+        }
+
+        .option-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+
+        .drag-handle {
+            cursor: move;
+            margin-right: 10px;
+        }
+
+        .image-preview {
+            max-width: 200px;
+            max-height: 200px;
+            margin-top: 10px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .question-type-badge {
+            font-size: 0.8rem;
+            margin-left: 10px;
+            color: #6c757d;
+        }
+
+        #tagSuggestions {
+            top:40px;
+            position: absolute;
+            z-index: 1000;
+            background: white;
+            border: 1px solid #ced4da;
+            border-radius: 0.25rem;
+            width: calc(100% - 24px);
+            max-height: 200px;
+            overflow-y: auto;
+            display: none;
+        }
+
+        .suggestion-item {
+            padding: 8px 12px;
+            cursor: pointer;
+        }
+
+            .suggestion-item:hover {
+                background-color: #f8f9fa;
+            }
+
+        #userSuggestions {
+            top:40px;
+            position: absolute;
+            z-index: 1000;
+            background: white;
+            border: 1px solid #ced4da;
+            border-radius: 0.25rem;
+            width: calc(100% - 52px);
+            max-height: 200px;
+            overflow-y: auto;
+            display: none;
+        }
+
+        .user-suggestion-item {
+            padding: 8px 12px;
+            cursor: pointer;
+        }
+
+            .user-suggestion-item:hover {
+                background-color: #f8f9fa;
+            }
+
+    </style>
+</head>
+<body>
+    <div class="container mt-4">
+        <h2>Create New Form</h2> 
+        
+        @if (!string.IsNullOrEmpty(ViewData["ErrorMessage"]?.ToString()))
+        {
+            <div class="alert alert-danger" role="alert">
+                @ViewData["ErrorMessage"]
+            </div>
+        }
+
+        <form method="post" enctype="multipart/form-data" id="createForm">
+            <input type="number" name="UserId" value="@Context.Session.GetInt32("UserId")" hidden />
+
+            <div class="mb-3">
+                <label class="form-label">Title</label>
+                <input type="text" class="form-control" name="Title" placeholder="Form title" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Description</label>
+                <textarea class="form-control" name="Description" placeholder="Form description" rows="3"></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Image</label>
+                <input type="file" name="ImageFile" class="form-control" id="imageUpload" accept="image/*">
+                <input type="text" name="ImageUrl" id="imageUrl" hidden>
+                <div id="imagePreviewContainer" class="mt-2">
+                    <img id="imagePreview" class="image-preview" src="" style="display: none;">
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Topic</label>
+                <select class="form-select" name="TopicId" asp-items="@TopicItems" required></select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Accessibility</label>
+                <select class="form-select" name="Accessibility" id="accessibilitySelect" asp-items="@AccessibilityItems" required></select>
+                <div id="restrictedUsersContainer" class="mt-3 hidden">
+                    <label class="form-label">Allowed Users</label>
+                    <div class="input-group mb-3" style="position: relative;">
+                        <input type="text" class="form-control" id="userSearchInput" placeholder="Search users">
+                        <button class="btn btn-outline-secondary" type="button" id="addUserBtn">Add</button>
+                        <div id="userSuggestions"></div>
+                    </div>
+                    <div id="allowedUsersList" class="mb-3"></div>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Tags</label>
+                <div class="input-group mb-3" style="position: relative;">
+                    <input type="text" class="form-control" id="tagInput" placeholder="Add tag and press Enter">
+                    <div id="tagSuggestions"></div>
+                </div>
+                <div id="tagsContainer" class="mb-3"></div>
+                <div id="tagsHiddenInputs"></div>
+            </div>
+
+            <div class="mb-3">
+                <h4>Questions</h4>
+                <div id="questionsContainer"></div>
+                <div class="dropdown mt-3">
+                    <button class="btn btn-primary dropdown-toggle" type="button" id="addQuestionDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        Add Question
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="addQuestionDropdown">
+                        @foreach (var item in QuestionTypeItems)
+                        {
+                            <li><a class="dropdown-item" href="#" data-type="@item.Value">@item.Text</a></li>
+                        }
+                    </ul>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-success">Create Form</button>
+        </form>
+    </div>
+
+    <!-- Question Template (hidden) -->
+    <div id="questionTemplate" class="question-card hidden">
+        <div class="d-flex justify-content-between mb-3">
+            <div class="d-flex align-items-center">
+                <i class="fas fa-grip-vertical drag-handle"></i>
+                <h5 class="question-title mb-0">Question <span class="question-type-badge"></span></h5>
+            </div>
+            <button type="button" class="btn btn-sm btn-danger delete-question"><i class="fas fa-trash"></i></button>
+        </div>
+        <input type="hidden" class="question-type" name="Questions[0].QuestionTypeId">
+        <input type="hidden" class="question-position" name="Questions[0].Position">
+        <div class="mb-3">
+            <input type="text" class="form-control question-text" name="Questions[0].Question" placeholder="Question text" required>
+        </div>
+        <div class="mb-3">
+            <textarea class="form-control question-description" name="Questions[0].Description" placeholder="Description (optional)" rows="2"></textarea>
+        </div>
+        <div class="options-container mb-3"></div>
+        <button type="button" class="btn btn-sm btn-outline-primary add-option hidden">Add Option</button>
+    </div>
+
+    <!-- Option Template (hidden) -->
+    <div id="optionTemplate" class="option-item hidden">
+        <input type="text" class="form-control form-control-sm option-value" placeholder="Option text" required>
+        <button type="button" class="btn btn-sm btn-outline-danger ms-2 remove-option"><i class="fas fa-times"></i></button>
+    </div>
+
+    <!-- Allowed User Template (hidden) -->
+    <div id="allowedUserTemplate" class="tag-item hidden">
+        <span class="user-name"></span>
+        <input type="hidden" class="user-id" name="AccessUsers[0].UserId">
+        <span class="tag-remove"><i class="fas fa-times"></i></span>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.14.0/Sortable.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            const questionTypes = {
+        @foreach (var item in QuestionTypeItems)
+        {
+            @Html.Raw($"{item.Value}: '{item.Text}',")
+        }
+            };
+
+            // Tags functionality
+            let tags = [];
+            const tagInput = $('#tagInput');
+            const tagsContainer = $('#tagsContainer');
+            const tagsHiddenInputs = $('#tagsHiddenInputs');
+            const tagSuggestions = $('#tagSuggestions');
+
+            let debounceTimer;
+            const debounceDelay = 300;
+
+            tagInput.on('input', function() {
+                clearTimeout(debounceTimer);
+                const inputText = $(this).val().trim();
+
+                if (inputText.length >= 2) {
+                    debounceTimer = setTimeout(() => {
+                        fetchTagSuggestions(inputText);
+                    }, debounceDelay);
+                } else {
+                    tagSuggestions.hide().empty();
+                }
+            });
+
+            tagInput.on('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    const tagText = $(this).val().trim();
+                    if (tagText && !tags.includes(tagText)) {
+                        tags.push(tagText);
+                        updateTagsDisplay();
+                        $(this).val('');
+                        tagSuggestions.hide().empty();
+                    }
+                } else if (e.key === 'ArrowDown') {
+                    e.preventDefault();
+                    const firstSuggestion = tagSuggestions.find('.suggestion-item').first();
+                    if (firstSuggestion.length) {
+                        firstSuggestion.focus();
+                    }
+                }
+            });
+
+            tagSuggestions.on('click', '.suggestion-item', function() {
+                const tagText = $(this).text().trim();
+                if (tagText && !tags.includes(tagText)) {
+                    tags.push(tagText);
+                    updateTagsDisplay();
+                    tagInput.val('');
+                }
+                tagSuggestions.hide().empty();
+            });
+
+            tagSuggestions.on('keydown', '.suggestion-item', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    $(this).click();
+                } else if (e.key === 'ArrowDown') {
+                    e.preventDefault();
+                    const next = $(this).next('.suggestion-item');
+                    if (next.length) next.focus();
+                } else if (e.key === 'ArrowUp') {
+                    e.preventDefault();
+                    const prev = $(this).prev('.suggestion-item');
+                    if (prev.length) {
+                        prev.focus();
+                    } else {
+                        tagInput.focus();
+                    }
+                }
+            });
+
+            function fetchTagSuggestions(query) {
+                $.ajax({
+                    url: '/Forms/FilterTagsByName',
+                    type: 'GET',
+                    data: { query: query },
+                    success: function(data) {
+                        if (data && data.length > 0) {
+                            tagSuggestions.empty();
+                            data.forEach(function(tag) {
+                                if (!tags.includes(tag.name)) {
+                                    tagSuggestions.append(
+                                        $('<div>').addClass('suggestion-item')
+                                            .text(tag.name)
+                                            .attr('tabindex', '0')
+                                    );
+                                }
+                            });
+
+                            if (tagSuggestions.children().length > 0) {
+                                tagSuggestions.show();
+                            } else {
+                                tagSuggestions.hide();
+                            }
+                        } else {
+                            tagSuggestions.hide().empty();
+                        }
+                    },
+                    error: function() {
+                        console.error('Error fetching tag suggestions');
+                        tagSuggestions.hide().empty();
+                    }
+                });
+            }
+
+            function updateTagsDisplay() {
+                tagsContainer.empty();
+                tagsHiddenInputs.empty();
+
+                tags.forEach((tag, index) => {
+                    const tagElement = $(`<span class="tag-item">${tag}<span class="tag-remove" data-index="${index}"><i class="fas fa-times"></i></span></span>`);
+                    tagsContainer.append(tagElement);
+
+                    const hiddenInput = $(`<input type="hidden" name="Tags[${index}]" value="${tag}">`);
+                    tagsHiddenInputs.append(hiddenInput);
+                });
+
+                tagSuggestions.hide().empty();
+            }
+
+            tagsContainer.on('click', '.tag-remove', function() {
+                const index = $(this).data('index');
+                tags.splice(index, 1);
+                updateTagsDisplay();
+            });
+
+            // Users functionality (for restricted access)
+            let allowedUsers = [];
+            const userSearchInput = $('#userSearchInput');
+            const addUserBtn = $('#addUserBtn');
+            const allowedUsersList = $('#allowedUsersList');
+            const userSuggestions = $('#userSuggestions');
+
+            let userDebounceTimer;
+            const userDebounceDelay = 300;
+
+            userSearchInput.on('input', function() {
+                clearTimeout(userDebounceTimer);
+                const query = $(this).val().trim();
+
+                if (query.length >= 2) {
+                    userDebounceTimer = setTimeout(() => {
+                        fetchUserSuggestions(query);
+                    }, userDebounceDelay);
+                } else {
+                    userSuggestions.hide().empty();
+                }
+            });
+
+            userSearchInput.on('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    addCurrentUser();
+                } else if (e.key === 'ArrowDown') {
+                    e.preventDefault();
+                    const firstSuggestion = userSuggestions.find('.user-suggestion-item').first();
+                    if (firstSuggestion.length) {
+                        firstSuggestion.focus();
+                    }
+                }
+            });
+
+            addUserBtn.on('click', addCurrentUser);
+
+            function addCurrentUser() {
+                const userName = userSearchInput.val().trim();
+                if (userName && !allowedUsers.some(u => u.name === userName)) {
+                    // In real system, use ID from suggestion
+                    const userId = "temp_" + Date.now();
+                    allowedUsers.push({ id: userId, name: userName });
+                    updateAllowedUsersDisplay();
+                    userSearchInput.val('');
+                    userSuggestions.hide().empty();
+                }
+            }
+
+            userSuggestions.on('click', '.user-suggestion-item', function() {
+                const userId = $(this).data('user-id');
+                const userName = $(this).text().trim();
+
+                if (!allowedUsers.some(u => u.id === userId)) {
+                    allowedUsers.push({ id: userId, name: userName });
+                    updateAllowedUsersDisplay();
+                    userSearchInput.val('');
+                }
+                userSuggestions.hide().empty();
+            });
+
+            userSuggestions.on('keydown', '.user-suggestion-item', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    $(this).click();
+                } else if (e.key === 'ArrowDown') {
+                    e.preventDefault();
+                    const next = $(this).next('.user-suggestion-item');
+                    if (next.length) next.focus();
+                } else if (e.key === 'ArrowUp') {
+                    e.preventDefault();
+                    const prev = $(this).prev('.user-suggestion-item');
+                    if (prev.length) {
+                        prev.focus();
+                    } else {
+                        userSearchInput.focus();
+                    }
+                }
+            });
+
+            function fetchUserSuggestions(query) {
+                $.ajax({
+                    url: '/Forms/FilterUsersbyEmail',
+                    type: 'GET',
+                    data: { query: query },
+                    success: function(data) {
+                        if (data && data.length > 0) {
+                            userSuggestions.empty();
+                            data.forEach(function(user) {
+                                if (!allowedUsers.some(u => u.id === user.id)) {
+                                    userSuggestions.append(
+                                        $('<div>')
+                                            .addClass('user-suggestion-item')
+                                            .text(user.email)
+                                            .attr('data-user-id', user.id)
+                                            .attr('tabindex', '0')
+                                    );
+                                }
+                            });
+
+                            if (userSuggestions.children().length > 0) {
+                                userSuggestions.show();
+                            } else {
+                                userSuggestions.hide();
+                            }
+                        } else {
+                            userSuggestions.hide().empty();
+                        }
+                    },
+                    error: function() {
+                        console.error('Error fetching user suggestions');
+                        userSuggestions.hide().empty();
+                    }
+                });
+            }
+
+            function updateAllowedUsersDisplay() {
+                allowedUsersList.empty();
+                allowedUsers.forEach((user, index) => {
+                    const userElement = $(
+                        `<div class="tag-item">
+                            ${user.name}
+                            <input type="hidden" name="AccessUsers[${index}].UserId" value="${user.id}">
+                            <span class="tag-remove" data-index="${index}">
+                                <i class="fas fa-times"></i>
+                            </span>
+                        </div>`
+                    );
+                    allowedUsersList.append(userElement);
+                });
+            }
+
+            allowedUsersList.on('click', '.tag-remove', function() {
+                const index = $(this).data('index');
+                allowedUsers.splice(index, 1);
+                updateAllowedUsersDisplay();
+            });
+
+            // Form accessibility change
+            $('#accessibilitySelect').change(function() {
+                if ($(this).val() == '1') {
+                    $('#restrictedUsersContainer').removeClass('hidden');
+                } else {
+                    $('#restrictedUsersContainer').addClass('hidden');
+                }
+            });
+
+            // Questions functionality
+            let questionCounter = 0;
+            const questionsContainer = $('#questionsContainer');
+
+            new Sortable(questionsContainer[0], {
+                handle: '.drag-handle',
+                animation: 150,
+                onEnd: function() {
+                    updateQuestionPositions();
+                }
+            });
+
+            $('.dropdown-item[data-type]').click(function(e) {
+                e.preventDefault();
+                const questionTypeId = $(this).data('type');
+                addQuestion(questionTypeId);
+            });
+
+            function addQuestion(questionTypeId) {
+                const questionTemplate = $('#questionTemplate').clone();
+                questionTemplate.removeClass('hidden');
+                questionTemplate.removeAttr('id');
+
+                const newIndex = questionCounter++;
+                questionTemplate.find('input, textarea, select').each(function() {
+                    const name = $(this).attr('name').replace('[0]', `[${newIndex}]`);
+                    $(this).attr('name', name);
+                });
+
+                questionTemplate.find('.question-type').val(questionTypeId);
+                questionTemplate.find('.question-position').val(newIndex);
+                questionTemplate.find('.question-type-badge').text(questionTypes[questionTypeId]);
+
+                if (questionTypeId == 4 || questionTypeId == 5) {
+                    questionTemplate.find('.add-option').removeClass('hidden');
+                    addOption(questionTemplate.find('.options-container'));
+                }
+
+                questionsContainer.append(questionTemplate);
+                updateQuestionPositions();
+            }
+
+            function addOption(container) {
+                const optionTemplate = $('#optionTemplate').clone();
+                optionTemplate.removeClass('hidden');
+                optionTemplate.removeAttr('id');
+
+                const optionIndex = container.find('.option-item').length;
+                optionTemplate.find('.option-value').attr('name', container.closest('.question-card').find('.question-text').attr('name').replace('Question', `Options[${optionIndex}].OptionValue`));
+
+                container.append(optionTemplate);
+            }
+
+            function updateQuestionPositions() {
+                $('.question-card').each(function(index) {
+                    $(this).find('.question-position').val(index);
+
+                    $(this).find('input, textarea, select').each(function() {
+                        const currentName = $(this).attr('name');
+                        const newName = currentName.replace(/Questions\[\d+\]/, `Questions[${index}]`);
+                        $(this).attr('name', newName);
+                    });
+                });
+            }
+
+            questionsContainer.on('click', '.add-option', function() {
+                addOption($(this).closest('.question-card').find('.options-container'));
+            });
+
+            questionsContainer.on('click', '.remove-option', function() {
+                $(this).closest('.option-item').remove();
+            });
+
+            questionsContainer.on('click', '.delete-question', function() {
+                $(this).closest('.question-card').remove();
+                updateQuestionPositions();
+            });
+
+            // Image upload
+            $('#imageUpload').change(function() {
+                const file = this.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        $('#imagePreview').attr('src', e.target.result).show();
+                        $('#imageUrl').val('/uploads/' + file.name);
+                    }
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            // Close suggestions when clicking outside
+            $(document).on('click', function(e) {
+                if (!$(e.target).closest('#tagInput, #tagSuggestions').length) {
+                    tagSuggestions.hide();
+                }
+                if (!$(e.target).closest('#userSearchInput, #userSuggestions').length) {
+                    userSuggestions.hide();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -32,7 +32,7 @@ namespace Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<Form>> GetAllByBatch(int batch, int batchSize = 20)
+        public async Task<IEnumerable<Form>> GetByBatch(int batch, int batchSize = 20)
         {
             return await _context.Forms.Skip(batch * batchSize).Take(batchSize).ToListAsync();
         }
@@ -52,9 +52,19 @@ namespace Repositories
             return await _context.Forms.Where(f => EF.Functions.Like(f.Title, $"%{title}%")).Skip(batch * batchSize).Take(batchSize).ToListAsync();
         }
 
-        public override Task<IEnumerable<Form>?> GetAll()
+        /// <summary>
+        /// elastic modif
+        /// </summary>
+        /// <returns></returns>
+        public override async Task<IEnumerable<Form>?> GetAll()
         {
-            throw new NotImplementedException();
+            return await _context.Forms
+                .Include(f=>f.User)
+                .Include(f=>f.Comments)
+                .Include(f=>f.Topic)
+                .Include(f=>f.FormTags)
+                .AsNoTracking()
+                .ToListAsync();
         }
 
         public override async Task<Form?> GetById(int id)

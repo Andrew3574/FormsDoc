@@ -53,7 +53,8 @@ create table Comments(
 	id serial primary key,
 	user_id int references Users(id) on delete cascade,
 	form_id int references Forms(id) on delete cascade,
-	created_at timestamptz(0) default now()
+	created_at timestamptz(0) default now(),
+	text text not null
 );
 
 create table Form_Tags(

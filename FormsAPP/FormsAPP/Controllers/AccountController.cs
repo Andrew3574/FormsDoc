@@ -1,4 +1,6 @@
-﻿using FormsAPP.Models;
+﻿using AutoMapper;
+using FormsAPP.Models.Account;
+using FormsAPP.Models.Users;
 using FormsAPP.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Reflection;
@@ -8,10 +10,12 @@ namespace FormsAPP.Controllers
     public class AccountController : Controller
     {
         private readonly HttpClient _httpClient;
+        private readonly IMapper _mapper;
 
-        public AccountController(HttpClientService httpClientService)
+        public AccountController(HttpClientService httpClientService, IMapper mapper)
         {
             _httpClient = httpClientService.GetClient()!;
+            _mapper = mapper;
         }
 
         public IActionResult Register()
@@ -27,9 +31,7 @@ namespace FormsAPP.Controllers
                 var response = await _httpClient.PostAsJsonAsync("Account/Register", model);
                 if (response.IsSuccessStatusCode)
                 {
-                    string token = await response.Content.ReadAsStringAsync();
-                    HttpContext.Response.Cookies.Append("jwt", token);
-                    return RedirectToAction("Index","Home");
+                    return View("Login", _mapper.Map<LoginModel>(model));
                 }
                 var message = await response.Content.ReadAsStringAsync();
                 ViewData["ErrorMessage"] = message;
@@ -50,11 +52,11 @@ namespace FormsAPP.Controllers
                 var response = await _httpClient.PostAsJsonAsync("Account/Login", model);
                 if (response.IsSuccessStatusCode)
                 {
-                    var token = await response.Content.ReadAsStringAsync();
-                    SetTokenByRememberMe(model.RememberMe, token);
+                    var authModel = await response.Content.ReadFromJsonAsync<AuthModel>();
+                    LoginProcess(authModel!, model.RememberMe);
                     return RedirectToAction("Index", "Home");
                 }
-                ViewData["ErrorMessage"] = await response.Content.ReadAsStringAsync();
+                TempData["ErrorMessage"] = await response.Content.ReadAsStringAsync();
                 return View(model);
             }
             return View(model);
@@ -63,6 +65,7 @@ namespace FormsAPP.Controllers
         public IActionResult Logout()
         {
             HttpContext.Response.Cookies.Delete("jwt");
+            HttpContext.Session.Clear();
             return RedirectToAction("Login", "Account");
         }
 
@@ -81,7 +84,7 @@ namespace FormsAPP.Controllers
                 return View("EmailConfirmation", new RecoveryModel { Email = email, Code="" });
             }
             ViewData["ErrorMessage"] = await response.Content.ReadAsStringAsync();
-            return View(email);
+            return View();
         }
 
         [HttpPost]
@@ -90,7 +93,7 @@ namespace FormsAPP.Controllers
             var response = await _httpClient.PostAsJsonAsync("Account/CheckCode", model);
             if (response.IsSuccessStatusCode)
             {
-                return View("RecoveryPaswordPage", new LoginModel { Email = model.Email });
+                return View("RecoveryPasswordPage", new LoginModel { Email = model.Email });
             }
             ViewData["ErrorMessage"] = await response.Content.ReadAsStringAsync();
             return View("EmailConfirmation",model);
@@ -112,14 +115,50 @@ namespace FormsAPP.Controllers
             ViewData["ErrorMessage"] = await response.Content.ReadAsStringAsync();
             return View("RecoveryPasswordPage",model);
         }
-        private void SetTokenByRememberMe(bool rememberMe, string token)
+
+        public async Task<IActionResult> UserProfile()
         {
+            if (HttpContext.Request.Cookies.TryGetValue("jwt", out string? token))
+            {
+                var response = await _httpClient.GetAsync($"Account/GetUserProfileInfo?token={token}");
+                if (response.IsSuccessStatusCode)
+                {
+                    var user = await response.Content.ReadFromJsonAsync<UserModel>();
+                    if(!HttpContext.Session.TryGetValue("UserId",out var id))
+                    {
+                        SetSessionValues(user!);
+                    }
+                    return View("UserProfile", user);
+                }
+            }            
+            return View("Login");
+        }
+
+        private void LoginProcess(AuthModel model, bool rememberMe)
+        {
+            SetSessionValues(model);
             if (rememberMe)
             {
-                var options = new CookieOptions() { Expires = DateTime.Now.AddDays(14), Secure = true };
-                HttpContext.Response.Cookies.Append("jwt", token, options);
+                var options = new CookieOptions() { Expires = DateTime.Now.AddDays(14), Secure = true, HttpOnly = true };
+                HttpContext.Response.Cookies.Append("jwt", model.Token, options);
             }
-            HttpContext.Response.Cookies.Append("jwt", token);
+            else
+            {
+                HttpContext.Response.Cookies.Append("jwt", model.Token);
+            }
+        }
+
+        private void SetSessionValues(AuthModel model)
+        {
+            HttpContext.Session.SetString("Role", model.Role);
+            HttpContext.Session.SetString("Email", model.Email);
+            HttpContext.Session.SetInt32("UserId", model.UserId);
+        }
+        private void SetSessionValues(UserModel model)
+        {
+            HttpContext.Session.SetString("Role", model.Role);
+            HttpContext.Session.SetString("Email", model.Email);
+            HttpContext.Session.SetInt32("UserId", model.Id);
         }
     }
 }

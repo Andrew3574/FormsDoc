@@ -11,7 +11,9 @@ public partial class Comment
 
     public int? FormId { get; set; }
 
-    public DateTime? CreatedAt { get; set; }
+    public DateTime CreatedAt { get; set; }
+
+    public string? Text { get; set; }
 
     public virtual Form? Form { get; set; }
 

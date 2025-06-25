@@ -27,9 +27,14 @@ namespace Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task<bool> isLiked(int formId, int userid)
+        public async Task<Like?> isLiked(int formId, int userid)
+        {             
+            return await _context.Likes.FirstOrDefaultAsync(l => l.FormId == formId && l.UserId == userid);
+        }
+
+        public async Task<IEnumerable<Like>?> GetLikesByFormId(int formId)
         {
-            return await _context.Likes.AnyAsync(l=>l.FormId==formId && l.UserId==userid);
+            return await _context.Likes.Where(l=>l.FormId==formId).ToListAsync();
         }
 
         public override Task<IEnumerable<Like>?> GetAll()

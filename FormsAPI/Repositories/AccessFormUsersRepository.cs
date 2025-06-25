@@ -46,5 +46,10 @@ namespace Repositories
         {
             throw new NotImplementedException();
         }
+
+        public async Task<bool> HasAccess(int userId)
+        {
+            return await _context.AccessformUsers.AnyAsync(u => u.UserId == userId);
+        }
     }
 }

@@ -58,9 +58,17 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "AWSSDK.S3": {
+              "target": "Package",
+              "version": "[4.0.2, )"
+            },
             "AutoMapper": {
               "target": "Package",
               "version": "[14.0.0, )"
+            },
+            "Elastic.Clients.Elasticsearch": {
+              "target": "Package",
+              "version": "[8.18.0, )"
             },
             "MailKit": {
               "target": "Package",

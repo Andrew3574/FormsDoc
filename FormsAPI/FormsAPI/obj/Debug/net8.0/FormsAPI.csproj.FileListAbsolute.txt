@@ -156,3 +156,13 @@ D:\SummerCourse\CourseProject\FormsAPI\FormsAPI\bin\Debug\net8.0\MimeKit.dll
 D:\SummerCourse\CourseProject\FormsAPI\FormsAPI\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
 D:\SummerCourse\CourseProject\FormsAPI\FormsAPI\bin\Debug\net8.0\System.Security.Cryptography.Pkcs.dll
 D:\SummerCourse\CourseProject\FormsAPI\FormsAPI\bin\Debug\net8.0\runtimes\win\lib\net8.0\System.Security.Cryptography.Pkcs.dll
+D:\SummerCourse\CourseProject\FormsAPI\FormsAPI\bin\Debug\net8.0\Microsoft.Extensions.Configuration.dll
+D:\SummerCourse\CourseProject\FormsAPI\FormsAPI\bin\Debug\net8.0\Microsoft.Extensions.Configuration.FileExtensions.dll
+D:\SummerCourse\CourseProject\FormsAPI\FormsAPI\bin\Debug\net8.0\Microsoft.Extensions.Configuration.Json.dll
+D:\SummerCourse\CourseProject\FormsAPI\FormsAPI\bin\Debug\net8.0\Microsoft.Extensions.FileProviders.Abstractions.dll
+D:\SummerCourse\CourseProject\FormsAPI\FormsAPI\bin\Debug\net8.0\Microsoft.Extensions.FileProviders.Physical.dll
+D:\SummerCourse\CourseProject\FormsAPI\FormsAPI\bin\Debug\net8.0\Microsoft.Extensions.FileSystemGlobbing.dll
+D:\SummerCourse\CourseProject\FormsAPI\FormsAPI\bin\Debug\net8.0\Elastic.Clients.Elasticsearch.dll
+D:\SummerCourse\CourseProject\FormsAPI\FormsAPI\bin\Debug\net8.0\Elastic.Transport.dll
+D:\SummerCourse\CourseProject\FormsAPI\FormsAPI\bin\Debug\net8.0\AWSSDK.Core.dll
+D:\SummerCourse\CourseProject\FormsAPI\FormsAPI\bin\Debug\net8.0\AWSSDK.S3.dll

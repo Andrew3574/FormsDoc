@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "KrKkwto/rgzwkrlbBDXMcxe1MHNX2CSacu4QX9kVhAg=",
+  "Hash": "PPBFCICXC2x6w5DVsvQ4o4lsoAko4Lo3UxtEriQk1pY=",
   "Source": "FormsAPP",
   "BasePath": "_content/FormsAPP",
   "Mode": "Default",
@@ -99,6 +99,48 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "D:\\SummerCourse\\CourseProject\\FormsAPP\\FormsAPP\\wwwroot\\images\\forms_icon.webp",
+      "SourceId": "FormsAPP",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\SummerCourse\\CourseProject\\FormsAPP\\FormsAPP\\wwwroot\\",
+      "BasePath": "_content/FormsAPP",
+      "RelativePath": "images/forms_icon#[.{fingerprint}]?.webp",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "rjsm1a5h0r",
+      "Integrity": "+SwiION27Pj0nx7SKRZTEQfeBaLpkxrtOVYLMj1bJcA=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\forms_icon.webp"
+    },
+    {
+      "Identity": "D:\\SummerCourse\\CourseProject\\FormsAPP\\FormsAPP\\wwwroot\\images\\profile_icon.png",
+      "SourceId": "FormsAPP",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\SummerCourse\\CourseProject\\FormsAPP\\FormsAPP\\wwwroot\\",
+      "BasePath": "_content/FormsAPP",
+      "RelativePath": "images/profile_icon#[.{fingerprint}]?.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "x9x7he8w55",
+      "Integrity": "yzIYL1QkcjXObTeCB5/o5SaYq71p+VjYgCjvXgk9hkY=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\profile_icon.png"
     },
     {
       "Identity": "D:\\SummerCourse\\CourseProject\\FormsAPP\\FormsAPP\\wwwroot\\js\\site.js",
@@ -1645,6 +1687,170 @@
         {
           "Name": "integrity",
           "Value": "sha256-xxoD6PVbgfMvSR3RfFCIdYZE/mMBp7wjtLlz31r1bN8="
+        }
+      ]
+    },
+    {
+      "Route": "images/forms_icon.rjsm1a5h0r.webp",
+      "AssetFile": "D:\\SummerCourse\\CourseProject\\FormsAPP\\FormsAPP\\wwwroot\\images\\forms_icon.webp",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "137960"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/webp"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"+SwiION27Pj0nx7SKRZTEQfeBaLpkxrtOVYLMj1bJcA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 17 Jun 2025 18:31:36 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "rjsm1a5h0r"
+        },
+        {
+          "Name": "label",
+          "Value": "images/forms_icon.webp"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-+SwiION27Pj0nx7SKRZTEQfeBaLpkxrtOVYLMj1bJcA="
+        }
+      ]
+    },
+    {
+      "Route": "images/forms_icon.webp",
+      "AssetFile": "D:\\SummerCourse\\CourseProject\\FormsAPP\\FormsAPP\\wwwroot\\images\\forms_icon.webp",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "137960"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/webp"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"+SwiION27Pj0nx7SKRZTEQfeBaLpkxrtOVYLMj1bJcA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 17 Jun 2025 18:31:36 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-+SwiION27Pj0nx7SKRZTEQfeBaLpkxrtOVYLMj1bJcA="
+        }
+      ]
+    },
+    {
+      "Route": "images/profile_icon.png",
+      "AssetFile": "D:\\SummerCourse\\CourseProject\\FormsAPP\\FormsAPP\\wwwroot\\images\\profile_icon.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "16865"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"yzIYL1QkcjXObTeCB5/o5SaYq71p+VjYgCjvXgk9hkY=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 16 Jun 2025 16:26:37 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-yzIYL1QkcjXObTeCB5/o5SaYq71p+VjYgCjvXgk9hkY="
+        }
+      ]
+    },
+    {
+      "Route": "images/profile_icon.x9x7he8w55.png",
+      "AssetFile": "D:\\SummerCourse\\CourseProject\\FormsAPP\\FormsAPP\\wwwroot\\images\\profile_icon.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "16865"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"yzIYL1QkcjXObTeCB5/o5SaYq71p+VjYgCjvXgk9hkY=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 16 Jun 2025 16:26:37 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "x9x7he8w55"
+        },
+        {
+          "Name": "label",
+          "Value": "images/profile_icon.png"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-yzIYL1QkcjXObTeCB5/o5SaYq71p+VjYgCjvXgk9hkY="
         }
       ]
     },
