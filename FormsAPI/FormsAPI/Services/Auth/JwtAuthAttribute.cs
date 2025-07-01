@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Models;
 using Models.Enums;
 using Repositories;
 using System.Security.Claims;
@@ -71,6 +72,15 @@ namespace FormsAPI.Services.Auth
         {
             var userRepository = context.HttpContext.RequestServices.GetService<UsersRepository>();
             var user = await userRepository!.GetByEmail(claims?.Claims?.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value!);
+            if (ValidateUser(user, context))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        private bool ValidateUser(User? user, ActionExecutingContext context)
+        {
             if (user == null)
             {
                 SetErrorResult(context, "User not found");
@@ -79,6 +89,11 @@ namespace FormsAPI.Services.Auth
             if (user.State == UserState.blocked)
             {
                 SetErrorResult(context, "You were blocked");
+                return false;
+            }
+            if (!_role.Contains(user.Role.ToString()))
+            {
+                SetErrorResult(context, "Insufficient access");
                 return false;
             }
             return true;

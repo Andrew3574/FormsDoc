@@ -4,6 +4,167 @@
 
 @{
     Layout = null;
+    int shortTextIndex = 0;
+    int longTextIndex = 0;
+    int integerIndex = 0;
+    int checkboxIndex = 0;
 }
 
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
 
+        .form-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            background-color: #f9f9f9;
+            overflow: hidden;
+        }
+
+        .form-title {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+
+        .form-description {
+            margin-bottom: 30px;
+            padding: 10px;
+            color: #666;
+            border-radius: 5px;
+        }
+
+        .question-container {
+            margin-bottom: 25px;
+            padding: 15px;
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .question-text {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .question-description {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .option-container {
+            margin: 5px 0;
+        }
+
+        input[type="text"], input[type="number"], textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            min-height: 100px;
+        }
+
+        .submit-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+            .submit-btn:hover {
+                background-color: #45a049;
+            }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1 class="form-title">@Model.Title</h1>
+
+        @if (!string.IsNullOrEmpty(Model.Description))
+        {
+            <div class="form-description">
+                <p>@Model.Description</p>
+            </div>
+        }
+
+        <form method="post" asp-action="CreateFormAnswer">
+            <input type="number" name="UserId" value="@Context.Session.GetInt32("UserId")" hidden />
+            <input type="number" name="FormId" value="@Model.FormId" hidden />
+            <input type="number" name="Version" value="@Model.Version" hidden />
+
+            @foreach (var question in Model.Questions.OrderBy(q => q.Position))
+            {
+                if (question.DisplayState ?? true)
+                {
+                    <div class="question-container">
+                        <div class="question-text">@question.Question</div>
+
+                        @if (!string.IsNullOrEmpty(question.Description))
+                        {
+                            <div class="question-description">@question.Description</div>
+                        }
+
+                        @switch (question.QuestionTypeId)
+                        {
+                            case 1: // Short text
+                                <input maxlength="50" type="text" name="ShortTextAnswers[@shortTextIndex].Answer" data-question-id="@question.Position" required/>
+                                <input type="number" name="ShortTextAnswers[@shortTextIndex].FormQuestionId" value="@question.Id" hidden />
+                                shortTextIndex++;
+                                break;
+
+                            case 2: // Long text
+                                <textarea maxlength="200" name="LongTextAnswers[@longTextIndex].Answer" data-question-id="@question.Position" required></textarea>
+                                <input type="number" name="LongTextAnswers[@longTextIndex].FormQuestionId" value="@question.Id" hidden />
+                                longTextIndex++;
+                                break;
+
+                            case 3: // Integer
+                                <input type="number" min="0" name="IntegerAnswers[@integerIndex].Answer" data-question-id="@question.Position" required />
+                                <input type="number" name="IntegerAnswers[@integerIndex].FormQuestionId" value="@question.Id" hidden />
+                                integerIndex++;
+                                break;
+
+                            case 4: // Checkbox
+                                foreach (var option in question.Options)
+                                {
+                                    <div class="option-container">
+                                        <input type="checkbox" value="true" name="CheckboxAnswers[@checkboxIndex].Answer" data-question-id="@question.Position" />
+                                        <label>@option.OptionValue</label>
+                                        <input type="number" name="CheckboxAnswers[@checkboxIndex].FormQuestionId" value="@question.Id" hidden />
+                                    </div>
+                                    checkboxIndex++;
+                                }
+                                break;
+
+                            default:
+                                <p>Unsupported question type</p>
+                                break;
+                        }
+                    </div>
+                }
+            }
+
+            <input type="submit" class="submit-btn" value="Submit" />
+        </form>
+    </div>
+</body>
+</html>

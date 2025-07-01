@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using FormsAPI.ModelsDTO.Forms;
+using FormsAPI.ModelsDTO.Forms.CRUD_DTO;
 using Models;
 using Models.Enums;
 using OnixLabs.Core.Linq;
@@ -10,7 +11,7 @@ namespace FormsAPI.ModelProfiles
     {
         public FormsProfile()
         {
-            //maps for creating
+            //maps for creating / updating
             CreateMap<CreateFormDTO, Form>()
                 .ForMember(dst => dst.UserId, opt => opt.MapFrom(src => src.UserId))
                 .ForMember(dst => dst.CreatedAt, opt => opt.MapFrom(src => src.CreatedAt))
@@ -23,13 +24,16 @@ namespace FormsAPI.ModelProfiles
                 .ForMember(dst => dst.AccessformUsers, opt => opt.MapFrom(src => src.AccessUsers));
 
             CreateMap<FormQuestionDTO, FormQuestion>()
-                .ForMember(dst => dst.Question, opt => opt.MapFrom(src => src.QuestionText))
+                .ForMember(dst => dst.Id, opt => opt.MapFrom(src => src.Id))
+                .ForMember(dst => dst.QuestionTypeId, opt => opt.MapFrom(src => src.QuestionTypeId))
+                .ForMember(dst => dst.Question, opt => opt.MapFrom(src => src.Question))
                 .ForMember(dst => dst.Description, opt => opt.MapFrom(src => src.Description))
                 .ForMember(dst => dst.DisplayState, opt => opt.MapFrom(src => src.DisplayState))
                 .ForMember(dst => dst.Position, opt => opt.MapFrom(src => src.Position))
                 .ForMember(dst => dst.FormQuestionOptions, opt => opt.MapFrom(src => src.Options));
 
             CreateMap<FormQuestionOptionDTO, FormQuestionOption>()
+                .ForMember(dst => dst.Id, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dst => dst.OptionValue, opt => opt.MapFrom(src => src.OptionValue));
             
             CreateMap<AccessformUserDTO, AccessformUser>()
@@ -43,6 +47,29 @@ namespace FormsAPI.ModelProfiles
                 .ForMember(dst => dst.UserId, opt => opt.MapFrom(src => src.UserId))
                 .ForMember(dst => dst.FormId, opt => opt.MapFrom(src => src.FormId))
                 .ForMember(dst => dst.Text, opt => opt.MapFrom(src => src.Text));
+
+
+            CreateMap<UpdateFormDTO, Form>()
+                .ForMember(dst => dst.Id, opt => opt.MapFrom(src => src.Id))
+                .ForMember(dst => dst.UserId, opt => opt.MapFrom(src => src.UserId))
+                .ForMember(dst => dst.CreatedAt, opt => opt.MapFrom(src => src.CreatedAt))
+                .ForMember(dst => dst.Title, opt => opt.MapFrom(src => src.Title))
+                .ForMember(dst => dst.Description, opt => opt.MapFrom(src => src.Description))
+                .ForMember(dst => dst.ImageUrl, opt => opt.MapFrom(src => src.ImageUrl))
+                .ForMember(dst => dst.TopicId, opt => opt.MapFrom(src => src.TopicId))
+                .ForMember(dst => dst.Accessibility, opt => opt.MapFrom(src => src.Accessibility))
+                .ForMember(dst => dst.FormTags, opt => opt.MapFrom(src => src.FormTags))
+                .ForMember(dst => dst.Version, opt => opt.MapFrom(src => src.Version))
+                .ForMember(dst => dst.FormQuestions, opt => opt.MapFrom(src => src.Questions))
+                .ForMember(dst => dst.AccessformUsers, opt => opt.MapFrom(src => src.AccessFormUsers));
+
+            CreateMap<FilterTagDTO, FormTag>()
+                .ForMember(dst => dst.Id, opt => opt.MapFrom(src => src.Id))
+                .ForMember(dst => dst.TagId, opt => opt.MapFrom(src => src.TagId));
+
+            CreateMap<FilterUserDTO, AccessformUser>()
+                .ForMember(dst => dst.Id, opt => opt.MapFrom(src => src.Id))
+                .ForMember(dst => dst.UserId, opt => opt.MapFrom(src => src.UserId));
 
             //maps for sending
             CreateMap<Form, FormDTO>()
@@ -76,6 +103,29 @@ namespace FormsAPI.ModelProfiles
             CreateMap<User, FilterUserDTO>()
                 .ForMember(dst => dst.Id, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dst => dst.Email, opt => opt.MapFrom(src => src.Email));
+
+
+            CreateMap<Form, UpdateFormDTO>()
+                .ForMember(dst => dst.Id, opt => opt.MapFrom(src => src.Id))
+                .ForMember(dst => dst.UserId, opt => opt.MapFrom(src => src.UserId))
+                .ForMember(dst => dst.CreatedAt, opt => opt.MapFrom(src => src.CreatedAt))
+                .ForMember(dst => dst.Title, opt => opt.MapFrom(src => src.Title))
+                .ForMember(dst => dst.Description, opt => opt.MapFrom(src => src.Description))
+                .ForMember(dst => dst.ImageUrl, opt => opt.MapFrom(src => src.ImageUrl))
+                .ForMember(dst => dst.TopicId, opt => opt.MapFrom(src => src.TopicId))
+                .ForMember(dst => dst.Accessibility, opt => opt.MapFrom(src => src.Accessibility))
+                .ForMember(dst => dst.FormTags, opt => opt.MapFrom(src => src.FormTags))
+                .ForMember(dst => dst.Version, opt => opt.MapFrom(src => src.Version))
+                .ForMember(dst => dst.Questions, opt => opt.MapFrom(src => src.FormQuestions))
+                .ForMember(dst => dst.AccessFormUsers, opt => opt.MapFrom(src => src.AccessformUsers));
+
+            CreateMap<AccessformUser, FilterUserDTO>()
+                .ForMember(dst => dst.Id, opt => opt.MapFrom(src => src.Id))
+                .ForMember(dst => dst.Email, opt => opt.MapFrom(src => src.User!.Email));
+
+            CreateMap<FormTag, FilterTagDTO>()
+                .ForMember(dst => dst.Id, opt => opt.MapFrom(src => src.Id))
+                .ForMember(dst => dst.Name, opt => opt.MapFrom(src => src.Tag!.Name));
         }
     }
 }

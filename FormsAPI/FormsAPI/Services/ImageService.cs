@@ -37,6 +37,27 @@ namespace FormsAPI.Services
             return await SendPutRequest(request, objectKey);
         }
 
+        public async Task<string> UpdateImage(Stream imageStream, string oldImageUrl, string imageName)
+        {
+            var response = await DeleteImage(oldImageUrl);
+            return await UploadImage(imageStream, imageName);            
+        }
+
+        public async Task<DeleteObjectResponse> DeleteImage(string oldImageUrl)
+        {
+            var request = new DeleteObjectRequest
+            {
+                BucketName = _bucketName,
+                Key = ExtractObjectKey(oldImageUrl),
+            };
+            return await _client.DeleteObjectAsync(request);
+        }
+
+        private string ExtractObjectKey(string url)
+        {
+            return url.Replace($"https://{_bucketName}.storage.yandexcloud.net/", "");
+        }
+
         private async Task<string> SendPutRequest(IAmazonWebServiceRequest request, string objectKey)
         {
             var response = await _client.PutObjectAsync((PutObjectRequest)request);

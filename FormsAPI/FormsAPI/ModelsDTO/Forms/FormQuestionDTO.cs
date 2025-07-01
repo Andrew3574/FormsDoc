@@ -2,9 +2,11 @@
 {
     public class FormQuestionDTO
     {
+        public int? Id { get; set; }
+
         public int? QuestionTypeId { get; set; }
 
-        public string QuestionText { get; set; } = null!;
+        public string Question { get; set; } = null!;
 
         public string? Description { get; set; }
 

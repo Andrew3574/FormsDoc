@@ -7,11 +7,11 @@ public partial class FormAnswer
 {
     public int Id { get; set; }
 
-    public int? UserId { get; set; }
+    public int UserId { get; set; }
 
-    public int? FormId { get; set; }
+    public int FormId { get; set; }
 
-    public DateTime? AsnweredAt { get; set; }
+    public DateTime AsnweredAt { get; set; }
 
     public virtual ICollection<CheckboxAnswer> CheckboxAnswers { get; set; } = new List<CheckboxAnswer>();
 

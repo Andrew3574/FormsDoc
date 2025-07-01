@@ -24,6 +24,14 @@ build_property.EnableCodeStyleSeverity =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxFbWFpbENvbmZpcm1hdGlvbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/SummerCourse/CourseProject/FormsAPP/FormsAPP/Views/Account/GetAnsweredForms.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxHZXRBbnN3ZXJlZEZvcm1zLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/SummerCourse/CourseProject/FormsAPP/FormsAPP/Views/Account/GetUserForms.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxHZXRVc2VyRm9ybXMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/SummerCourse/CourseProject/FormsAPP/FormsAPP/Views/Account/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -48,8 +56,20 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRm9ybXNcQ3JlYXRlRm9ybUFuc3dlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/SummerCourse/CourseProject/FormsAPP/FormsAPP/Views/Forms/FormStatistics.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRm9ybXNcRm9ybVN0YXRpc3RpY3MuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/SummerCourse/CourseProject/FormsAPP/FormsAPP/Views/Forms/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRm9ybXNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/SummerCourse/CourseProject/FormsAPP/FormsAPP/Views/Forms/UpdateAnswerPage.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRm9ybXNcVXBkYXRlQW5zd2VyUGFnZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/SummerCourse/CourseProject/FormsAPP/FormsAPP/Views/Forms/UpdateFormPage.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRm9ybXNcVXBkYXRlRm9ybVBhZ2UuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/SummerCourse/CourseProject/FormsAPP/FormsAPP/Views/Home/Index.cshtml]

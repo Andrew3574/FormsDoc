@@ -75,5 +75,6 @@ public class Program
         builder.Services.AddScoped<UsersRepository>();
         builder.Services.AddAutoMapper(typeof(UserProfile));
         builder.Services.AddAutoMapper(typeof(FormsProfile));
+        builder.Services.AddAutoMapper(typeof(FormAnswersProfile));
     }
 }

@@ -17,8 +17,15 @@ namespace Repositories
 
         public override async Task Create(FormAnswer entity)
         {
-            _context.FormAnswers.Add(entity);
-            await _context.SaveChangesAsync();
+            try
+            {
+                _context.FormAnswers.Add(entity);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException pgEx)
+            {
+                throw new DbUpdateException("You can have only one answer for each form. You can edit existing answers in your account manager.");
+            }
         }        
 
         public override async Task Delete(FormAnswer entity)
@@ -41,6 +48,20 @@ namespace Repositories
         {
             _context.FormAnswers.Update(entity);
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<IEnumerable<FormAnswer>> FilterByUserId(int userId)
+        {
+            return await _context.FormAnswers.Where(f => f.UserId == userId).ToListAsync();
+        }
+        public async Task<IEnumerable<FormAnswer>?> GetByFormId(int formId)
+        {
+            return await _context.FormAnswers.Where(f => f.FormId == formId).ToListAsync();
+        }
+
+        public async Task<FormAnswer?> GetByUserId_FormId(int userId,int formId)
+        {
+            return await _context.FormAnswers.FirstOrDefaultAsync(f => f.UserId == userId && f.FormId == formId);
         }
     }
 }

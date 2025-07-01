@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
-using FormsAPI.ModelsDTO;
 using FormsAPI.ModelsDTO.Account;
+using FormsAPI.ModelsDTO.FormAnswers;
+using FormsAPI.ModelsDTO.Forms.CRUD_DTO;
+using FormsAPI.ModelsDTO.Users;
 using FormsAPI.Services;
 using FormsAPI.Services.Auth;
 using Microsoft.AspNetCore.Http;
@@ -20,18 +22,24 @@ namespace FormsAPI.Controllers
     public class AccountController : ControllerBase
     {
         private readonly UsersRepository _usersRepository;
+        private readonly FormAnswersRepository _formAnswersRepository;
+        private readonly FormsRepository _formsRepository;
         private readonly EncryptionService _encryptionService;
         private readonly IMapper _mapper;
         private readonly EmailService _emailService;
         private readonly IMemoryCache _memoryCache;
 
-        public AccountController(UsersRepository usersRepository, IMapper mapper, EncryptionService encryptionService, EmailService emailService, IMemoryCache memoryCache)
+        public AccountController(UsersRepository usersRepository, IMapper mapper, EncryptionService encryptionService,
+            EmailService emailService, IMemoryCache memoryCache, FormAnswersRepository formAnswersRepository,
+            FormsRepository formsRepository)
         {
             _usersRepository = usersRepository;
             _mapper = mapper;
             _encryptionService = encryptionService;
             _emailService = emailService;
             _memoryCache = memoryCache;
+            _formAnswersRepository = formAnswersRepository;
+            _formsRepository = formsRepository;
         }
 
         [HttpPost("Register")]
@@ -78,7 +86,7 @@ namespace FormsAPI.Controllers
             return BadRequest("Invalid data input");
         }
 
-        [HttpGet("GetUserProfileInfo")]
+        [HttpGet("GetUserProfileByToken")]
         public async Task<ActionResult> GetUserProfileInfo([FromQuery]string token)
         {
             if(!string.IsNullOrEmpty(token))
@@ -90,7 +98,21 @@ namespace FormsAPI.Controllers
                     return Ok(_mapper.Map<UserDTO>(user));
                 }
             }
-            return BadRequest();
+            return BadRequest("user not found");
+        }
+
+        [HttpGet("GetUserProfileByUserId")]
+        public async Task<ActionResult> GetUserProfileInfo([FromQuery]int userId)
+        {
+            if (userId != 0)
+            {
+                var user = await _usersRepository.GetById(userId);
+                if (user != null)
+                {
+                    return Ok(_mapper.Map<UserDTO>(user));
+                }
+            }
+            return BadRequest("user not found");
         }
 
         [HttpPost("GetCode")]
@@ -135,6 +157,26 @@ namespace FormsAPI.Controllers
                 return BadRequest("user not found");
             }
             return BadRequest("An error occured. Try again");
+        }
+
+        [HttpGet("GetUserForms")]
+        public async Task<ActionResult> GetUserForms([FromQuery]int userId)
+        {
+            if(userId != 0)
+            {
+                return Ok(_mapper.Map<IEnumerable<FormDTO>>(await _formsRepository.FilterByUserId(userId)));
+            }
+            return BadRequest("user not found");
+        }
+
+        [HttpGet("GetAnsweredForms")]
+        public async Task<ActionResult> GetAnsweredForms([FromQuery]int userId)
+        {
+            if (userId != 0)
+            {
+                return Ok(_mapper.Map<IEnumerable<AnsweredFormDTO>>(await _formAnswersRepository.FilterByUserId(userId)));
+            }
+            return BadRequest("user not found");
         }
 
         private bool IsLoginSuccessful(User? user, LoginDTO userDto, out string message)

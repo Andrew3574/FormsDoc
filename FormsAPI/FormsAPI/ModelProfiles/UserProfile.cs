@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using FormsAPI.ModelsDTO;
 using FormsAPI.ModelsDTO.Account;
+using FormsAPI.ModelsDTO.Users;
 using FormsAPI.Services;
 using Models;
 

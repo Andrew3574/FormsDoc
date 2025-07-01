@@ -1,4 +1,5 @@
 ﻿using FormsAPP.Models.Forms;
+using FormsAPP.Models.Forms.CRUD;
 using Microsoft.AspNetCore.SignalR;
 
 namespace FormsAPP.Hubs

@@ -1,4 +1,5 @@
 ﻿@using FormsAPP.Models.Forms
+@using FormsAPP.Models.Forms.CRUD
 @model CreateFormModel
 
 @{
@@ -83,7 +84,7 @@
         }
 
         #tagSuggestions {
-            top:40px;
+            top: 40px;
             position: absolute;
             z-index: 1000;
             background: white;
@@ -105,7 +106,7 @@
             }
 
         #userSuggestions {
-            top:40px;
+            top: 40px;
             position: absolute;
             z-index: 1000;
             background: white;
@@ -130,8 +131,8 @@
 </head>
 <body>
     <div class="container mt-4">
-        <h2>Create New Form</h2> 
-        
+        <h2>Create New Form</h2>
+
         @if (!string.IsNullOrEmpty(ViewData["ErrorMessage"]?.ToString()))
         {
             <div class="alert alert-danger" role="alert">
@@ -206,7 +207,7 @@
                 </div>
             </div>
 
-            <button type="submit" class="btn btn-success">Create Form</button>
+            <button type="submit" class="btn btn-success bottom-50">Create Form</button>
         </form>
     </div>
 
@@ -240,7 +241,7 @@
     <!-- Allowed User Template (hidden) -->
     <div id="allowedUserTemplate" class="tag-item hidden">
         <span class="user-name"></span>
-        <input type="hidden" class="user-id" name="AccessUsers[0].UserId">
+        <input type="hidden" class="user-id">
         <span class="tag-remove"><i class="fas fa-times"></i></span>
     </div>
 
@@ -250,10 +251,10 @@
     <script>
         $(document).ready(function() {
             const questionTypes = {
-        @foreach (var item in QuestionTypeItems)
-        {
-            @Html.Raw($"{item.Value}: '{item.Text}',")
-        }
+            @foreach (var item in QuestionTypeItems)
+            {
+                @Html.Raw($"{item.Value}: '{item.Text}',")
+            }
             };
 
             // Tags functionality
@@ -372,7 +373,7 @@
                     const hiddenInput = $(`<input type="hidden" name="Tags[${index}]" value="${tag}">`);
                     tagsHiddenInputs.append(hiddenInput);
                 });
-
+                tagInput.focus();
                 tagSuggestions.hide().empty();
             }
 
@@ -423,7 +424,6 @@
             function addCurrentUser() {
                 const userName = userSearchInput.val().trim();
                 if (userName && !allowedUsers.some(u => u.name === userName)) {
-                    // In real system, use ID from suggestion
                     const userId = "temp_" + Date.now();
                     allowedUsers.push({ id: userId, name: userName });
                     updateAllowedUsersDisplay();
@@ -513,6 +513,7 @@
                     );
                     allowedUsersList.append(userElement);
                 });
+                userSearchInput.focus();
             }
 
             allowedUsersList.on('click', '.tag-remove', function() {
@@ -553,7 +554,10 @@
                 questionTemplate.removeClass('hidden');
                 questionTemplate.removeAttr('id');
 
-                const newIndex = questionCounter++;
+                const newIndex = questionCounter;
+                questionCounter++;
+
+                // Update all field names with the new index
                 questionTemplate.find('input, textarea, select').each(function() {
                     const name = $(this).attr('name').replace('[0]', `[${newIndex}]`);
                     $(this).attr('name', name);
@@ -563,49 +567,72 @@
                 questionTemplate.find('.question-position').val(newIndex);
                 questionTemplate.find('.question-type-badge').text(questionTypes[questionTypeId]);
 
-                if (questionTypeId == 4 || questionTypeId == 5) {
+                // Show add option button only for checkbox questions
+                if (questionTypeId == 4) {
                     questionTemplate.find('.add-option').removeClass('hidden');
-                    addOption(questionTemplate.find('.options-container'));
+                    // Add initial options for checkbox questions
+                    addOption(questionTemplate.find('.options-container'), newIndex);
+                    addOption(questionTemplate.find('.options-container'), newIndex);
                 }
 
                 questionsContainer.append(questionTemplate);
                 updateQuestionPositions();
             }
 
-            function addOption(container) {
+            function addOption(container, questionIndex) {
                 const optionTemplate = $('#optionTemplate').clone();
                 optionTemplate.removeClass('hidden');
                 optionTemplate.removeAttr('id');
 
                 const optionIndex = container.find('.option-item').length;
-                optionTemplate.find('.option-value').attr('name', container.closest('.question-card').find('.question-text').attr('name').replace('Question', `Options[${optionIndex}].OptionValue`));
+
+                // Create the correct name for the option
+                const optionName = `Questions[${questionIndex}].Options[${optionIndex}].OptionValue`;
+
+                // Create a proper input element instead of using the template's
+                const optionInput = $(`<input type="text" class="form-control form-control-sm option-value"
+                                       name="${optionName}" placeholder="Option text" required>`);
+
+                // Replace the template input with our properly named input
+                optionTemplate.find('.option-value').replaceWith(optionInput);
 
                 container.append(optionTemplate);
             }
 
             function updateQuestionPositions() {
-                $('.question-card').each(function(index) {
-                    $(this).find('.question-position').val(index);
+                $('.question-card').each(function(questionIndex) {
+                    // Update question position
+                    $(this).find('.question-position').val(questionIndex);
 
-                    $(this).find('input, textarea, select').each(function() {
-                        const currentName = $(this).attr('name');
-                        const newName = currentName.replace(/Questions\[\d+\]/, `Questions[${index}]`);
-                        $(this).attr('name', newName);
+                    // Update question field names
+                    const baseName = `Questions[${questionIndex}]`;
+                    $(this).find('.question-text').attr('name', `${baseName}.Question`);
+                    $(this).find('.question-description').attr('name', `${baseName}.Description`);
+                    $(this).find('.question-type').attr('name', `${baseName}.QuestionTypeId`);
+                    $(this).find('.question-position').attr('name', `${baseName}.Position`);
+
+                    // Update option field names
+                    $(this).find('.option-item').each(function(optionIndex) {
+                        const optionName = `${baseName}.Options[${optionIndex}].OptionValue`;
+                        $(this).find('.option-value').attr('name', optionName);
                     });
                 });
             }
 
             questionsContainer.on('click', '.add-option', function() {
-                addOption($(this).closest('.question-card').find('.options-container'));
+                const questionCard = $(this).closest('.question-card');
+                const questionIndex = $('.question-card').index(questionCard);
+                addOption($(this).closest('.question-card').find('.options-container'), questionIndex);
             });
 
             questionsContainer.on('click', '.remove-option', function() {
                 $(this).closest('.option-item').remove();
+                updateQuestionPositions(); // Reindex after removal
             });
 
             questionsContainer.on('click', '.delete-question', function() {
                 $(this).closest('.question-card').remove();
-                updateQuestionPositions();
+                updateQuestionPositions(); // Reindex after removal
             });
 
             // Image upload

@@ -102,7 +102,7 @@
                         state: @Html.DisplayFor(modelItem => item.State) | role: @Html.DisplayFor(modelItem => item.Role)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Email)
+                        <a class="link-primary" asp-action="UserProfileByUserId" asp-controller="Account" asp-route-userId="@item.Id">@Html.DisplayFor(modelItem => item.Email)</a>
                     </td>
                     <td title="@DateTime.Parse(item.Lastlogin).ToString("f")">
                         @Html.LastLoginTime(DateTime.Parse(item.Lastlogin))
@@ -169,7 +169,7 @@
                         state: ${user.state} | role: ${user.role}
                     </td>
                     <td>
-                        ${user.email}
+                         <a class="link-primary" href="/Account/UserProfileByUserId?userId=${user.id}">${user.email}</a>
                     </td>
                     <td class="last-login" title="${new Date(user.lastlogin).toLocaleString('ru-RU', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit' })}">
                         ${formatLastLogin(user.lastlogin)}

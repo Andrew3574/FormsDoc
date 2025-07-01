@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace FormsAPI.ModelsDTO.Forms
+namespace FormsAPI.ModelsDTO.Forms.CRUD_DTO
 {
     public class FormDTO
     {
@@ -25,7 +25,7 @@ namespace FormsAPI.ModelsDTO.Forms
 
         public List<string> Tags { get; set; } = new List<string>();
 
-        public int LikesCount { get; set; } = 0;
+        public int LikesCount { get; set; }
 
         public List<CommentDTO> Comments { get; set; } = new List<CommentDTO>();
     }

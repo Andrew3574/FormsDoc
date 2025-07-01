@@ -89,8 +89,10 @@ create table Form_Answers(
 	id serial primary key,
 	user_id int references users(id) on delete cascade,
 	form_id int references forms(id) on delete cascade,
-	asnwered_at timestamptz(0) default now()
+	asnwered_at timestamptz(0) default now(),
+	unique(user_id, form_id)
 );
+
 
 create table Short_Text_Answers(
 	id serial primary key,

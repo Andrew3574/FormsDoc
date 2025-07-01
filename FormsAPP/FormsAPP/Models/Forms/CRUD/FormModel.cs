@@ -1,6 +1,6 @@
 ﻿using FormsAPP.Models.Users;
 
-namespace FormsAPP.Models.Forms
+namespace FormsAPP.Models.Forms.CRUD
 {
     public class FormModel
     {
@@ -8,7 +8,7 @@ namespace FormsAPP.Models.Forms
 
         public int UserId { get; set; }
 
-        public UserModel User {  get; set; }
+        public UserModel? User {  get; set; }
 
         public string CreatedAt { get; set; } = null!;
 

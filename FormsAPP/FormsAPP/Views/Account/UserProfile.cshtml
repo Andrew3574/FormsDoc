@@ -1,34 +1,23 @@
 ﻿@using FormsAPP.Models.Users
 @model UserModel
 
-<div class="profile-container">
-
-    @if (!string.IsNullOrEmpty(Model.ImageUrl))
-    {
-        <img class="profile-image" src="@Model.ImageUrl" alt="Profile ImageUrl" />
-    }
-    else
-    {
-        <img class="profile-image" src="~/images/profile_icon.png" alt="Profile ImageUrl" />
-    }
-
-    <div class="profile-info">
-        <h2>@Model.Name @Model.Surname</h2>
-        <p>Email: @Model.Email</p>
-    </div>
-
-    <a class="btn btn-outline-danger" asp-action="Logout">Log out</a>
-</div>
-
 <style>
     .profile-container {
+        margin: 50px auto;
         display: flex;
+        flex-wrap: wrap;
         align-items: center;
-        gap: 20px;
+        gap: 30px;
         padding: 20px;
         max-width: 800px;
-        min-width:300px;
-        margin: 0 auto;
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+
+    .profile-image-container {
+        flex: 0 0 150px;
+        text-align: center;
     }
 
     .profile-image {
@@ -36,10 +25,106 @@
         height: 150px;
         border-radius: 50%;
         object-fit: cover;
-        border: 3px solid #ddd;
+        border: 3px solid #e9ecef;
     }
 
     .profile-info {
-        flex-grow: 1;
+        flex: 1;
+        min-width: 200px;
+    }
+
+    .profile-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 15px;
+    }
+
+    .action-card {
+        width: 120px;
+        padding: 10px;
+        text-align: center;
+        border-radius: 5px;
+        transition: all 0.3s ease;
+        text-decoration: none;
+    }
+
+        .action-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+    .logout-btn {
+        margin-left: auto;
+        margin-bottom:10px;
+        align-self: end;
+    }
+
+    .alert-container {
+        width: 100%;
+    }
+
+    @@media (max-width: 768px) {
+        .profile-container {
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .logout-btn {
+            margin-left: 0;
+            align-self: center;
+        }
+
+        .profile-actions {
+            justify-content: center;
+        }
     }
 </style>
+
+<div class="profile-container">
+    <div class="alert-container">
+        @if (!string.IsNullOrEmpty(TempData["ErrorMessage"]?.ToString()))
+        {
+            <div class="alert alert-danger" role="alert">
+                @TempData["ErrorMessage"]
+            </div>
+        }
+        @if (!string.IsNullOrEmpty(TempData["SuccessMessage"]?.ToString()))
+        {
+            <div class="alert alert-success" role="alert">
+                @TempData["SuccessMessage"]
+            </div>
+        }
+    </div>
+
+    <div class="profile-image-container">
+        @if (!string.IsNullOrEmpty(Model.ImageUrl))
+        {
+            <img class="profile-image" src="@Model.ImageUrl" alt="Profile Image" />
+        }
+        else
+        {
+            <img class="profile-image" src="~/images/profile_icon.png" alt="Default Profile" />
+        }
+    </div>
+
+    <div class="profile-info">
+        <h2>@Model.Name @Model.Surname</h2>
+        <p class="text-muted">@Model.Email</p>
+
+        <div class="profile-actions">
+            @if (Model.Id == Context.Session.GetInt32("UserId"))
+            {
+                <a class="action-card btn btn-outline-primary" href="~/Account/GetUserForms">Your Forms</a>
+                <a class="action-card btn btn-outline-primary" href="~/Account/GetAnsweredForms">Your Answers</a>
+            }
+            else if (Context.Session.GetString("Role") == "admin")
+            {
+                <a class="action-card btn btn-outline-primary" href="~/Account/GetUserFormsById?userId=@Model.Id">User Forms</a>
+                <a class="action-card btn btn-outline-primary" href="~/Account/GetAnsweredFormsById?userId=@Model.Id">User Answers</a>
+            }
+        </div>
+    </div>
+
+    <a class="logout-btn btn btn-outline-danger" asp-action="Logout">Log out</a>
+</div>

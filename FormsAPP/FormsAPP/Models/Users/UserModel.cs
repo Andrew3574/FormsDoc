@@ -1,6 +1,8 @@
-﻿namespace FormsAPP.Models.Users
+﻿using System.Text.Json.Serialization;
+
+namespace FormsAPP.Models.Users
 {
-    public partial class UserModel
+    public class UserModel
     {
         public int Id { get; set; }
 
@@ -15,6 +17,8 @@
         public string Surname { get; set; } = null!;
 
         public string Lastlogin { get; set; } = null!;
+
+        public IFormFile? ImageFile { get; set; }
 
         public string? ImageUrl { get; set; }
     }

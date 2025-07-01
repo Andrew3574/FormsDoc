@@ -1,10 +1,9 @@
-﻿using Models.Enums;
-using Models;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
-namespace FormsAPI.ModelsDTO.Forms
+namespace FormsAPP.Models.Forms.CRUD
 {
-    public class CreateFormDTO
+    public class CreateFormModel
     {
         public int? Id { get; set; }
 
@@ -18,18 +17,20 @@ namespace FormsAPI.ModelsDTO.Forms
 
         public string? ImageUrl { get; set; }
 
-        [NotMapped]
+        [JsonIgnore]
         public IFormFile? ImageFile { get; set; }
 
         public int TopicId { get; set; }
 
         public int Accessibility { get; set; }
 
+        public int Version { get; set; } = 1;
+
         public List<string> Tags { get; set; } = new List<string>();
 
-        public List<AccessformUserDTO> AccessUsers { get; set; } = new List<AccessformUserDTO>();
+        public List<AccessformUserModel> AccessUsers { get; set; } = new List<AccessformUserModel>();
 
-        public List<FormQuestionDTO> Questions { get; set; } = new List<FormQuestionDTO>();
+        public List<FormQuestionModel> Questions { get; set; } = new List<FormQuestionModel>();
 
     }
 }

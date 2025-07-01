@@ -2,7 +2,9 @@
 {
     public class FormQuestionModel
     {
-        public int? QuestionTypeId { get; set; }
+        public int? Id { get; set; }
+
+        public int QuestionTypeId { get; set; }
 
         public string Question { get; set; } = null!;
 

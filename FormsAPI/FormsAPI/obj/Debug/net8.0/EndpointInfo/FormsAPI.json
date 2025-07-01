@@ -67,7 +67,7 @@
         }
       }
     },
-    "/api/Account/GetUserProfileInfo": {
+    "/api/Account/GetUserProfileByToken": {
       "get": {
         "tags": [
           "Account"
@@ -78,6 +78,28 @@
             "in": "query",
             "schema": {
               "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Account/GetUserProfileByUserId": {
+      "get": {
+        "tags": [
+          "Account"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
             }
           }
         ],
@@ -181,6 +203,50 @@
         }
       }
     },
+    "/api/Account/GetUserForms": {
+      "get": {
+        "tags": [
+          "Account"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Account/GetAnsweredForms": {
+      "get": {
+        "tags": [
+          "Account"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Forms/GetByBatch/{batch}": {
       "get": {
         "tags": [
@@ -235,6 +301,37 @@
         }
       }
     },
+    "/api/Forms/UpdateForm": {
+      "put": {
+        "tags": [
+          "Forms"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateFormDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateFormDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateFormDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Forms/CreateAnswer": {
       "post": {
         "tags": [
@@ -266,6 +363,28 @@
         }
       }
     },
+    "/api/Forms/GetFormForUpdate": {
+      "get": {
+        "tags": [
+          "Forms"
+        ],
+        "parameters": [
+          {
+            "name": "formId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Forms/FormTemplateInfo": {
       "get": {
         "tags": [
@@ -286,6 +405,118 @@
             "schema": {
               "type": "integer",
               "format": "int32"
+            }
+          },
+          {
+            "name": "userRole",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Forms/AnsweredFormTemplateInfo": {
+      "get": {
+        "tags": [
+          "Forms"
+        ],
+        "parameters": [
+          {
+            "name": "answerId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "userId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "userRole",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Forms/UpdateAnswer": {
+      "put": {
+        "tags": [
+          "Forms"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AnsweredFormTemplateDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AnsweredFormTemplateDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AnsweredFormTemplateDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Forms/GetFormAnswers": {
+      "get": {
+        "tags": [
+          "Forms"
+        ],
+        "parameters": [
+          {
+            "name": "formId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "userId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "userRole",
+            "in": "query",
+            "schema": {
+              "type": "string"
             }
           }
         ],
@@ -766,9 +997,78 @@
       "AccessformUserDTO": {
         "type": "object",
         "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
           "userId": {
             "type": "integer",
             "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AnsweredFormTemplateDTO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "userId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "formId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "version": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "questions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FormQuestionDTO"
+            },
+            "nullable": true
+          },
+          "shortTextAnswers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ShortTextAnswerDTO"
+            },
+            "nullable": true
+          },
+          "longTextAnswers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LongTextAnswerDTO"
+            },
+            "nullable": true
+          },
+          "integerAnswers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IntegerAnswerDTO"
+            },
+            "nullable": true
+          },
+          "checkboxAnswers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CheckboxAnswerDTO"
+            },
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -828,6 +1128,10 @@
             "format": "int32"
           },
           "formId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "version": {
             "type": "integer",
             "format": "int32"
           },
@@ -903,6 +1207,10 @@
             "type": "integer",
             "format": "int32"
           },
+          "version": {
+            "type": "integer",
+            "format": "int32"
+          },
           "tags": {
             "type": "array",
             "items": {
@@ -930,6 +1238,14 @@
       "FilterTagDTO": {
         "type": "object",
         "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tagId": {
+            "type": "integer",
+            "format": "int32"
+          },
           "name": {
             "type": "string",
             "nullable": true
@@ -944,6 +1260,10 @@
             "type": "integer",
             "format": "int32"
           },
+          "userId": {
+            "type": "integer",
+            "format": "int32"
+          },
           "email": {
             "type": "string",
             "nullable": true
@@ -954,12 +1274,17 @@
       "FormQuestionDTO": {
         "type": "object",
         "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
           "questionTypeId": {
             "type": "integer",
             "format": "int32",
             "nullable": true
           },
-          "questionText": {
+          "question": {
             "type": "string",
             "nullable": true
           },
@@ -988,6 +1313,10 @@
       "FormQuestionOptionDTO": {
         "type": "object",
         "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
           "optionValue": {
             "type": "string",
             "nullable": true
@@ -1130,6 +1459,77 @@
           },
           "answer": {
             "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateFormDTO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "userId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "imageUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "topicId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "accessibility": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "version": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "formTags": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FilterTagDTO"
+            },
+            "nullable": true
+          },
+          "accessFormUsers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FilterUserDTO"
+            },
+            "nullable": true
+          },
+          "questions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FormQuestionDTO"
+            },
+            "nullable": true
+          },
+          "newTags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
             "nullable": true
           }
         },

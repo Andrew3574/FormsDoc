@@ -1,0 +1,461 @@
+﻿@using FormsAPP.Models.FormAnswers
+@using FormsAPP.Models.Users
+@model FormStatisticsModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 20px;
+        color: #333;
+        }
+
+        .compact-cell {
+            max-width: 500px;
+            overflow: auto;
+            word-wrap: break-word;
+            white-space: normal;
+        }
+        .form-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 20px;
+        overflow: hidden;
+        }
+
+        .form-title {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #2c3e50;
+        }
+
+        .form-description {
+        margin-bottom: 30px;
+        padding: 10px;
+        color: #666;
+        border-radius: 5px;
+        }
+
+        .short-answer {
+        max-width: 80%;
+        max-height: 400px;
+        }
+
+        .long-answer {
+        max-width: 80%;
+        max-height: 800px;
+        }
+
+        .integer-answer {
+        max-height: 300px;
+        }
+
+        .checkbox-answer {
+        }
+
+        .question-container {
+            max-height:600px;
+        overflow: auto;
+        margin-bottom: 25px;
+        padding: 15px;
+        background-color: #f9f9f9;
+        border-radius: 20px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .question-text {
+        width: auto;
+        border-radius: 5px;
+        font-weight: bold;
+        margin-bottom: 10px;
+        }
+
+        .question-description {
+        font-size: 0.9em;
+        color: #666;
+        margin-bottom: 15px;
+        }
+
+        .option-container {
+        margin: 5px 0;
+        }
+
+        input[type="text"], input[type="number"], textarea {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        box-sizing: border-box;
+        }
+
+        textarea {
+        min-height: 100px;
+        }
+
+        .submit-btn {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        }
+
+        .submit-btn:hover {
+        background-color: #45a049;
+        }
+
+        .compact-chart-container {
+        display: flex;
+        align-items: center;
+        margin: 15px 0;
+        }
+
+        .compact-pie-chart {
+        width: 150px;
+        height: 150px;
+        }
+
+        .compact-legend {
+        margin-left: 20px;
+        flex-grow: 1;
+        }
+
+        .compact-legend-item {
+        display: flex;
+        align-items: center;
+        margin: 3px 0;
+        font-size: 0.9em;
+        }
+
+        .compact-legend-color {
+        width: 15px;
+        height: 15px;
+        margin-right: 8px;
+        border-radius: 3px;
+        }
+
+        .compact-legend-users {
+        font-size: 0.8em;
+        color: #666;
+        margin-left: 5px;
+        }
+
+        .histogram-container {
+        margin-top: 20px;
+        }
+
+        .histogram-item {
+        margin-bottom: 15px;
+        }
+
+        .histogram-label {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 5px;
+        }
+
+        .histogram-bar-container {
+        width: 100%;
+        height: 30px;
+        background-color: #f0f0f0;
+        border-radius: 4px;
+        overflow: hidden;
+        }
+
+        .histogram-bar {
+        height: 100%;
+        background-color: #4CAF50;
+        transition: width 0.3s ease;
+        position: relative;
+        }
+
+        .histogram-percentage {
+        position: absolute;
+        right: 5px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: white;
+        font-weight: bold;
+        text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+        }
+
+        .histogram-tooltip {
+        display: none;
+        position: absolute;
+        background-color: #333;
+        color: white;
+        padding: 8px;
+        border-radius: 4px;
+        z-index: 100;
+        max-width: 300px;
+        font-size: 0.9em;
+        line-height: 1.4;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h3>Total answers: @Model.Answers?.Count()</h3>
+
+        @foreach (var question in Model.QuestionList.OrderBy(q => q.Position))
+        {
+            <div class="question-container">
+                <div class="question-text">@(question.Position + 1). @(question.Question)</div>
+                @if (!string.IsNullOrEmpty(question.Description))
+                {
+                    <div class="question-description">@question.Description</div>
+                }
+
+                @switch (question.QuestionTypeId)
+                {
+                    case 1: // Short text answers
+                        var shortAnswersByUser = Model.Answers?
+                        .Select(g => new { User = g.User, Answer = g.ShortTextAnswers.First(ans => ans.FormQuestionId == question.Id) })
+                        .ToList();
+                        if (shortAnswersByUser != null && shortAnswersByUser!.Any())
+                        {
+                            <table class="table short-answer">
+                                @foreach (var answer in shortAnswersByUser!)
+                                {
+                                    <tr><td>@answer.User.Email</td><td>@answer.Answer.Answer</td></tr>
+                                }
+                            </table>
+                        }
+                        else
+                        {
+                            <h4>None</h4>
+                        }
+                        break;
+
+                    case 2: // Long text answers
+                        var longAnswersByUser = Model.Answers?
+                        .Select(g => new { User = g.User, Answer = g.LongTextAnswers.First(ans => ans.FormQuestionId == question.Id) })
+                        .ToList();
+                        if (longAnswersByUser != null && longAnswersByUser!.Any())
+                        {
+                            <table class="table-primary long-answer">
+                                @foreach (var answer in longAnswersByUser!)
+                                {
+                                    <tr ><td style="vertical-align:top;">@answer.User.Email</td><td class="compact-cell">@answer.Answer.Answer</td></tr>
+                                }
+                            </table>
+                        }
+                        else
+                        {
+                            <h4>None</h4>
+                        }
+                        break;
+
+                    case 3: // Integer answers
+                        var integerAnswersGrouped = Model.Answers?
+                        .Where(a => a.IntegerAnswers.Any(ans => ans.FormQuestionId == question.Id))
+                        .GroupBy(a => a.IntegerAnswers.First(ans => ans.FormQuestionId == question.Id).Answer)
+                        .Select(g => new
+                        {
+                            AnswerValue = g.Key,
+                            Users = g.Select(u => u.User).ToList()
+                        })
+                        .OrderBy(g => g.AnswerValue)
+                        .ToList();
+
+                        if (integerAnswersGrouped != null && integerAnswersGrouped.Any())
+                        {
+                            <div class="compact-chart-container">
+                                <div class="compact-pie-chart">
+                                    <canvas id="pieChart-@question.Id"></canvas>
+                                </div>
+                                <div class="compact-legend" id="legend-@question.Id">
+                                    @foreach (var group in integerAnswersGrouped)
+                                    {
+                                        var colorIndex = integerAnswersGrouped.IndexOf(group);
+                                        var color = new List<string>
+                                            {
+                                            "#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0",
+                                            "#9966FF", "#FF9F40", "#8AC24A", "#607D8B"
+                                            }[colorIndex % 8];
+
+                                        <div class="compact-legend-item">
+                                            <div class="compact-legend-value">
+                                                <div class="compact-legend-color" style="background-color: @color;"></div>
+                                                <span>@group.AnswerValue</span>
+                                            </div>
+                                            <div class="compact-legend-users">
+                                                @foreach(var user in group.Users.Select(u => u.Email))
+                                                {
+                                                    <div>@user</div>
+                                                }
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+
+                            <script>
+                                document.addEventListener('DOMContentLoaded', function() {
+                                    var ctx = document.getElementById('pieChart-@question.Id').getContext('2d');
+                                    var chart = new Chart(ctx, {
+                                        type: 'pie',
+                                        data: {
+                                            labels: [
+                                                @foreach (var group in integerAnswersGrouped)
+                                                {
+                                                    @Html.Raw($"'{group.AnswerValue}',")
+                                                }
+                                            ],
+                                            datasets: [{
+                                                data: [
+                                                    @foreach (var group in integerAnswersGrouped)
+                                                    {
+                                                        @Html.Raw($"{group.Users.Count},")
+                                                    }
+                                                ],
+                                                backgroundColor: [
+                                                    @foreach (var group in integerAnswersGrouped.Select((g, i) => new { g, i }))
+                                                    {
+                                                        var color = new List<string>
+                                                            {
+                                                                "#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0",
+                                                                "#9966FF", "#FF9F40", "#8AC24A", "#607D8B"
+                                                            }[group.i % 8];
+                                                        @Html.Raw($"'{color}',")
+                                                    }
+                                                ],
+                                                borderWidth: 0
+                                            }]
+                                        },
+                                        options: {
+                                            responsive: true,
+                                            maintainAspectRatio: false,
+                                            plugins: {
+                                                legend: { display: false },
+                                                tooltip: {
+                                                    callbacks: {
+                                                        label: function(context) {
+                                                            return `${context.label}: ${context.raw} user(s)`;
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    });
+                                });
+                            </script>
+                        }
+                        else
+                        {
+                            <h4>None</h4>
+                        }
+                        break;
+
+                    case 4: // Checkbox answers
+                        if (question.Options != null && question.Options.Any())
+                        {
+                            var optionsCount = question.Options.Count;
+                            var totalUsersAnswered = Model.Answers?
+                            .Count(a => a.CheckboxAnswers.Any(c => c.FormQuestionId == question.Id)) ?? 0;
+                            var totalAnwers = Model.Answers?.SelectMany(a=>a.CheckboxAnswers.Where(c=>c.FormQuestionId==question.Id)).ToList();
+
+                            <div class="histogram-container">
+                                @for (int i = 0; i < optionsCount; i++)
+                                {
+                                    var option = question.Options[i];
+                                    var usersSelected = new List<FilterUserModel>();
+                                    var currentIndex = 0;
+
+                                    foreach (var answer in Model.Answers)
+                                    {
+                                        var userAnswers = totalAnwers?
+                                        .Skip(currentIndex)
+                                        .Take(optionsCount)
+                                        .ToList();
+                                        if (userAnswers.Count > i && userAnswers[i].Answer)
+                                        {
+                                            usersSelected.Add(answer.User);
+                                        }
+                                        currentIndex += optionsCount;
+                                    }
+
+                                    var selectedCount = usersSelected.Count;
+                                    var percentage = totalUsersAnswered > 0 ?
+                                    Math.Round((double)selectedCount / totalUsersAnswered * 100) : 0;
+
+                                    <div class="histogram-item">
+
+                                        <div class="histogram-label">
+                                            <span>@option.OptionValue</span>
+                                            <span>@selectedCount / @totalUsersAnswered</span>
+                                        </div>
+
+                                        <div class="histogram-bar-container">
+                                            <div class="histogram-bar"
+                                                 style="width: @percentage%;">
+                                                <span class="histogram-percentage">@percentage%</span>
+                                            </div>
+                                        </div>
+                                        @foreach (var user in usersSelected.Select(u => u.Email))
+                                        {
+                                            <div class="compact-legend-users">@user</div>
+                                        }
+
+                                    </div>
+                                }
+                            </div>
+                        }
+                        else
+                        {
+                            <h4>No options defined</h4>
+                        }
+                        break;
+
+                        /* Остальные case остаются без изменений */
+                }
+            </div>
+        }
+    </div>
+
+    <div id="histogramTooltip" class="histogram-tooltip"></div>
+
+    <script>
+        // Показываем подсказку с пользователями при наведении на столбец
+        document.querySelectorAll('.histogram-bar').forEach(bar => {
+            bar.addEventListener('mouseenter', function(e) {
+                const tooltip = document.getElementById('histogramTooltip');
+                const users = this.getAttribute('data-users');
+
+                if (users) {
+                    tooltip.textContent = users;
+                    tooltip.style.display = 'block';
+                    tooltip.style.left = `${e.clientX + 15}px`;
+                    tooltip.style.top = `${e.clientY + 15}px`;
+                }
+            });
+
+            bar.addEventListener('mouseleave', function() {
+                document.getElementById('histogramTooltip').style.display = 'none';
+            });
+        });
+
+        // Обновляем позицию подсказки при движении мыши
+        document.addEventListener('mousemove', function(e) {
+            const tooltip = document.getElementById('histogramTooltip');
+            if (tooltip.style.display === 'block') {
+                tooltip.style.left = `${e.clientX + 15}px`;
+                tooltip.style.top = `${e.clientY + 15}px`;
+            }
+        });
+    </script>
+</body>
+</html>

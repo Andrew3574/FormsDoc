@@ -153,7 +153,7 @@ public partial class FormsDbContext : DbContext
                 .HasMaxLength(256)
                 .HasColumnName("image_url");
             entity.Property(e => e.Title)
-                .HasMaxLength(32)
+                .HasMaxLength(50)
                 .HasColumnName("title");
             entity.Property(e => e.TopicId).HasColumnName("topic_id");
             entity.Property(e => e.UserId).HasColumnName("user_id");
@@ -179,6 +179,8 @@ public partial class FormsDbContext : DbContext
             entity.HasKey(e => e.Id).HasName("form_answers_pkey");
 
             entity.ToTable("form_answers");
+
+            entity.HasIndex(e => new { e.UserId, e.FormId }, "form_answers_user_id_form_id_key").IsUnique();
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.AsnweredAt)

@@ -1,4 +1,4 @@
-﻿namespace FormsAPI.ModelsDTO
+﻿namespace FormsAPI.ModelsDTO.Users
 {
     public class UserDTO
     {

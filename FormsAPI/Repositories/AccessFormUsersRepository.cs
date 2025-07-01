@@ -20,6 +20,11 @@ namespace Repositories
             _context.AccessformUsers.Add(entity);
             await _context.SaveChangesAsync();
         }
+        public async Task CreateRange(IEnumerable<AccessformUser> entities)
+        {
+            _context.AccessformUsers.AddRange(entities);
+            await _context.SaveChangesAsync();
+        }
 
         public override async Task Delete(AccessformUser entity)
         {
@@ -47,9 +52,9 @@ namespace Repositories
             throw new NotImplementedException();
         }
 
-        public async Task<bool> HasAccess(int userId)
+        public async Task<bool> CheckAccess(int userId,int formId)
         {
-            return await _context.AccessformUsers.AnyAsync(u => u.UserId == userId);
+            return await _context.AccessformUsers.AnyAsync(u => u.UserId == userId && u.FormId == formId);
         }
     }
 }

@@ -1,8 +1,12 @@
 ﻿using AutoMapper;
 using FormsAPP.Models.Account;
+using FormsAPP.Models.FormAnswers;
+using FormsAPP.Models.Forms.CRUD;
 using FormsAPP.Models.Users;
+using FormsAPP.Profiles;
 using FormsAPP.Services;
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 
 namespace FormsAPP.Controllers
@@ -120,7 +124,7 @@ namespace FormsAPP.Controllers
         {
             if (HttpContext.Request.Cookies.TryGetValue("jwt", out string? token))
             {
-                var response = await _httpClient.GetAsync($"Account/GetUserProfileInfo?token={token}");
+                var response = await _httpClient.GetAsync($"Account/GetUserProfileByToken?token={token}");
                 if (response.IsSuccessStatusCode)
                 {
                     var user = await response.Content.ReadFromJsonAsync<UserModel>();
@@ -132,6 +136,73 @@ namespace FormsAPP.Controllers
                 }
             }            
             return View("Login");
+        }
+
+        public async Task<IActionResult> UserProfileByUserId([FromQuery] int userId)
+        {
+            if (userId != 0)
+            {
+                var response = await _httpClient.GetAsync($"Account/GetUserProfileByUserId?userId={userId}");
+                if (response.IsSuccessStatusCode)
+                {
+                    var user = await response.Content.ReadFromJsonAsync<UserModel>();
+                    if (!HttpContext.Session.TryGetValue("UserId", out var id))
+                    {
+                        SetSessionValues(user!);
+                    }
+                    return View("UserProfile", user);
+                }
+            }
+            return View("Login");
+        }
+
+        public async Task<IActionResult> GetUserForms()
+        {
+            var response = await _httpClient.GetAsync($"Account/GetUserForms?userId={HttpContext.Session.GetInt32("UserId")}");
+            if (response.IsSuccessStatusCode)
+            {
+                return View("GetUserForms", await response.Content.ReadFromJsonAsync<IEnumerable<FormModel>>());
+            }
+            TempData["ErrorMessage"] = await response.Content.ReadAsStringAsync();
+            return RedirectToAction("UserProfile");            
+        }
+        public async Task<IActionResult> GetUserFormsbyId([FromQuery] int userId)
+        {
+            if (userId != 0)
+            {
+                var response = await _httpClient.GetAsync($"Account/GetUserForms?userId={userId}");
+                if (response.IsSuccessStatusCode)
+                {
+                    return View("GetUserForms", await response.Content.ReadFromJsonAsync<IEnumerable<FormModel>>());
+                }
+                TempData["ErrorMessage"] = await response.Content.ReadAsStringAsync();
+            }
+            return RedirectToAction("UserProfile");
+        }
+
+        public async Task<IActionResult> GetAnsweredForms()
+        {
+            var response = await _httpClient.GetAsync($"Account/GetAnsweredForms?userId={HttpContext.Session.GetInt32("UserId")}");
+            if (response.IsSuccessStatusCode)
+            {
+                return View(await response.Content.ReadFromJsonAsync<IEnumerable<AnsweredFormModel>>());
+            }
+            TempData["ErrorMessage"] = await response.Content.ReadAsStringAsync();
+            return RedirectToAction("UserProfile");
+        }
+
+        public async Task<IActionResult> GetAnsweredFormsById([FromQuery] int userId)
+        {
+            if(userId != 0)
+            {
+                var response = await _httpClient.GetAsync($"Account/GetAnsweredForms?userId={userId}");
+                if (response.IsSuccessStatusCode)
+                {
+                    return View("GetAnsweredForms", await response.Content.ReadFromJsonAsync<IEnumerable<AnsweredFormModel>>());
+                }
+                TempData["ErrorMessage"] = await response.Content.ReadAsStringAsync();
+            }
+            return RedirectToAction("UserProfile");
         }
 
         private void LoginProcess(AuthModel model, bool rememberMe)

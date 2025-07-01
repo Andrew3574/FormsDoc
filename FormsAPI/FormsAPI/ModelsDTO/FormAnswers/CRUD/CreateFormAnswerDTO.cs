@@ -1,4 +1,6 @@
-﻿namespace FormsAPI.Models.FormAnswers
+﻿using FormsAPI.Models.FormAnswers;
+
+namespace FormsAPI.ModelsDTO.FormAnswers.CRUD
 {
     public class CreateFormAnswerDTO
     {
@@ -7,6 +9,8 @@
         public int UserId { get; set; }
 
         public int FormId { get; set; }
+
+        public int Version { get; set; }
 
         public List<ShortTextAnswerDTO> ShortTextAnswers { get; set; } = new List<ShortTextAnswerDTO>();
         public List<LongTextAnswerDTO> LongTextAnswers { get; set; } = new List<LongTextAnswerDTO>();

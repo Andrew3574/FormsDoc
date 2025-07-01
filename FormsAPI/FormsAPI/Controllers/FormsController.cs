@@ -1,7 +1,8 @@
 ﻿using AutoMapper;
-using FormsAPI.Models.FormAnswers;
 using FormsAPI.ModelsDTO.FormAnswers;
+using FormsAPI.ModelsDTO.FormAnswers.CRUD;
 using FormsAPI.ModelsDTO.Forms;
+using FormsAPI.ModelsDTO.Forms.CRUD_DTO;
 using FormsAPI.Services;
 using FormsAPI.Services.Auth;
 using Microsoft.AspNetCore.Mvc;
@@ -9,6 +10,7 @@ using Models;
 using Models.Enums;
 using OnixLabs.Core.Linq;
 using Repositories;
+using static Org.BouncyCastle.Bcpg.Attr.ImageAttrib;
 
 namespace FormsAPI.Controllers
 {
@@ -59,13 +61,34 @@ namespace FormsAPI.Controllers
                 if (formDTO != null)
                 {
                     var form = _mapper.Map<Form>(formDTO);
-                    await InsertTags(form, formDTO);
+                    await InsertOrCreateTags(form, formDTO.Tags);
                     await _formsRepository.Create(form);
                     /*await _elasticsearchService.IndexForm(form);*/
                     return Ok(_mapper.Map<FormDTO>(form));
                 }
                 return BadRequest("Invalid data input");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Invalid data input. Reason: " + ex.Message);
+            }
+        }
 
+        [JwtAuth]
+        [HttpPut("UpdateForm")]
+        public async Task<ActionResult> UpdateForm([FromBody] UpdateFormDTO formDTO)
+        {
+            try
+            {
+                if (formDTO != null)
+                {
+                    var form = _mapper.Map<Form>(formDTO);
+                    await InsertOrCreateTags(form,formDTO.NewTags);
+                    await _formsRepository.Update(form);
+                    /*await _elasticsearchService.IndexForm(form);*/
+                    return Ok("Form successfully updated");
+                }
+                return BadRequest("Invalid data input");
             }
             catch (Exception ex)
             {
@@ -81,30 +104,116 @@ namespace FormsAPI.Controllers
             {
                 if (answerDTO != null)
                 {
-                    var answer = _mapper.Map<FormAnswer>(answerDTO);
-                    await _formAnswersRepository.Create(answer);
-                    return Ok();
+                    if (await CheckFormVersion(answerDTO.FormId,answerDTO.Version))
+                    {
+                        var answer = _mapper.Map<FormAnswer>(answerDTO);
+                        await _formAnswersRepository.Create(answer);
+                        return Ok("Answer successfully created");
+                    }
+                    return BadRequest("Current form recently has been updated. Please try again");
                 }
                 return BadRequest("Invalid data input");
             }
             catch (Exception ex)
             {
-                return BadRequest("Invalid data input. Reason: " + ex.Message);
+                return BadRequest("An error occured. Reason: " + ex.Message);
             }
         }
 
         [JwtAuth]
+        [HttpGet("GetFormForUpdate")]
+        public async Task<ActionResult> GetFormForUpdate([FromQuery]int formId)
+        {
+            if (formId != 0)
+            {
+                var form = await _formsRepository.GetById(formId);
+                if (form != null)
+                {
+                    return Ok(_mapper.Map<UpdateFormDTO>(form));
+                }
+                return BadRequest("form not found");
+            }
+            return BadRequest("invalid data input");
+        }
+
+        [JwtAuth]
         [HttpGet("FormTemplateInfo")]
-        public async Task<ActionResult> FormTemplateInfo([FromQuery]int formId, [FromQuery]int userId)
+        public async Task<ActionResult> FormTemplateInfo([FromQuery]int formId, [FromQuery]int userId, [FromQuery]string userRole)
         {
             if (userId != 0 && formId != 0)
             {
                 var form = await _formsRepository.GetById(formId);
-                if (form != null && form.Accessibility == FormAccessibility.@public || await _accessFormUsersRepository.HasAccess(userId))
+                if(form != null)
                 {
-                    return Ok(_mapper.Map<FormTemplateInfoDTO>(form));
+                    if (form.Accessibility == FormAccessibility.@public || form.UserId == userId || await _accessFormUsersRepository.CheckAccess(userId, formId) || userRole == UserRole.admin.ToString())
+                    {
+                        return Ok(_mapper.Map<FormTemplateDTO>(form));
+                    }
+                    return BadRequest("Insufficient access");
                 }
-                return BadRequest("Insufficient access");
+            }
+            return BadRequest("Invalid data input");
+        }
+
+        [JwtAuth]
+        [HttpGet("AnsweredFormTemplateInfo")]
+        public async Task<ActionResult> AnsweredFormTemplateInfo([FromQuery] int answerId, [FromQuery] int userId, [FromQuery] string userRole)
+        {
+            if (userId != 0 && answerId != 0)
+            {
+                var formAnswer = await _formAnswersRepository.GetById(answerId);
+                if (formAnswer != null)
+                {
+                    if (formAnswer.Form!.Accessibility == FormAccessibility.@public || formAnswer.Form.UserId == userId || await _accessFormUsersRepository.CheckAccess(userId, formAnswer.FormId) || userRole == UserRole.admin.ToString())
+                    {
+                        return Ok(_mapper.Map<AnsweredFormTemplateDTO>(formAnswer));
+                    }
+                    return BadRequest("Insufficient access");
+                }
+            }
+            return BadRequest("Invalid data input");
+        }
+
+        [JwtAuth]
+        [HttpPut("UpdateAnswer")]
+        public async Task<ActionResult> UpdateAnswer([FromBody] AnsweredFormTemplateDTO answerDTO)
+        {
+            try
+            {
+                if (answerDTO != null)
+                {
+                    if (await CheckFormVersion(answerDTO.FormId, answerDTO.Version))
+                    {
+                        var answer = _mapper.Map<FormAnswer>(answerDTO);
+                        await _formAnswersRepository.Update(answer);
+                        return Ok("Answer successfully updated");
+                    }
+                    return BadRequest("Current form recently has been updated. Please try again");
+                }
+                return BadRequest("Invalid data input");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("An error occured. Reason: " + ex.Message);
+            }
+        }
+
+        [JwtAuth]
+        [HttpGet("GetFormAnswers")]
+        public async Task<ActionResult> GetFormAnswers([FromQuery] int formId, [FromQuery] int userId, [FromQuery] string userRole)
+        {
+            if (userId != 0 && formId != 0)
+            {
+                var formAnswers = await _formAnswersRepository.GetByFormId(formId);
+                if (formAnswers != null && formAnswers.Any())
+                {
+                    if (formAnswers.First().Form!.UserId == userId || userRole == UserRole.admin.ToString())
+                    {
+                        return Ok(new FormStatisticsDTO { QuestionList = _mapper.Map<List<FormQuestionDTO>>(formAnswers.First().Form!.FormQuestions), Answers = _mapper.Map<List<FormAnswerDTO>>(formAnswers) });
+                    }
+                    return BadRequest("Insufficient access");
+                }
+                return BadRequest("answers not found");
             }
             return BadRequest("Invalid data input");
         }
@@ -160,6 +269,28 @@ namespace FormsAPI.Controllers
             return string.Empty;
         }
 
+        [ApiExplorerSettings(IgnoreApi = true)]
+        [HttpPut("UpdateUploadedImage")]
+        public async Task<string> UpdateUploadedImage([FromForm]IFormFile? file, [FromForm] string oldImageUrl)
+        {
+            if (file != null && file.Length > 0)
+            {
+                using var stream = file.OpenReadStream();
+                return await _imageService.UpdateImage(stream, oldImageUrl, file.FileName);
+            }
+            return string.Empty;
+        }
+
+        private async Task<bool> CheckFormVersion(int formId, int version)
+        {
+            var form = await _formsRepository.GetById(formId);
+            if (form!.Version == version)
+            {
+                return true;
+            }
+            return false;
+        }
+
         private async Task isLikedAction(LikeDTO likeDto)
         {
             var like = await _likesRepository.isLiked(likeDto.FormId, likeDto.UserId);
@@ -173,11 +304,13 @@ namespace FormsAPI.Controllers
             }
         }
 
-        private async Task InsertTags(Form form, CreateFormDTO formDTO)
+        private async Task InsertOrCreateTags(Form form, List<string> insertTags)
         {
-            var tags = await _tagsRepository.GetOrCreateByName(formDTO.Tags);
-            tags.ForEach(t => form.FormTags.Add(new FormTag { Tag = t }));
+            if (insertTags.Any())
+            {
+                var tags = await _tagsRepository.GetOrCreateByName(insertTags);
+                tags.ForEach(t => form.FormTags.Add(new FormTag { Tag = t }));
+            }
         }
-
     }
 }
