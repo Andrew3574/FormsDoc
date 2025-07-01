@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FormsAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8740bf0ec9334e45848e05f131de07745d2d8ee2")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+75278e5c3f327dd4cc4f60e1c73e749bb69cad04")]
 [assembly: System.Reflection.AssemblyProductAttribute("FormsAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FormsAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
