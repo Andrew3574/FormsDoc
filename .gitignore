@@ -3,3 +3,11 @@
 ################################################################################
 
 /FormsAPI/FormsAPI/appsettings.json
+*.vs
+# Config files
+**/appsettings.json
+**/appsettings.*.json
+
+# Build outputs
+bin/
+obj/

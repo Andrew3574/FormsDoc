@@ -328,8 +328,7 @@
               "RelativeToolTip": "FormsAPI\\ModelsDTO\\FormAnswers\\CRUD\\FormAnswerDTO.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAuwAgAAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-30T19:35:35.146Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-30T19:35:35.146Z"
             },
             {
               "$type": "Document",
@@ -341,8 +340,7 @@
               "RelativeToolTip": "FormsAPI\\ModelsDTO\\FormAnswers\\FormStatisticsDTO.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAuwAgAAAAhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-30T19:35:16.125Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-30T19:35:16.125Z"
             },
             {
               "$type": "Document",
@@ -354,8 +352,7 @@
               "RelativeToolTip": "FormsAPI\\ModelsDTO\\FormAnswers\\CRUD\\AnsweredFormTemplateDTO.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-30T15:14:53.352Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-30T15:14:53.352Z"
             },
             {
               "$type": "Document",
@@ -391,8 +388,7 @@
               "RelativeToolTip": "FormsAPI\\ModelProfiles\\FormAnswersProfile.cs",
               "ViewState": "AgIAAAkAAAAAAAAAAAAAABUAAABjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-28T15:48:21.961Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-28T15:48:21.961Z"
             },
             {
               "$type": "Document",
@@ -416,8 +412,7 @@
               "RelativeToolTip": "Repositories\\FormAnswersRepository.cs",
               "ViewState": "AgIAAAMAAAAAAAAAAAAAABgAAAAqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-27T16:41:55.159Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-27T16:41:55.159Z"
             },
             {
               "$type": "Document",
@@ -525,8 +520,7 @@
               "RelativeToolTip": "FormsAPI\\Services\\ImageService.cs",
               "ViewState": "AgIAACwAAAAAAAAAAAAgwCcAAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-23T16:47:07.494Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-23T16:47:07.494Z"
             },
             {
               "$type": "Document",
@@ -538,8 +532,7 @@
               "RelativeToolTip": "FormsAPI\\ModelsDTO\\Forms\\FilterUserDTO.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-23T14:36:45.956Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-23T14:36:45.956Z"
             },
             {
               "$type": "Document",
@@ -731,8 +724,7 @@
               "RelativeToolTip": "FormsAPI\\ModelProfiles\\FormsProfile.cs",
               "ViewState": "AgIAADcAAAAAAAAAAAAtwEkAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-18T13:39:42.326Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-18T13:39:42.326Z"
             },
             {
               "$type": "Document",
@@ -768,8 +760,7 @@
               "RelativeToolTip": "FormsAPI\\Controllers\\FormsController.cs",
               "ViewState": "AgIAAFgAAAAAAAAAAAAAAG0AAAA7AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-17T16:19:23.815Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-17T16:19:23.815Z"
             },
             {
               "$type": "Document",
@@ -841,8 +832,7 @@
               "RelativeToolTip": "FormsAPI\\Controllers\\UsersController.cs",
               "ViewState": "AgIAAC0AAAAAAAAAAAAAAEYAAAA3AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-14T14:12:39.725Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-14T14:12:39.725Z"
             },
             {
               "$type": "Document",
@@ -1119,8 +1109,7 @@
               "RelativeToolTip": "FormsAPI\\Controllers\\AccountController.cs",
               "ViewState": "AgIAAJ8AAAAAAAAAAAAswHAAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-13T15:39:57.446Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-13T15:39:57.446Z"
             }
           ]
         },
