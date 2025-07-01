@@ -3,11 +3,5 @@
 ################################################################################
 
 /FormsAPI/FormsAPI/appsettings.json
+/FormsAPI/FormsAPI/bin/Debug/net8.0/appsettings.json
 *.vs
-# Config files
-**/appsettings.json
-**/appsettings.*.json
-
-# Build outputs
-bin/
-obj/
