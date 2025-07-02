@@ -20,16 +20,16 @@ namespace FormsAPI.Services.Auth
 
         public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
         {
-            if (!context.HttpContext.Request.Cookies.TryGetValue("jwt", out string? token))
-            {
-                SetErrorResult(context, "Token not found");
-                return;
-            }
-            if(await IsClaimsValidated(token!, context))
-            {
-                await next();
-            }
-            return;
+            if (!isTokenAvailable(context, out string? token)) return;           
+            if(!await IsClaimsValidated(token!, context)) return;            
+            await next();            
+        }
+
+        private bool isTokenAvailable(ActionExecutingContext context, out string? token)
+        {
+            if (context.HttpContext.Request.Cookies.TryGetValue("jwt", out token)) return true;
+            SetErrorResult(context, "Token not found");
+            return false;
         }
 
         private async Task<bool> IsClaimsValidated(string token, ActionExecutingContext context)

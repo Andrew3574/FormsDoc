@@ -6,6 +6,7 @@ using FormsAPI.ModelsDTO.Forms.CRUD_DTO;
 using FormsAPI.Services;
 using FormsAPI.Services.Auth;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Models;
 using Models.Enums;
 using OnixLabs.Core.Linq;
@@ -28,11 +29,15 @@ namespace FormsAPI.Controllers
         private readonly CommentsRepository _commentsRepository;
         private readonly FormAnswersRepository _formAnswersRepository;
         private readonly AccessFormUsersRepository _accessFormUsersRepository;
+        private readonly FormTagsRepository _formTagsRepository;
+        private readonly FormQuestionRepository _formQuestionRepository;
+        private readonly FormQuestionOptionsRepository _formQuestionOptionsRepository;
 
         public FormsController(IMapper mapper, ElasticsearchService elasticsearchService,FormsRepository formsRepository,
             UsersRepository usersRepository, TagsRepository tagsRepository, LikesRepository likesRepository,
             CommentsRepository commentsRepository,ImageService imageService, FormAnswersRepository formAnswersRepository,
-            AccessFormUsersRepository accessFormUsersRepository)
+            AccessFormUsersRepository accessFormUsersRepository, FormTagsRepository formTagsRepository,
+            FormQuestionRepository formQuestionRepository, FormQuestionOptionsRepository formQuestionOptionsRepository)
         {
             _mapper = mapper;
             _elasticsearchService = elasticsearchService;
@@ -44,6 +49,9 @@ namespace FormsAPI.Controllers
             _imageService = imageService;
             _formAnswersRepository = formAnswersRepository;
             _accessFormUsersRepository = accessFormUsersRepository;
+            _formTagsRepository = formTagsRepository;
+            _formQuestionRepository = formQuestionRepository;
+            _formQuestionOptionsRepository = formQuestionOptionsRepository;
         }
 
         [HttpGet("GetByBatch/{batch:int}")]
@@ -56,192 +64,113 @@ namespace FormsAPI.Controllers
         [HttpPost("CreateForm")]
         public async Task<ActionResult> CreateForm([FromBody]CreateFormDTO formDTO)
         {
-            try
-            {
-                if (formDTO != null)
-                {
-                    var form = _mapper.Map<Form>(formDTO);
-                    await InsertOrCreateTags(form, formDTO.Tags);
-                    await _formsRepository.Create(form);
-                    /*await _elasticsearchService.IndexForm(form);*/
-                    return Ok(_mapper.Map<FormDTO>(form));
-                }
-                return BadRequest("Invalid data input");
-            }
-            catch (Exception ex)
-            {
-                return BadRequest("Invalid data input. Reason: " + ex.Message);
-            }
+            var form = _mapper.Map<Form>(formDTO);
+            if (form is null) return BadRequest("form not found");
+            await InsertOrCreateTags(form, formDTO.Tags);
+            await _formsRepository.Create(form);
+            return Ok(_mapper.Map<FormDTO>(form));
         }
 
         [JwtAuth]
         [HttpPut("UpdateForm")]
         public async Task<ActionResult> UpdateForm([FromBody] UpdateFormDTO formDTO)
         {
-            try
-            {
-                if (formDTO != null)
-                {
-                    var form = _mapper.Map<Form>(formDTO);
-                    await InsertOrCreateTags(form,formDTO.NewTags);
-                    await _formsRepository.Update(form);
-                    /*await _elasticsearchService.IndexForm(form);*/
-                    return Ok("Form successfully updated");
-                }
-                return BadRequest("Invalid data input");
-            }
-            catch (Exception ex)
-            {
-                return BadRequest("Invalid data input. Reason: " + ex.Message);
-            }
+            var form = _mapper.Map<Form>(formDTO);
+            if (form is null) return BadRequest("form not found");
+            await InsertOrCreateTags(form,formDTO.NewTags);
+            MarkDeletingEntities(formDTO);
+            await _formsRepository.Update(form);
+            return Ok("Form successfully updated");          
+        }
+
+        private void MarkDeletingEntities(UpdateFormDTO formDTO)
+        {
+            if (formDTO.DeletedAccessFormUsers.Any()) _accessFormUsersRepository.MarkDelete(_mapper.Map<IEnumerable<AccessformUser>>(formDTO.DeletedAccessFormUsers));
+            if (formDTO.DeletedFormTags.Any()) _formTagsRepository.MarkDelete(_mapper.Map<IEnumerable<FormTag>>(formDTO.DeletedFormTags));
+            if (formDTO.DeletedQuestions.Any()) _formQuestionRepository.MarkDelete(_mapper.Map<IEnumerable<FormQuestion>>(formDTO.DeletedQuestions));
+            if (formDTO.DeletedQuestionOptions.Any()) _formQuestionOptionsRepository.MarkDelete(_mapper.Map<IEnumerable<FormQuestionOption>>(formDTO.DeletedQuestionOptions));
         }
 
         [JwtAuth]
         [HttpPost("CreateAnswer")]
         public async Task<ActionResult> CreateAnswer([FromBody]CreateFormAnswerDTO answerDTO)
         {
-            try
-            {
-                if (answerDTO != null)
-                {
-                    if (await CheckFormVersion(answerDTO.FormId,answerDTO.Version))
-                    {
-                        var answer = _mapper.Map<FormAnswer>(answerDTO);
-                        await _formAnswersRepository.Create(answer);
-                        return Ok("Answer successfully created");
-                    }
-                    return BadRequest("Current form recently has been updated. Please try again");
-                }
-                return BadRequest("Invalid data input");
-            }
-            catch (Exception ex)
-            {
-                return BadRequest("An error occured. Reason: " + ex.Message);
-            }
+            if (!await CheckFormVersion(answerDTO.FormId,answerDTO.Version)) return BadRequest("Current form recently has been updated. Please try again");
+            var answer = _mapper.Map<FormAnswer>(answerDTO);
+            await _formAnswersRepository.Create(answer);
+            return Ok("Answer successfully created");                
         }
 
         [JwtAuth]
         [HttpGet("GetFormForUpdate")]
         public async Task<ActionResult> GetFormForUpdate([FromQuery]int formId)
         {
-            if (formId != 0)
-            {
-                var form = await _formsRepository.GetById(formId);
-                if (form != null)
-                {
-                    return Ok(_mapper.Map<UpdateFormDTO>(form));
-                }
-                return BadRequest("form not found");
-            }
-            return BadRequest("invalid data input");
+            var form = await _formsRepository.GetById(formId);
+            if (form is null) return BadRequest("form not found");
+            return Ok(_mapper.Map<UpdateFormDTO>(form));
         }
 
         [JwtAuth]
         [HttpGet("FormTemplateInfo")]
         public async Task<ActionResult> FormTemplateInfo([FromQuery]int formId, [FromQuery]int userId, [FromQuery]string userRole)
         {
-            if (userId != 0 && formId != 0)
-            {
-                var form = await _formsRepository.GetById(formId);
-                if(form != null)
-                {
-                    if (form.Accessibility == FormAccessibility.@public || form.UserId == userId || await _accessFormUsersRepository.CheckAccess(userId, formId) || userRole == UserRole.admin.ToString())
-                    {
-                        return Ok(_mapper.Map<FormTemplateDTO>(form));
-                    }
-                    return BadRequest("Insufficient access");
-                }
-            }
-            return BadRequest("Invalid data input");
+            var form = await _formsRepository.GetById(formId);
+            if (form is null) return BadRequest("form not found");
+            if (form.Accessibility == FormAccessibility.@public || form.UserId == userId || await _accessFormUsersRepository.CheckAccess(userId, formId) || userRole == UserRole.admin.ToString())
+                return Ok(_mapper.Map<FormTemplateDTO>(form));            
+            return BadRequest("Insufficient access");
+            
         }
 
         [JwtAuth]
         [HttpGet("AnsweredFormTemplateInfo")]
         public async Task<ActionResult> AnsweredFormTemplateInfo([FromQuery] int answerId, [FromQuery] int userId, [FromQuery] string userRole)
         {
-            if (userId != 0 && answerId != 0)
-            {
-                var formAnswer = await _formAnswersRepository.GetById(answerId);
-                if (formAnswer != null)
-                {
-                    if (formAnswer.Form!.Accessibility == FormAccessibility.@public || formAnswer.Form.UserId == userId || await _accessFormUsersRepository.CheckAccess(userId, formAnswer.FormId) || userRole == UserRole.admin.ToString())
-                    {
-                        return Ok(_mapper.Map<AnsweredFormTemplateDTO>(formAnswer));
-                    }
-                    return BadRequest("Insufficient access");
-                }
-            }
-            return BadRequest("Invalid data input");
+            var formAnswer = await _formAnswersRepository.GetById(answerId);
+            if (formAnswer is null) return BadRequest("answer not found");
+            if (formAnswer.Form!.Accessibility == FormAccessibility.@public || formAnswer.Form.UserId == userId || await _accessFormUsersRepository.CheckAccess(userId, formAnswer.FormId) || userRole == UserRole.admin.ToString())
+                return Ok(_mapper.Map<AnsweredFormTemplateDTO>(formAnswer));
+            return BadRequest("Insufficient access");
         }
 
         [JwtAuth]
         [HttpPut("UpdateAnswer")]
         public async Task<ActionResult> UpdateAnswer([FromBody] AnsweredFormTemplateDTO answerDTO)
         {
-            try
-            {
-                if (answerDTO != null)
-                {
-                    if (await CheckFormVersion(answerDTO.FormId, answerDTO.Version))
-                    {
-                        var answer = _mapper.Map<FormAnswer>(answerDTO);
-                        await _formAnswersRepository.Update(answer);
-                        return Ok("Answer successfully updated");
-                    }
-                    return BadRequest("Current form recently has been updated. Please try again");
-                }
-                return BadRequest("Invalid data input");
-            }
-            catch (Exception ex)
-            {
-                return BadRequest("An error occured. Reason: " + ex.Message);
-            }
+            if (!await CheckFormVersion(answerDTO!.FormId, answerDTO.Version)) return BadRequest("Current form recently has been updated. Please try again");
+            var answer = _mapper.Map<FormAnswer>(answerDTO);
+            await _formAnswersRepository.Update(answer);
+            return Ok("Answer successfully updated");          
         }
 
         [JwtAuth]
         [HttpGet("GetFormAnswers")]
         public async Task<ActionResult> GetFormAnswers([FromQuery] int formId, [FromQuery] int userId, [FromQuery] string userRole)
         {
-            if (userId != 0 && formId != 0)
-            {
-                var formAnswers = await _formAnswersRepository.GetByFormId(formId);
-                if (formAnswers != null && formAnswers.Any())
-                {
-                    if (formAnswers.First().Form!.UserId == userId || userRole == UserRole.admin.ToString())
-                    {
-                        return Ok(new FormStatisticsDTO { QuestionList = _mapper.Map<List<FormQuestionDTO>>(formAnswers.First().Form!.FormQuestions), Answers = _mapper.Map<List<FormAnswerDTO>>(formAnswers) });
-                    }
-                    return BadRequest("Insufficient access");
-                }
-                return BadRequest("answers not found");
-            }
-            return BadRequest("Invalid data input");
+            var formAnswers = await _formAnswersRepository.GetByFormId(formId);
+            if (formAnswers is null || !formAnswers.Any()) return BadRequest("answers not found");
+            if (formAnswers.First().Form!.UserId == userId || userRole == UserRole.admin.ToString())
+                return Ok(new FormStatisticsDTO { QuestionList = _mapper.Map<List<FormQuestionDTO>>(formAnswers.First().Form!.FormQuestions), Answers = _mapper.Map<List<FormAnswerDTO>>(formAnswers) });
+            return BadRequest("Insufficient access");                
         }
 
         [JwtAuth]
         [HttpPost("LikeAction")]
         public async Task<ActionResult> LikeAction([FromBody]LikeDTO likeDto)
         {
-            if(likeDto != null)
-            {
-                await isLikedAction(likeDto);
-                var likes =  await _likesRepository.GetLikesByFormId(likeDto.FormId);
-                return Ok(likes!.Count());
-            }
-            return BadRequest("An error occured");
+            await isLikedAction(likeDto);
+            var likes =  await _likesRepository.GetLikesByFormId(likeDto.FormId);
+            return Ok(likes!.Count());
         }
 
         [JwtAuth]
         [HttpPost("CommentAction")]
         public async Task<ActionResult> CommentAction([FromBody]CreateCommentDTO commentDto)
         {
-            if (commentDto != null)
-            {
-                var comment = _mapper.Map<Comment>(commentDto);
-                await _commentsRepository.Create(comment);       
-                return Ok(_mapper.Map<CommentDTO>(comment));
-            }
-            return BadRequest("An error occured");
+            if (commentDto is null) return BadRequest("invalid data input");
+            var comment = _mapper.Map<Comment>(commentDto);
+            await _commentsRepository.Create(comment);       
+            return Ok(_mapper.Map<CommentDTO>(comment));
         }
 
         [HttpGet("FilterTagsByName")]
@@ -261,47 +190,33 @@ namespace FormsAPI.Controllers
         [HttpPost("UploadImage")]
         public async Task<string> UploadImage(IFormFile? file)
         {
-            if (file != null && file.Length > 0)
-            {
-                using var stream = file.OpenReadStream();                
-                return await _imageService.UploadImage(stream, file.FileName);
-            }
-            return string.Empty;
+            if (file is null || file.Length == 0) return string.Empty;
+            using var stream = file.OpenReadStream();                
+            return await _imageService.UploadImage(stream, file.FileName);            
         }
 
         [ApiExplorerSettings(IgnoreApi = true)]
         [HttpPut("UpdateUploadedImage")]
         public async Task<string> UpdateUploadedImage([FromForm]IFormFile? file, [FromForm] string oldImageUrl)
         {
-            if (file != null && file.Length > 0)
-            {
-                using var stream = file.OpenReadStream();
-                return await _imageService.UpdateImage(stream, oldImageUrl, file.FileName);
-            }
-            return string.Empty;
+            if (file is null || file.Length == 0) return string.Empty;
+            using var stream = file.OpenReadStream();
+            return await _imageService.UpdateImage(stream, oldImageUrl, file.FileName);            
         }
 
         private async Task<bool> CheckFormVersion(int formId, int version)
         {
             var form = await _formsRepository.GetById(formId);
-            if (form!.Version == version)
-            {
-                return true;
-            }
+            if (form is null) throw new ArgumentNullException("form not found");
+            if (form!.Version == version) return true;
             return false;
         }
 
         private async Task isLikedAction(LikeDTO likeDto)
         {
             var like = await _likesRepository.isLiked(likeDto.FormId, likeDto.UserId);
-            if (like != null)
-            {
-                await _likesRepository.Delete(like);
-            }
-            else
-            {
-                await _likesRepository.Create(_mapper.Map<Like>(likeDto));
-            }
+            if (like is null) await _likesRepository.Create(_mapper.Map<Like>(likeDto));
+            else await _likesRepository.Delete(like);
         }
 
         private async Task InsertOrCreateTags(Form form, List<string> insertTags)
@@ -312,5 +227,6 @@ namespace FormsAPI.Controllers
                 tags.ForEach(t => form.FormTags.Add(new FormTag { Tag = t }));
             }
         }
+
     }
 }

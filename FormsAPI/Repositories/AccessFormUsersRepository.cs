@@ -31,6 +31,11 @@ namespace Repositories
             _context.AccessformUsers.Remove(entity);
             await _context.SaveChangesAsync();
         }
+        public async Task DeleteRange(IEnumerable<AccessformUser> entitie)
+        {
+            _context.AccessformUsers.RemoveRange(entitie);
+            await _context.SaveChangesAsync();
+        }
 
         public override Task<IEnumerable<AccessformUser>?> GetAll()
         {
@@ -55,6 +60,11 @@ namespace Repositories
         public async Task<bool> CheckAccess(int userId,int formId)
         {
             return await _context.AccessformUsers.AnyAsync(u => u.UserId == userId && u.FormId == formId);
+        }
+
+        public void MarkDelete(IEnumerable<AccessformUser> entities)
+        {
+            _context.AccessformUsers.RemoveRange(entities);
         }
     }
 }

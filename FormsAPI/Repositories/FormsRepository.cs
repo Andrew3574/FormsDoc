@@ -30,7 +30,7 @@ namespace Repositories
         {
             entity.Version++;
             _context.Forms.Update(entity);
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();            
         }
 
         public async Task<IEnumerable<Form>> GetByBatch(int batch, int batchSize = 20)

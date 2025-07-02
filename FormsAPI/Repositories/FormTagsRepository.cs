@@ -46,5 +46,10 @@ namespace Repositories
         {
             throw new NotImplementedException();
         }
+
+        public void MarkDelete(IEnumerable<FormTag> entities)
+        {
+            _context.FormTags.RemoveRange(entities);
+        }
     }
 }

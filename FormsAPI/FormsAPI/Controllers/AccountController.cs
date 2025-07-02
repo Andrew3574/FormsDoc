@@ -45,138 +45,92 @@ namespace FormsAPI.Controllers
         [HttpPost("Register")]
         public async Task<ActionResult> Register([FromBody] RegisterDTO userDto)
         {
-            if(userDto != null)
+            if(userDto is null) return BadRequest("Invalid data input");
+            try
             {
-                try
-                {
-                    userDto.Password = _encryptionService.HashPassword(userDto.Email + userDto.Password);
-                    User user = _mapper.Map<User>(userDto);
-                    await _usersRepository.Create(user);
-                    return Ok();
-                }
-                catch (Exception)
-                {
-                    return BadRequest("Current email is already taken");
-                }
+                userDto.Password = _encryptionService.HashPassword(userDto.Email + userDto.Password);
+                User user = _mapper.Map<User>(userDto);
+                await _usersRepository.Create(user);
+                return Ok();
             }
-            return BadRequest("Invalid data input");
+            catch (Exception)
+            {
+                return BadRequest("Current email is already taken");
+            }            
         }
+
         [HttpPost("Login")]
         public async Task<ActionResult> Login([FromBody]LoginDTO userDto)
         {
-            if(userDto != null)
-            {
-                try
-                {
-                    var user = await _usersRepository.GetByEmail(userDto.Email);
-                    if (IsLoginSuccessful(user, userDto,out string message))
-                    {
-                        user!.Lastlogin = DateTime.UtcNow;
-                        await _usersRepository.Update(user);
-                        var authDto = new AuthDTO() {UserId = user.Id, Email=userDto.Email, Role=user.Role.ToString(), Token = JwtAuthenticationService.GenerateJSONWebToken(user!) };
-                        return Ok(authDto);
-                    }
-                    return BadRequest(message);
-                }
-                catch (Exception)
-                {
-                    return BadRequest("Invalid data input");
-                }
-            }
-            return BadRequest("Invalid data input");
+            if (userDto is null) return BadRequest("Invalid data input");    
+            var user = await _usersRepository.GetByEmail(userDto.Email);
+            if (!IsLoginSuccessful(user, userDto,out string message)) return BadRequest(message);
+            user!.Lastlogin = DateTime.UtcNow;
+            await _usersRepository.Update(user);
+            return Ok(new AuthDTO() { UserId = user.Id, Email = userDto.Email, Role = user.Role.ToString(), Token = JwtAuthenticationService.GenerateJSONWebToken(user!) });                
         }
 
         [HttpGet("GetUserProfileByToken")]
         public async Task<ActionResult> GetUserProfileInfo([FromQuery]string token)
         {
-            if(!string.IsNullOrEmpty(token))
-            {
-                var email = JwtAuthenticationService.GetEmailByToken(token);
-                var user = await _usersRepository.GetByEmail(email);
-                if(user != null)
-                {
-                    return Ok(_mapper.Map<UserDTO>(user));
-                }
-            }
-            return BadRequest("user not found");
+            if(string.IsNullOrEmpty(token)) return BadRequest("token not found");
+            var email = JwtAuthenticationService.GetEmailByToken(token);
+            var user = await _usersRepository.GetByEmail(email);
+            if(user is null) return BadRequest("user not found");
+            return Ok(_mapper.Map<UserDTO>(user));            
         }
 
         [HttpGet("GetUserProfileByUserId")]
         public async Task<ActionResult> GetUserProfileInfo([FromQuery]int userId)
         {
-            if (userId != 0)
-            {
-                var user = await _usersRepository.GetById(userId);
-                if (user != null)
-                {
-                    return Ok(_mapper.Map<UserDTO>(user));
-                }
-            }
-            return BadRequest("user not found");
+            var user = await _usersRepository.GetById(userId);
+            if (user is null) return BadRequest("user not found");
+            return Ok(_mapper.Map<UserDTO>(user));            
         }
 
         [HttpPost("GetCode")]
         public async Task<ActionResult> SendRecoveryCode([FromBody]string email)
         {
             var user = await _usersRepository.GetByEmail(email);
-            if(user != null)
-            {
-                var code = await _emailService.SendRecoveryCode(email);
-                _memoryCache.Set(email, code, DateTimeOffset.Now.AddMinutes(2));
-                return Ok("Recovery code has been sent to email");
-            }
-            return BadRequest("user not found");
+            if(user is null) return BadRequest("user not found");
+            var code = await _emailService.SendRecoveryCode(email);
+            _memoryCache.Set(email, code, DateTimeOffset.Now.AddMinutes(2));
+            return Ok("Recovery code has been sent to email");            
         }
 
         [HttpPost("CheckCode")]
         public ActionResult CheckRecoveryCode([FromBody]RecoveryDTO userDto)
         {
-            if(userDto != null)
+            if(_memoryCache.TryGetValue(userDto.Email, out string? storedCode) && userDto.Code==storedCode)
             {
-                if(_memoryCache.TryGetValue(userDto.Email, out string? storedCode) && userDto.Code==storedCode)
-                {
-                    _memoryCache.Remove(userDto.Email);
-                    return Ok();
-                }
-            }
+                _memoryCache.Remove(userDto.Email);
+                return Ok();
+            }            
             return BadRequest("Invalid code");
         }
 
         [HttpPost("RecoverPassword")]
         public async Task<ActionResult> RecoverPassword([FromBody]LoginDTO userDto)
         {
-            if(userDto != null)
-            {
-                var user = await _usersRepository.GetByEmail(userDto.Email);
-                if(user != null)
-                {
-                    user.Passwordhash = _encryptionService.HashPassword(userDto.Email+userDto.Password);
-                    await _usersRepository.Update(user);
-                    return Ok();
-                }
-                return BadRequest("user not found");
-            }
-            return BadRequest("An error occured. Try again");
+            var user = await _usersRepository.GetByEmail(userDto.Email);
+            if(user is null) return BadRequest("user not found");
+            user.Passwordhash = _encryptionService.HashPassword(userDto.Email+userDto.Password);
+            await _usersRepository.Update(user);
+            return Ok();                
         }
 
         [HttpGet("GetUserForms")]
         public async Task<ActionResult> GetUserForms([FromQuery]int userId)
         {
-            if(userId != 0)
-            {
-                return Ok(_mapper.Map<IEnumerable<FormDTO>>(await _formsRepository.FilterByUserId(userId)));
-            }
-            return BadRequest("user not found");
+            if(userId == 0) return BadRequest("user not found");
+            return Ok(_mapper.Map<IEnumerable<FormDTO>>(await _formsRepository.FilterByUserId(userId)));
         }
 
         [HttpGet("GetAnsweredForms")]
         public async Task<ActionResult> GetAnsweredForms([FromQuery]int userId)
         {
-            if (userId != 0)
-            {
-                return Ok(_mapper.Map<IEnumerable<AnsweredFormDTO>>(await _formAnswersRepository.FilterByUserId(userId)));
-            }
-            return BadRequest("user not found");
+            if (userId == 0) return BadRequest("user not found");
+            return Ok(_mapper.Map<IEnumerable<AnsweredFormDTO>>(await _formAnswersRepository.FilterByUserId(userId)));
         }
 
         private bool IsLoginSuccessful(User? user, LoginDTO userDto, out string message)

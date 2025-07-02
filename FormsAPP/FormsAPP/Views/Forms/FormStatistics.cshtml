@@ -223,14 +223,14 @@
                 {
                     case 1: // Short text answers
                         var shortAnswersByUser = Model.Answers?
-                        .Select(g => new { User = g.User, Answer = g.ShortTextAnswers.First(ans => ans.FormQuestionId == question.Id) })
+                        .Select(g => new { User = g.User, Answer = g.ShortTextAnswers?.FirstOrDefault(ans => ans.FormQuestionId == question.Id) })
                         .ToList();
                         if (shortAnswersByUser != null && shortAnswersByUser!.Any())
                         {
                             <table class="table short-answer">
                                 @foreach (var answer in shortAnswersByUser!)
                                 {
-                                    <tr><td>@answer.User.Email</td><td>@answer.Answer.Answer</td></tr>
+                                    <tr><td>@answer.User.Email</td><td>@answer.Answer?.Answer</td></tr>
                                 }
                             </table>
                         }
@@ -242,14 +242,14 @@
 
                     case 2: // Long text answers
                         var longAnswersByUser = Model.Answers?
-                        .Select(g => new { User = g.User, Answer = g.LongTextAnswers.First(ans => ans.FormQuestionId == question.Id) })
+                        .Select(g => new { User = g.User, Answer = g.LongTextAnswers?.FirstOrDefault(ans => ans.FormQuestionId == question.Id) })
                         .ToList();
                         if (longAnswersByUser != null && longAnswersByUser!.Any())
                         {
                             <table class="table-primary long-answer">
                                 @foreach (var answer in longAnswersByUser!)
                                 {
-                                    <tr ><td style="vertical-align:top;">@answer.User.Email</td><td class="compact-cell">@answer.Answer.Answer</td></tr>
+                                    <tr ><td style="vertical-align:top;">@answer.User.Email</td><td class="compact-cell">@answer.Answer?.Answer</td></tr>
                                 }
                             </table>
                         }
@@ -262,7 +262,7 @@
                     case 3: // Integer answers
                         var integerAnswersGrouped = Model.Answers?
                         .Where(a => a.IntegerAnswers.Any(ans => ans.FormQuestionId == question.Id))
-                        .GroupBy(a => a.IntegerAnswers.First(ans => ans.FormQuestionId == question.Id).Answer)
+                        .GroupBy(a => a.IntegerAnswers?.FirstOrDefault(ans => ans.FormQuestionId == question.Id).Answer)
                         .Select(g => new
                         {
                             AnswerValue = g.Key,
@@ -420,42 +420,10 @@
                         }
                         break;
 
-                        /* Остальные case остаются без изменений */
                 }
             </div>
         }
     </div>
-
-    <div id="histogramTooltip" class="histogram-tooltip"></div>
-
-    <script>
-        // Показываем подсказку с пользователями при наведении на столбец
-        document.querySelectorAll('.histogram-bar').forEach(bar => {
-            bar.addEventListener('mouseenter', function(e) {
-                const tooltip = document.getElementById('histogramTooltip');
-                const users = this.getAttribute('data-users');
-
-                if (users) {
-                    tooltip.textContent = users;
-                    tooltip.style.display = 'block';
-                    tooltip.style.left = `${e.clientX + 15}px`;
-                    tooltip.style.top = `${e.clientY + 15}px`;
-                }
-            });
-
-            bar.addEventListener('mouseleave', function() {
-                document.getElementById('histogramTooltip').style.display = 'none';
-            });
-        });
-
-        // Обновляем позицию подсказки при движении мыши
-        document.addEventListener('mousemove', function(e) {
-            const tooltip = document.getElementById('histogramTooltip');
-            if (tooltip.style.display === 'block') {
-                tooltip.style.left = `${e.clientX + 15}px`;
-                tooltip.style.top = `${e.clientY + 15}px`;
-            }
-        });
-    </script>
+ 
 </body>
 </html>

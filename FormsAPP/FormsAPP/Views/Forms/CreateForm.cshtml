@@ -145,12 +145,12 @@
 
             <div class="mb-3">
                 <label class="form-label">Title</label>
-                <input type="text" class="form-control" name="Title" placeholder="Form title" required>
+                <input maxlength="50" type="text" class="form-control" name="Title" placeholder="Form title" required>
             </div>
 
             <div class="mb-3">
                 <label class="form-label">Description</label>
-                <textarea class="form-control" name="Description" placeholder="Form description" rows="3"></textarea>
+                <textarea maxlength="100" class="form-control" name="Description" placeholder="Form description" rows="3"></textarea>
             </div>
 
             <div class="mb-3">
@@ -257,7 +257,6 @@
             }
             };
 
-            // Tags functionality
             let tags = [];
             const tagInput = $('#tagInput');
             const tagsContainer = $('#tagsContainer');
@@ -383,7 +382,6 @@
                 updateTagsDisplay();
             });
 
-            // Users functionality (for restricted access)
             let allowedUsers = [];
             const userSearchInput = $('#userSearchInput');
             const addUserBtn = $('#addUserBtn');
@@ -522,7 +520,6 @@
                 updateAllowedUsersDisplay();
             });
 
-            // Form accessibility change
             $('#accessibilitySelect').change(function() {
                 if ($(this).val() == '1') {
                     $('#restrictedUsersContainer').removeClass('hidden');
@@ -531,7 +528,6 @@
                 }
             });
 
-            // Questions functionality
             let questionCounter = 0;
             const questionsContainer = $('#questionsContainer');
 
@@ -557,7 +553,6 @@
                 const newIndex = questionCounter;
                 questionCounter++;
 
-                // Update all field names with the new index
                 questionTemplate.find('input, textarea, select').each(function() {
                     const name = $(this).attr('name').replace('[0]', `[${newIndex}]`);
                     $(this).attr('name', name);
@@ -567,10 +562,8 @@
                 questionTemplate.find('.question-position').val(newIndex);
                 questionTemplate.find('.question-type-badge').text(questionTypes[questionTypeId]);
 
-                // Show add option button only for checkbox questions
                 if (questionTypeId == 4) {
                     questionTemplate.find('.add-option').removeClass('hidden');
-                    // Add initial options for checkbox questions
                     addOption(questionTemplate.find('.options-container'), newIndex);
                     addOption(questionTemplate.find('.options-container'), newIndex);
                 }
@@ -586,14 +579,11 @@
 
                 const optionIndex = container.find('.option-item').length;
 
-                // Create the correct name for the option
                 const optionName = `Questions[${questionIndex}].Options[${optionIndex}].OptionValue`;
 
-                // Create a proper input element instead of using the template's
                 const optionInput = $(`<input type="text" class="form-control form-control-sm option-value"
                                        name="${optionName}" placeholder="Option text" required>`);
 
-                // Replace the template input with our properly named input
                 optionTemplate.find('.option-value').replaceWith(optionInput);
 
                 container.append(optionTemplate);
@@ -601,17 +591,14 @@
 
             function updateQuestionPositions() {
                 $('.question-card').each(function(questionIndex) {
-                    // Update question position
                     $(this).find('.question-position').val(questionIndex);
 
-                    // Update question field names
                     const baseName = `Questions[${questionIndex}]`;
                     $(this).find('.question-text').attr('name', `${baseName}.Question`);
                     $(this).find('.question-description').attr('name', `${baseName}.Description`);
                     $(this).find('.question-type').attr('name', `${baseName}.QuestionTypeId`);
                     $(this).find('.question-position').attr('name', `${baseName}.Position`);
 
-                    // Update option field names
                     $(this).find('.option-item').each(function(optionIndex) {
                         const optionName = `${baseName}.Options[${optionIndex}].OptionValue`;
                         $(this).find('.option-value').attr('name', optionName);
@@ -627,15 +614,14 @@
 
             questionsContainer.on('click', '.remove-option', function() {
                 $(this).closest('.option-item').remove();
-                updateQuestionPositions(); // Reindex after removal
+                updateQuestionPositions(); 
             });
 
             questionsContainer.on('click', '.delete-question', function() {
                 $(this).closest('.question-card').remove();
-                updateQuestionPositions(); // Reindex after removal
+                updateQuestionPositions(); 
             });
 
-            // Image upload
             $('#imageUpload').change(function() {
                 const file = this.files[0];
                 if (file) {
@@ -648,7 +634,6 @@
                 }
             });
 
-            // Close suggestions when clicking outside
             $(document).on('click', function(e) {
                 if (!$(e.target).closest('#tagInput, #tagSuggestions').length) {
                     tagSuggestions.hide();

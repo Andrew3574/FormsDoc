@@ -34,6 +34,14 @@ namespace FormsAPP.Models.Forms.CRUD
 
         public List<string> NewTags { get; set; } = new List<string>();
 
+        public List<FilterTagModel> DeletedFormTags { get; set; } = new List<FilterTagModel>();
+
+        public List<FilterUserModel> DeletedAccessFormUsers { get; set; } = new List<FilterUserModel>();
+
+        public List<FormQuestionModel> DeletedQuestions { get; set; } = new List<FormQuestionModel>();
+
+        public List<FormQuestionOptionModel> DeletedQuestionOptions { get; set; } = new List<FormQuestionOptionModel>();
+
 
     }
 }

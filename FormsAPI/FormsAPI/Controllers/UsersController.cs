@@ -86,12 +86,9 @@ namespace FormsAPI.Controllers
         [HttpGet("FilterByEmail")]
         public async Task<ActionResult> FilterByEmail([FromQuery] string email)
         {
-            if (!string.IsNullOrEmpty(email))
-            {
-                var filteredUsers = await _usersRepository.FilterByEmail(email);
-                return Ok(ConvertToUserDTO(filteredUsers));
-            }
-            return BadRequest("invalid data input");
+            if (string.IsNullOrEmpty(email)) return BadRequest("invalid data input");
+            var filteredUsers = await _usersRepository.FilterByEmail(email);
+            return Ok(ConvertToUserDTO(filteredUsers));
         }
         
         private IEnumerable<UserDTO> ConvertToUserDTO(IEnumerable<User>? users)

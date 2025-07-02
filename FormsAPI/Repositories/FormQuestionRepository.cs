@@ -48,6 +48,11 @@ namespace Repositories
             throw new NotImplementedException();
         }
 
+        public void MarkDelete(IEnumerable<FormQuestion> entities)
+        {
+            _context.FormQuestions.RemoveRange(entities);
+        }
+
         public override async Task Update(FormQuestion entity)
         {
             _context.FormQuestions.Update(entity);

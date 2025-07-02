@@ -218,7 +218,7 @@
                             </summary>
                         </details>
                     </td>
-                    <td style="max-width:200px;">
+                    <td style="max-width:200px; word-break:break-word;">
                         @Html.DisplayFor(modelItem => item.Title)
                     </td>
                     <td>
@@ -446,7 +446,7 @@
                             </summary>
                         </details>
                     </td>
-                    <td style="max-width:150px;overflow:hidden;">${form.title}</td>
+                    <td style="max-width:200px; word-break:break-word;">${form.title}</td>
                     <td>
                         ${form.user.surname} ${form.user.name}
                         <p>${form.user.email}</p>

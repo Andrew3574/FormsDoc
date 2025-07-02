@@ -1,6 +1,8 @@
 using FormsAPI.Extensions;
+using FormsAPI.Middlewares;
 using FormsAPI.ModelProfiles;
 using FormsAPI.Services;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualBasic;
 using Models.Enums;
@@ -18,14 +20,17 @@ public class Program
 
         var app = builder.Build();
 
-        if(app.Environment.IsDevelopment())
+        app.UseRouting();
+        app.UseExceptionHandler(_ => { });
+        app.UseAuthorization();
+
+        if (app.Environment.IsDevelopment())
         {
             app.UseSwagger();
             app.UseSwaggerUI();
             app.ApplyMigrations();
         }
 
-        app.UseAuthorization();
         app.MapControllers();
 
         app.Run();
@@ -50,6 +55,7 @@ public class Program
         {
             options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
         });
+        builder.Services.AddExceptionHandler<ExceptionMiddleware>();
         builder.Services.AddMemoryCache();
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();

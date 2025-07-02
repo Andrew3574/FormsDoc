@@ -34,5 +34,12 @@ namespace FormsAPI.ModelsDTO.Forms.CRUD_DTO
 
         public List<string> NewTags { get; set; } = new List<string>();
 
+        public List<FilterUserDTO> DeletedAccessFormUsers {  get; set; } = new List<FilterUserDTO>();
+
+        public List<FilterTagDTO> DeletedFormTags { get; set; } = new List<FilterTagDTO>();
+
+        public List<FormQuestionDTO> DeletedQuestions { get; set; } = new List<FormQuestionDTO>();
+        public List<FormQuestionOptionDTO> DeletedQuestionOptions { get; set; } = new List<FormQuestionOptionDTO>();
+
     }
 }

@@ -37,6 +37,11 @@ namespace Repositories
             return await _context.FormQuestionOptions.FirstOrDefaultAsync(x => x.Id == id);
         }
 
+        public void MarkDelete(IEnumerable<FormQuestionOption> entities)
+        {
+            _context.FormQuestionOptions.RemoveRange(entities);
+        }
+
         public override async Task Update(FormQuestionOption entity)
         {
             _context.FormQuestionOptions.Update(entity);

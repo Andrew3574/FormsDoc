@@ -1,5 +1,6 @@
 ﻿@using FormsAPP.Models.Forms
 @using FormsAPP.Models.Forms.CRUD
+@using FormsAPP.Models.Users
 @model UpdateFormModel
 @{
     Layout = null;
@@ -98,6 +99,10 @@
 <body>
     <div class="container mt-4 mb-4" >
         <h2>Edit Form</h2>
+        <input type="hidden" name="DeletedFormTagsJson" id="deletedFormTagsInput">
+        <input type="hidden" name="DeletedAccessFormUsersJson" id="deletedAccessFormUsersInput">
+        <input type="hidden" name="DeletedQuestionsJson" id="deletedQuestionsInput">
+        <input type="hidden" name="DeletedQuestionOptionsJson" id="deletedQuestionOptionsInput">
 
         @if (!string.IsNullOrEmpty(ViewData["ErrorMessage"]?.ToString()))
         {
@@ -115,12 +120,12 @@
 
             <div class="mb-3">
                 <label class="form-label">Title</label>
-                <input type="text" class="form-control" asp-for="Title" required>
+                <input maxlength="50" type="text" class="form-control" asp-for="Title" required>
             </div>
 
             <div class="mb-3">
                 <label class="form-label">Description</label>
-                <textarea class="form-control" asp-for="Description" rows="3"></textarea>
+                <textarea maxlength="100" class="form-control" asp-for="Description" rows="3"></textarea>
             </div>
 
             <div class="mb-3">
@@ -305,214 +310,232 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.14.0/Sortable.min.js"></script>
     <script>
-     $(document).ready(function() {
-        const questionTypes = {
-            @foreach (var item in QuestionTypeItems)
-            {
-                @Html.Raw($"{item.Value}: '{item.Text}',")
-            }
-        };
-
-        // Initialize data
-        let existingTags = @Html.Raw(Json.Serialize(Model.FormTags.Select(t => new { t.Id, t.Name })));
-        let tags = [...existingTags]; // Copy the existing tags
-        let allowedUsers = @Html.Raw(Json.Serialize(Model.AccessFormUsers.Select(u => new { Id = u.Id, UserId = u.Userid, Email = u.Email }).ToList()));
-        let questionCounter = @Model.Questions.Count;
-
-        // Initialize new tags array
-        let newTags = [];
-        $('#newTagsInput').val(JSON.stringify(newTags));
-
-        // Tags functionality with suggestions
-        $('#tagInput').on('input', debounce(function() {
-            const query = $(this).val().trim();
-            if (query.length >= 2) {
-                fetchTagSuggestions(query);
-            } else {
-                $('#tagSuggestions').hide().empty();
-            }
-        }, 300));
-
-        $('#tagInput').on('keydown', function(e) {
-            if (e.key === 'Enter') {
-                e.preventDefault();
-                const tagText = $(this).val().trim();
-                if (tagText && !tags.some(t => t.Name === tagText)) {
-                    // Add as new tag (without ID)
-                    newTags.push(tagText);
-                    tags.push({ Id: 0, Name: tagText });
-                    updateTagsDisplay();
-                    $(this).val('');
-                    $('#tagSuggestions').hide().empty();
-                }
-            }
-        });
-
-        function fetchTagSuggestions(query) {
-                $.get('/Forms/FilterTagsByName', { query: query })
-                .done(function(data) {
-                    $('#tagSuggestions').empty();
-                    data.forEach(tag => {
-                        if (!tags.some(t => t.Name === tag.name)) {
-                            $('#tagSuggestions').append(`
-                                    <div class="suggestion-item" data-tag-id="${tag.id}" data-tag-tagId="${tag.tagId}" data-tag-name="${tag.name}">
-                                    ${tag.name}
-                                </div>
-                            `);
-                        }
-                    });
-                    if ($('#tagSuggestions').children().length > 0) {
-                        $('#tagSuggestions').show();
-                    }
-                })
-                .fail(() => console.error('Error fetching tags'));
+             $(document).ready(function () {
+            const questionTypes = {
+        @foreach (var item in QuestionTypeItems)
+        {
+            @Html.Raw($"{item.Value}: '{item.Text}',")
         }
+            };
 
-        $('#tagSuggestions').on('click', '.suggestion-item', function() {
-            const Id = $(this).data('tag-id');
-            const tagId = $(this).data('tag-tagId');
-            const tagName = $(this).data('tag-name');
+            // Ensure property names match throughout
+            let existingTags = @Html.Raw(Json.Serialize(Model.FormTags.Select(t => new { Id = t.Id, TagId = t.TagId, Name = t.Name })));
+            let tags = [...existingTags];
+            let newTags = [];
+            let allowedUsers = @Html.Raw(Json.Serialize(Model.AccessFormUsers.Select(u => new { Id = u.Id, UserId = u.Userid, Email = u.Email })));
 
-            if (!tags.some(t => t.Id === Id)) {
-                tags.push({ Id: Id, TagId: tagid, Name: tagName });
-                updateTagsDisplay();
-                $('#tagInput').val('');
-                $('#tagSuggestions').hide().empty();
-            }
-        });
+            let deletedFormTags = @Html.Raw(Json.Serialize(Model.DeletedFormTags ?? new List<FilterTagModel>()));
+            let deletedAccessFormUsers = @Html.Raw(Json.Serialize(Model.DeletedAccessFormUsers ?? new List<FilterUserModel>()));
+            let deletedQuestions = @Html.Raw(Json.Serialize(Model.DeletedQuestions ?? new List<FormQuestionModel>()));
+            let deletedQuestionOptions = @Html.Raw(Json.Serialize(Model.DeletedQuestionOptions ?? new List<FormQuestionOptionModel>()));
+            let questionCounter = @Model.Questions.Count;
 
-        function updateTagsDisplay() {
-            $('#tagsContainer').empty();
-            // Update new tags (only those that don't have IDs)
-            newTags = tags.filter(t => t.Id === 0).map(t => t.Name);
             $('#newTagsInput').val(JSON.stringify(newTags));
 
-            tags.forEach((tag, index) => {
-                $('#tagsContainer').append(`
-                    <div class="tag-item">
-                        ${tag.Name}
-                        <input type="hidden" name="FormTags[${index}].Id" value="${tag.Id}">
-                        <input type="hidden" name="FormTags[${index}].TagId" value="${tag.TagId}">
-                        <input type="hidden" name="FormTags[${index}].Name" value="${tag.Name}">
-                        <span class="tag-remove" data-index="${index}"><i class="fas fa-times"></i></span>
-                    </div>
-                `);
+            $('#updateForm').on('submit', function () {
+                $('#deletedFormTagsInput').val(JSON.stringify(deletedFormTags));
+                $('#deletedAccessUsersInput').val(JSON.stringify(deletedAccessFormUsers));
+                $('#deletedQuestionsInput').val(JSON.stringify(deletedQuestions));
+                $('#deletedQuestionOptionsInput').val(JSON.stringify(deletedQuestionOptions));
             });
-        }
 
-        $('#tagsContainer').on('click', '.tag-remove', function() {
-            const index = $(this).data('index');
-            const tag = tags[index];
-            
-            // Remove from newTags if it was a new tag
-            if (tag.Id === 0) {
-                newTags = newTags.filter(t => t !== tag.Name);
-                $('#newTagsInput').val(JSON.stringify(newTags));
-            }
-            
-            tags.splice(index, 1);
-            updateTagsDisplay();
-        });
+            $('#imageInput').on('change', function () {
+                const file = this.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                        $('#imagePreview').attr('src', e.target.result).show();
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
 
-        // Users functionality
-        $('#userSearchInput').on('input', debounce(function() {
-            const query = $(this).val().trim();
-            if (query.length >= 2) {
-                fetchUserSuggestions(query);
-            } else {
-                $('#userSuggestions').hide().empty();
-            }
-        }, 300));
+            // Tags
+            $('#tagInput').on('input', debounce(function () {
+                const query = $(this).val().trim();
+                if (query.length >= 2) {
+                    fetchTagSuggestions(query);
+                } else {
+                    $('#tagSuggestions').hide().empty();
+                }
+            }, 300));
 
-        $('#addUserBtn').click(function() {
-            const email = $('#userSearchInput').val().trim();
-            if (email && !allowedUsers.some(u => u.Email === email)) {
-                allowedUsers.push({
-                    Id: 0,
-                    UserId: 0,
-                    Email: email
-                });
-                updateAllowedUsersDisplay();
-                $('#userSearchInput').val('');
-                $('#userSuggestions').hide().empty();
-            }
-        });
-
-        function fetchUserSuggestions(query) {
-            $.get('/Forms/FilterUsersbyEmail', { query: query })
-                .done(function(data) {
-                    $('#userSuggestions').empty();
-                    data.forEach(user => {
-                        if (!allowedUsers.some(u => u.Email === user.email)) {
-                            $('#userSuggestions').append(`
-                                <div class="user-suggestion-item" data-user-id="${user.id}" data-user-email="${user.email}">
-                                    ${user.email}
-                                </div>
-                            `);
-                        }
-                    });
-                    if ($('#userSuggestions').children().length > 0) {
-                        $('#userSuggestions').show();
+            $('#tagInput').on('keydown', function (e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    const tagText = $(this).val().trim();
+                    if (tagText && !tags.some(t => t.Name === tagText)) {
+                        newTags.push(tagText);
+                        tags.push({ Id: 0, TagId: 0, Name: tagText }); // Ensure all fields are present
+                        updateTagsDisplay();
+                        $(this).val('');
+                        $('#tagSuggestions').hide().empty();
                     }
-                })
-                .fail(() => console.error('Error fetching users'));
-        }
-
-        $('#userSuggestions').on('click', '.user-suggestion-item', function() {
-            const userId = $(this).data('user-id');
-            const email = $(this).data('user-email');
-
-            if (!allowedUsers.some(u => u.UserId === userId)) {
-                allowedUsers.push({
-                    Id: 0,
-                    UserId: userId,
-                    Email: email
-                });
-                updateAllowedUsersDisplay();
-                $('#userSearchInput').val('');
-                $('#userSuggestions').hide().empty();
-            }
-        });
-
-        function updateAllowedUsersDisplay() {
-            $('#allowedUsersList').empty();
-            allowedUsers.forEach((user, index) => {
-                $('#allowedUsersList').append(`
-                    <div class="tag-item">
-                        ${user.Email}
-                        <input type="hidden" name="AccessFormUsers[${index}].Id" value="${user.Id}">
-                        <input type="hidden" name="AccessFormUsers[${index}].UserId" value="${user.UserId}">
-                        <span class="tag-remove" data-index="${index}"><i class="fas fa-times"></i></span>
-                    </div>
-                `);
+                }
             });
-        }
 
-        $('#allowedUsersList').on('click', '.tag-remove', function() {
-            const index = $(this).data('index');
-            allowedUsers.splice(index, 1);
-            updateAllowedUsersDisplay();
-        });
+            function fetchTagSuggestions(query) {
+                $.get('/Forms/FilterTagsByName', { query: query })
+                    .done(function (data) {
+                        $('#tagSuggestions').empty();
+                        data.forEach(tag => {
+                            if (!tags.some(t => t.Name === tag.name)) {
+                                $('#tagSuggestions').append(`
+                                    <div class="suggestion-item" data-tag-id="0" data-tag-tagid="${tag.id}" data-tag-name="${tag.name}">
+                                        ${tag.name}
+                                    </div>
+                                `);
+                            }
+                        });
+                        if ($('#tagSuggestions').children().length > 0) {
+                            $('#tagSuggestions').show();
+                        }
+                    })
+                    .fail(() => console.error('Error fetching tags'));
+            }
 
-        // Questions functionality
+            $('#tagSuggestions').on('click', '.suggestion-item', function () {
+                const Id = $(this).data('tag-id');
+                const TagId = $(this).data('tag-tagid');
+                const Name = $(this).data('tag-name');
+
+                if (!tags.some(t => t.Id === Id)) {
+                    tags.push({ Id, TagId, Name });
+                    updateTagsDisplay();
+                    $('#tagInput').val('');
+                    $('#tagSuggestions').hide().empty();
+                }
+            });
+
+            function updateTagsDisplay() {
+                $('#tagsContainer').empty();
+                newTags = tags.filter(t => t.Id === 0).map(t => t.Name);
+                $('#newTagsInput').val(JSON.stringify(newTags));
+
+                tags.forEach((tag, index) => {
+                    $('#tagsContainer').append(`
+                        <div class="tag-item">
+                            ${tag.name ?? tag.Name}
+                            <input type="hidden" name="FormTags[${index}].Id" value="${tag.id ?? tag.Id}">
+                            <input type="hidden" name="FormTags[${index}].TagId" value="${tag.tagId ?? tag.TagId}">
+                            <input type="hidden" name="FormTags[${index}].Name" value="${tag.name ?? tag.Name}">
+                            <span class="tag-remove" data-index="${index}"><i class="fas fa-times"></i></span>
+                        </div>
+                    `);
+                });
+            }
+
+            $('#tagsContainer').on('click', '.tag-remove', function () {
+                const index = $(this).data('index');
+                const tag = tags[index];
+
+                if (tag.Id === 0) {
+                    newTags = newTags.filter(t => t !== tag.Name);
+                    $('#newTagsInput').val(JSON.stringify(newTags));
+                } else {
+                    deletedFormTags.push(tag);
+                }
+                tags.splice(index, 1);
+                updateTagsDisplay();
+            });
+
+            // Users
+            $('#userSearchInput').on('input', debounce(function () {
+                const query = $(this).val().trim();
+                if (query.length >= 2) {
+                    fetchUserSuggestions(query);
+                } else {
+                    $('#userSuggestions').hide().empty();
+                }
+            }, 300));
+
+            $('#addUserBtn').click(function () {
+                const email = $('#userSearchInput').val().trim();
+                if (email && !allowedUsers.some(u => u.Email === email)) {
+                    allowedUsers.push({ Id: 0, UserId: 0, Email: email });
+                    updateAllowedUsersDisplay();
+                    $('#userSearchInput').val('');
+                    $('#userSuggestions').hide().empty();
+                }
+            });
+
+            function fetchUserSuggestions(query) {
+                $.get('/Forms/FilterUsersbyEmail', { query: query })
+                    .done(function (data) {
+                        $('#userSuggestions').empty();
+                        data.forEach(user => {
+                            if (!allowedUsers.some(u => u.Email === user.email)) {
+                                $('#userSuggestions').append(`
+                                    <div class="user-suggestion-item" data-user-id="${user.id}" data-user-email="${user.email}">
+                                        ${user.email}
+                                    </div>
+                                `);
+                            }
+                        });
+                        if ($('#userSuggestions').children().length > 0) {
+                            $('#userSuggestions').show();
+                        }
+                    })
+                    .fail(() => console.error('Error fetching users'));
+            }
+
+            $('#userSuggestions').on('click', '.user-suggestion-item', function () {
+                const userId = $(this).data('user-id');
+                const email = $(this).data('user-email');
+
+                if (!allowedUsers.some(u => u.UserId === userId)) {
+                    allowedUsers.push({ Id: 0, UserId: userId, Email: email });
+                    updateAllowedUsersDisplay();
+                    $('#userSearchInput').val('');
+                    $('#userSuggestions').hide().empty();
+                }
+            });
+
+            function updateAllowedUsersDisplay() {
+                $('#allowedUsersList').empty();
+                allowedUsers.forEach((user, index) => {
+                    $('#allowedUsersList').append(`
+                        <div class="tag-item">
+                            ${user.email ?? user.Email}
+                            <input type="hidden" name="AccessFormUsers[${index}].Id" value="${user.id ?? user.Id}">
+                            <input type="hidden" name="AccessFormUsers[${index}].UserId" value="${user.userId ?? user.UserId}">
+                            <input type="hidden" name="AccessFormUsers[${index}].Email" value="${user.email ?? user.Email}">
+                            <span class="tag-remove" data-index="${index}"><i class="fas fa-times"></i></span>
+                        </div>
+                    `);
+                });
+            }
+
+            $('#allowedUsersList').on('click', '.tag-remove', function () {
+                const index = $(this).data('index');
+                const removedUser = allowedUsers.splice(index, 1)[0];
+
+                if (removedUser.Id !== 0) {
+                    deletedAccessFormUsers.push(removedUser);
+                }
+                updateAllowedUsersDisplay();
+            });
+                    // Questions functionality
         $('.dropdown-item[data-type]').click(function(e) {
             e.preventDefault();
-            const questionTypeId = $(this).data('type');
-            addQuestion(parseInt(questionTypeId));
+            const questionTypeId = parseInt($(this).data('type'));
+            addQuestion(questionTypeId);
         });
 
         function addQuestion(questionTypeId) {
-            const $template = $('#questionTemplate').html();
-            const $newQuestion = $($template);
+            const template = $('#questionTemplate').html();
+            const $newQuestion = $(template);
             const newIndex = questionCounter++;
 
+            // Update basic fields
             $newQuestion.find('.question-position').val(newIndex);
             $newQuestion.find('.question-type').val(questionTypeId);
             $newQuestion.find('.question-type-badge').text(questionTypes[questionTypeId]);
+            $newQuestion.find('.question-title').text(`Question ${newIndex + 1}`);
 
             // Update all field names with the new index
             $newQuestion.find('[name]').each(function() {
-                const name = $(this).attr('name').replace('[0]', `[${newIndex}]`);
+                const name = $(this).attr('name').replace(/\[0\]/g, `[${newIndex}]`);
                 $(this).attr('name', name);
             });
 
@@ -525,13 +548,14 @@
             }
 
             $('#questionsContainer').append($newQuestion);
-            updateQuestionPositions();
+            updateQuestionNumbers();
         }
 
         function addOption($container, questionIndex, optionIndex) {
-            const $option = $('#optionTemplate').html();
-            const $newOption = $($option);
-            
+            const template = $('#optionTemplate').html();
+            const $newOption = $(template);
+
+            // Update option fields
             $newOption.find('.option-value')
                 .attr('name', `Questions[${questionIndex}].Options[${optionIndex}].OptionValue`)
                 .attr('required', true);
@@ -539,27 +563,15 @@
             $container.append($newOption);
         }
 
-        function updateQuestionPositions() {
+        function updateQuestionNumbers() {
             $('.question-card').each(function(index) {
-                const currentIndex = index;
-                $(this).find('.question-position').val(currentIndex);
-                
-                // Update question number display
-                $(this).find('.question-title').text(`Question ${currentIndex + 1}`);
-                
-                // Update all field names with the current index
-                $(this).find('[name]').each(function() {
-                    const name = $(this).attr('name').replace(/Questions\[\d+\]/g, `Questions[${currentIndex}]`);
+                $(this).find('.question-position').val(index);
+                $(this).find('.question-title').text(`Question ${index + 1}`);
+
+                // Update all question field names
+                $(this).find('[name^="Questions["]').each(function() {
+                    const name = $(this).attr('name').replace(/Questions\[\d+\]/g, `Questions[${index}]`);
                     $(this).attr('name', name);
-                    
-                    // Special handling for options
-                    if (name.includes('Options')) {
-                        const optionMatch = name.match(/Options\[(\d+)\]/);
-                        if (optionMatch) {
-                            const newName = name.replace(/Options\[\d+\]/g, `Options[${optionMatch[1]}]`);
-                            $(this).attr('name', newName);
-                        }
-                    }
                 });
             });
         }
@@ -573,12 +585,25 @@
                 addOption($card.find('.options-container'), questionIndex, optionIndex);
             })
             .on('click', '.remove-option', function() {
-                $(this).closest('.option-item').remove();
-                updateQuestionPositions();
+                const $option = $(this).closest('.option-item');
+                const optionId = parseInt($option.find('[name$=".Id"]').val());
+
+                if (!isNaN(optionId) && optionId !== 0) {
+                    deletedQuestionOptions.push({ Id: optionId });
+                }
+
+                $option.remove();
             })
             .on('click', '.delete-question', function() {
-                $(this).closest('.question-card').remove();
-                updateQuestionPositions();
+                const $questionCard = $(this).closest('.question-card');
+                const questionId = parseInt($questionCard.find('[name$=".Id"]').val());
+
+                if (!isNaN(questionId) && questionId !== 0) {
+                    deletedQuestions.push({ Id: questionId });
+                }
+
+                $questionCard.remove();
+                updateQuestionNumbers();
             })
             .on('change', '.question-type', function() {
                 const $card = $(this).closest('.question-card');
@@ -592,8 +617,9 @@
                 if (questionTypeId === 4) {
                     $addOptionBtn.removeClass('hidden');
                     if ($optionsContainer.find('.option-item').length === 0) {
-                        addOption($optionsContainer, $('.question-card').index($card), 0);
-                        addOption($optionsContainer, $('.question-card').index($card), 1);
+                        const questionIndex = $('.question-card').index($card);
+                        addOption($optionsContainer, questionIndex, 0);
+                        addOption($optionsContainer, questionIndex, 1);
                     }
                 } else {
                     $addOptionBtn.addClass('hidden');
@@ -601,26 +627,35 @@
                 }
             });
 
-        // Close suggestions when clicking outside
-        $(document).on('click', function(e) {
-            if (!$(e.target).closest('#tagInput, #tagSuggestions').length) {
-                $('#tagSuggestions').hide();
-            }
-            if (!$(e.target).closest('#userSearchInput, #userSuggestions').length) {
-                $('#userSuggestions').hide();
+        // Initialize Sortable for questions
+        new Sortable(document.getElementById('questionsContainer'), {
+            handle: '.drag-handle',
+            animation: 150,
+            onEnd: function() {
+                updateQuestionNumbers();
             }
         });
 
-        // Helper function
-        function debounce(func, wait) {
-            let timeout;
-            return function() {
-                const context = this, args = arguments;
-                clearTimeout(timeout);
-                timeout = setTimeout(() => func.apply(context, args), wait);
-            };
-        }
-    });
+            // Helper
+            function debounce(func, wait) {
+                let timeout;
+                return function () {
+                    clearTimeout(timeout);
+                    timeout = setTimeout(() => func.apply(this, arguments), wait);
+                };
+            }
+
+            // Hide suggestion dropdowns on click outside
+            $(document).on('click', function (e) {
+                if (!$(e.target).closest('#tagInput, #tagSuggestions').length) {
+                    $('#tagSuggestions').hide();
+                }
+                if (!$(e.target).closest('#userSearchInput, #userSuggestions').length) {
+                    $('#userSuggestions').hide();
+                }
+            });
+        });
+
 </script>
 </body>
 </html>

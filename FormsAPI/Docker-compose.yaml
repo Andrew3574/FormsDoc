@@ -1,6 +1,6 @@
 services:
-  forms_api:
-    container_name: forms_api
+  project_api:
+    container_name: project_api
     build:
       context: .
       dockerfile: Dockerfile
@@ -15,9 +15,9 @@ services:
 
   postgres:
     image: postgres:latest
-    container_name: postgres_db
+    container_name: postgres_database
     volumes:
-      - db_data:/var/lib/postgresql/data
+      - database_data:/var/lib/postgresql/data
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: 123
@@ -36,4 +36,4 @@ services:
       - "105:80"
 
 volumes:
-  db_data:
+  database_data:

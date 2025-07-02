@@ -1531,6 +1531,34 @@
               "type": "string"
             },
             "nullable": true
+          },
+          "deletedAccessFormUsers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FilterUserDTO"
+            },
+            "nullable": true
+          },
+          "deletedFormTags": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FilterTagDTO"
+            },
+            "nullable": true
+          },
+          "deletedQuestions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FormQuestionDTO"
+            },
+            "nullable": true
+          },
+          "deletedQuestionOptions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FormQuestionOptionDTO"
+            },
+            "nullable": true
           }
         },
         "additionalProperties": false
