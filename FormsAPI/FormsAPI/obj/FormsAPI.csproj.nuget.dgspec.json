@@ -68,7 +68,7 @@
             },
             "Elastic.Clients.Elasticsearch": {
               "target": "Package",
-              "version": "[8.18.0, )"
+              "version": "[8.15.2, )"
             },
             "MailKit": {
               "target": "Package",
@@ -101,6 +101,10 @@
             "MimeKit": {
               "target": "Package",
               "version": "[4.12.0, )"
+            },
+            "NEST": {
+              "target": "Package",
+              "version": "[7.17.5, )"
             },
             "Npgsql.EntityFrameworkCore.PostgreSQL": {
               "target": "Package",

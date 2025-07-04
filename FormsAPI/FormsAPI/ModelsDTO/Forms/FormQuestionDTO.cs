@@ -12,9 +12,9 @@
 
         public bool? DisplayState { get; set; }
 
-        public int Position { get; set; }
+        public int? Position { get; set; }
 
-        public List<FormQuestionOptionDTO> Options { get; set; } = new List<FormQuestionOptionDTO>();
+        public List<FormQuestionOptionDTO>? Options { get; set; } = new List<FormQuestionOptionDTO>();
 
     }
 }

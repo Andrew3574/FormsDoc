@@ -7,6 +7,90 @@
       "RelativeMoniker": "D:0:0:{77717707-0B6E-407A-A160-B3A588DEDC54}|FormsAPI\\FormsAPI.csproj|solutionrelative:formsapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{77717707-0B6E-407A-A160-B3A588DEDC54}|FormsAPI\\FormsAPI.csproj|d:\\summercourse\\courseproject\\formsapi\\formsapi\\controllers\\formscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{77717707-0B6E-407A-A160-B3A588DEDC54}|FormsAPI\\FormsAPI.csproj|solutionrelative:formsapi\\controllers\\formscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{77717707-0B6E-407A-A160-B3A588DEDC54}|FormsAPI\\FormsAPI.csproj|d:\\summercourse\\courseproject\\formsapi\\formsapi\\services\\elastic\\elasticsearchservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{77717707-0B6E-407A-A160-B3A588DEDC54}|FormsAPI\\FormsAPI.csproj|solutionrelative:formsapi\\services\\elastic\\elasticsearchservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{77717707-0B6E-407A-A160-B3A588DEDC54}|FormsAPI\\FormsAPI.csproj|d:\\summercourse\\courseproject\\formsapi\\formsapi\\services\\elastic\\ielasticservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{77717707-0B6E-407A-A160-B3A588DEDC54}|FormsAPI\\FormsAPI.csproj|solutionrelative:formsapi\\services\\elastic\\ielasticservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{77717707-0B6E-407A-A160-B3A588DEDC54}|FormsAPI\\FormsAPI.csproj|d:\\summercourse\\courseproject\\formsapi\\formsapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{77717707-0B6E-407A-A160-B3A588DEDC54}|FormsAPI\\FormsAPI.csproj|solutionrelative:formsapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{77717707-0B6E-407A-A160-B3A588DEDC54}|FormsAPI\\FormsAPI.csproj|d:\\summercourse\\courseproject\\formsapi\\formsapi\\modelsdto\\forms\\crud\\updateformdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{77717707-0B6E-407A-A160-B3A588DEDC54}|FormsAPI\\FormsAPI.csproj|solutionrelative:formsapi\\modelsdto\\forms\\crud\\updateformdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{77717707-0B6E-407A-A160-B3A588DEDC54}|FormsAPI\\FormsAPI.csproj|d:\\summercourse\\courseproject\\formsapi\\formsapi\\modelsdto\\forms\\crud\\createformdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{77717707-0B6E-407A-A160-B3A588DEDC54}|FormsAPI\\FormsAPI.csproj|solutionrelative:formsapi\\modelsdto\\forms\\crud\\createformdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{77717707-0B6E-407A-A160-B3A588DEDC54}|FormsAPI\\FormsAPI.csproj|d:\\summercourse\\courseproject\\formsapi\\formsapi\\modelsdto\\forms\\crud\\formdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{77717707-0B6E-407A-A160-B3A588DEDC54}|FormsAPI\\FormsAPI.csproj|solutionrelative:formsapi\\modelsdto\\forms\\crud\\formdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{77717707-0B6E-407A-A160-B3A588DEDC54}|FormsAPI\\FormsAPI.csproj|d:\\summercourse\\courseproject\\formsapi\\formsapi\\modelsdto\\forms\\formquestiondto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{77717707-0B6E-407A-A160-B3A588DEDC54}|FormsAPI\\FormsAPI.csproj|solutionrelative:formsapi\\modelsdto\\forms\\formquestiondto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{77717707-0B6E-407A-A160-B3A588DEDC54}|FormsAPI\\FormsAPI.csproj|d:\\summercourse\\courseproject\\formsapi\\formsapi\\modelsdto\\forms\\filteruserdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{77717707-0B6E-407A-A160-B3A588DEDC54}|FormsAPI\\FormsAPI.csproj|solutionrelative:formsapi\\modelsdto\\forms\\filteruserdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{77717707-0B6E-407A-A160-B3A588DEDC54}|FormsAPI\\FormsAPI.csproj|d:\\summercourse\\courseproject\\formsapi\\formsapi\\modelsdto\\forms\\filtertagdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{77717707-0B6E-407A-A160-B3A588DEDC54}|FormsAPI\\FormsAPI.csproj|solutionrelative:formsapi\\modelsdto\\forms\\filtertagdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{228F8D23-D77E-44C8-BAA8-769BBE77492C}|Repositories\\Repositories.csproj|d:\\summercourse\\courseproject\\formsapi\\repositories\\tagsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{228F8D23-D77E-44C8-BAA8-769BBE77492C}|Repositories\\Repositories.csproj|solutionrelative:repositories\\tagsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B01A1809-7990-468F-8838-8D3050B21362}|Models\\Models.csproj|d:\\summercourse\\courseproject\\formsapi\\models\\form.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B01A1809-7990-468F-8838-8D3050B21362}|Models\\Models.csproj|solutionrelative:models\\form.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B01A1809-7990-468F-8838-8D3050B21362}|Models\\Models.csproj|d:\\summercourse\\courseproject\\formsapi\\models\\formtag.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B01A1809-7990-468F-8838-8D3050B21362}|Models\\Models.csproj|solutionrelative:models\\formtag.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{228F8D23-D77E-44C8-BAA8-769BBE77492C}|Repositories\\Repositories.csproj|d:\\summercourse\\courseproject\\formsapi\\repositories\\formsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{228F8D23-D77E-44C8-BAA8-769BBE77492C}|Repositories\\Repositories.csproj|solutionrelative:repositories\\formsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{77717707-0B6E-407A-A160-B3A588DEDC54}|FormsAPI\\FormsAPI.csproj|d:\\summercourse\\courseproject\\formsapi\\formsapi\\modelprofiles\\formsprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{77717707-0B6E-407A-A160-B3A588DEDC54}|FormsAPI\\FormsAPI.csproj|solutionrelative:formsapi\\modelprofiles\\formsprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{228F8D23-D77E-44C8-BAA8-769BBE77492C}|Repositories\\Repositories.csproj|d:\\summercourse\\courseproject\\formsapi\\repositories\\commentsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{228F8D23-D77E-44C8-BAA8-769BBE77492C}|Repositories\\Repositories.csproj|solutionrelative:repositories\\commentsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B01A1809-7990-468F-8838-8D3050B21362}|Models\\Models.csproj|d:\\summercourse\\courseproject\\formsapi\\models\\comment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B01A1809-7990-468F-8838-8D3050B21362}|Models\\Models.csproj|solutionrelative:models\\comment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{77717707-0B6E-407A-A160-B3A588DEDC54}|FormsAPI\\FormsAPI.csproj|d:\\summercourse\\courseproject\\formsapi\\formsapi\\services\\elastic\\elasticsettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{77717707-0B6E-407A-A160-B3A588DEDC54}|FormsAPI\\FormsAPI.csproj|solutionrelative:formsapi\\services\\elastic\\elasticsettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{77717707-0B6E-407A-A160-B3A588DEDC54}|FormsAPI\\FormsAPI.csproj|d:\\summercourse\\courseproject\\formsapi\\formsapi\\formsapi.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{77717707-0B6E-407A-A160-B3A588DEDC54}|FormsAPI\\FormsAPI.csproj|solutionrelative:formsapi\\formsapi.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{77717707-0B6E-407A-A160-B3A588DEDC54}|FormsAPI\\FormsAPI.csproj|d:\\summercourse\\courseproject\\formsapi\\formsapi\\services\\imageservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{77717707-0B6E-407A-A160-B3A588DEDC54}|FormsAPI\\FormsAPI.csproj|solutionrelative:formsapi\\services\\imageservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{77717707-0B6E-407A-A160-B3A588DEDC54}|FormsAPI\\FormsAPI.csproj|d:\\summercourse\\courseproject\\formsapi\\formsapi\\extensions\\migrationextension.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{77717707-0B6E-407A-A160-B3A588DEDC54}|FormsAPI\\FormsAPI.csproj|solutionrelative:formsapi\\extensions\\migrationextension.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{228F8D23-D77E-44C8-BAA8-769BBE77492C}|Repositories\\Repositories.csproj|d:\\summercourse\\courseproject\\formsapi\\repositories\\migrations\\formsdbcontextmodelsnapshot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{228F8D23-D77E-44C8-BAA8-769BBE77492C}|Repositories\\Repositories.csproj|solutionrelative:repositories\\migrations\\formsdbcontextmodelsnapshot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -15,20 +99,8 @@
       "RelativeMoniker": "D:0:0:{228F8D23-D77E-44C8-BAA8-769BBE77492C}|Repositories\\Repositories.csproj|solutionrelative:repositories\\migrations\\20250702182950_initialdb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{77717707-0B6E-407A-A160-B3A588DEDC54}|FormsAPI\\FormsAPI.csproj|d:\\summercourse\\courseproject\\formsapi\\formsapi\\controllers\\formscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{77717707-0B6E-407A-A160-B3A588DEDC54}|FormsAPI\\FormsAPI.csproj|solutionrelative:formsapi\\controllers\\formscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{228F8D23-D77E-44C8-BAA8-769BBE77492C}|Repositories\\Repositories.csproj|d:\\summercourse\\courseproject\\formsapi\\repositories\\data\\formsdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{228F8D23-D77E-44C8-BAA8-769BBE77492C}|Repositories\\Repositories.csproj|solutionrelative:repositories\\data\\formsdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{77717707-0B6E-407A-A160-B3A588DEDC54}|FormsAPI\\FormsAPI.csproj|d:\\summercourse\\courseproject\\formsapi\\formsapi\\modelprofiles\\formsprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{77717707-0B6E-407A-A160-B3A588DEDC54}|FormsAPI\\FormsAPI.csproj|solutionrelative:formsapi\\modelprofiles\\formsprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{77717707-0B6E-407A-A160-B3A588DEDC54}|FormsAPI\\FormsAPI.csproj|d:\\summercourse\\courseproject\\formsapi\\formsapi\\modelsdto\\forms\\filtertagdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{77717707-0B6E-407A-A160-B3A588DEDC54}|FormsAPI\\FormsAPI.csproj|solutionrelative:formsapi\\modelsdto\\forms\\filtertagdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{228F8D23-D77E-44C8-BAA8-769BBE77492C}|Repositories\\Repositories.csproj|d:\\summercourse\\courseproject\\formsapi\\repositories\\formquestionoptionsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -47,24 +119,8 @@
       "RelativeMoniker": "D:0:0:{228F8D23-D77E-44C8-BAA8-769BBE77492C}|Repositories\\Repositories.csproj|solutionrelative:repositories\\accessformusersrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{228F8D23-D77E-44C8-BAA8-769BBE77492C}|Repositories\\Repositories.csproj|d:\\summercourse\\courseproject\\formsapi\\repositories\\formsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{228F8D23-D77E-44C8-BAA8-769BBE77492C}|Repositories\\Repositories.csproj|solutionrelative:repositories\\formsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{77717707-0B6E-407A-A160-B3A588DEDC54}|FormsAPI\\FormsAPI.csproj|d:\\summercourse\\courseproject\\formsapi\\formsapi\\modelsdto\\forms\\crud\\updateformdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{77717707-0B6E-407A-A160-B3A588DEDC54}|FormsAPI\\FormsAPI.csproj|solutionrelative:formsapi\\modelsdto\\forms\\crud\\updateformdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{77717707-0B6E-407A-A160-B3A588DEDC54}|FormsAPI\\FormsAPI.csproj|d:\\summercourse\\courseproject\\formsapi\\formsapi\\modelsdto\\forms\\formquestiondto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{77717707-0B6E-407A-A160-B3A588DEDC54}|FormsAPI\\FormsAPI.csproj|solutionrelative:formsapi\\modelsdto\\forms\\formquestiondto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{77717707-0B6E-407A-A160-B3A588DEDC54}|FormsAPI\\FormsAPI.csproj|d:\\summercourse\\courseproject\\formsapi\\formsapi\\modelsdto\\forms\\formquestionoptiondto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{77717707-0B6E-407A-A160-B3A588DEDC54}|FormsAPI\\FormsAPI.csproj|solutionrelative:formsapi\\modelsdto\\forms\\formquestionoptiondto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{77717707-0B6E-407A-A160-B3A588DEDC54}|FormsAPI\\FormsAPI.csproj|d:\\summercourse\\courseproject\\formsapi\\formsapi\\modelsdto\\forms\\filteruserdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{77717707-0B6E-407A-A160-B3A588DEDC54}|FormsAPI\\FormsAPI.csproj|solutionrelative:formsapi\\modelsdto\\forms\\filteruserdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{77717707-0B6E-407A-A160-B3A588DEDC54}|FormsAPI\\FormsAPI.csproj|d:\\summercourse\\courseproject\\formsapi\\formsapi\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -91,24 +147,12 @@
       "RelativeMoniker": "D:0:0:{77717707-0B6E-407A-A160-B3A588DEDC54}|FormsAPI\\FormsAPI.csproj|solutionrelative:formsapi\\services\\auth\\jwtauthattribute.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{77717707-0B6E-407A-A160-B3A588DEDC54}|FormsAPI\\FormsAPI.csproj|d:\\summercourse\\courseproject\\formsapi\\formsapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{77717707-0B6E-407A-A160-B3A588DEDC54}|FormsAPI\\FormsAPI.csproj|solutionrelative:formsapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{77717707-0B6E-407A-A160-B3A588DEDC54}|FormsAPI\\FormsAPI.csproj|d:\\summercourse\\courseproject\\formsapi\\formsapi\\extensions\\migrationextension.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{77717707-0B6E-407A-A160-B3A588DEDC54}|FormsAPI\\FormsAPI.csproj|solutionrelative:formsapi\\extensions\\migrationextension.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{228F8D23-D77E-44C8-BAA8-769BBE77492C}|Repositories\\Repositories.csproj|d:\\summercourse\\courseproject\\formsapi\\repositories\\formanswersrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{228F8D23-D77E-44C8-BAA8-769BBE77492C}|Repositories\\Repositories.csproj|solutionrelative:repositories\\formanswersrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{77717707-0B6E-407A-A160-B3A588DEDC54}|FormsAPI\\FormsAPI.csproj|d:\\summercourse\\courseproject\\formsapi\\formsapi\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{77717707-0B6E-407A-A160-B3A588DEDC54}|FormsAPI\\FormsAPI.csproj|solutionrelative:formsapi\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{77717707-0B6E-407A-A160-B3A588DEDC54}|FormsAPI\\FormsAPI.csproj|d:\\summercourse\\courseproject\\formsapi\\formsapi\\services\\imageservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{77717707-0B6E-407A-A160-B3A588DEDC54}|FormsAPI\\FormsAPI.csproj|solutionrelative:formsapi\\services\\imageservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{77717707-0B6E-407A-A160-B3A588DEDC54}|FormsAPI\\FormsAPI.csproj|d:\\summercourse\\courseproject\\formsapi\\formsapi\\modelsdto\\formanswers\\crud\\formanswerdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -151,36 +195,16 @@
       "RelativeMoniker": "D:0:0:{77717707-0B6E-407A-A160-B3A588DEDC54}|FormsAPI\\FormsAPI.csproj|solutionrelative:formsapi\\modelsdto\\formanswers\\formtemplatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{77717707-0B6E-407A-A160-B3A588DEDC54}|FormsAPI\\FormsAPI.csproj|d:\\summercourse\\courseproject\\formsapi\\formsapi\\modelsdto\\forms\\crud\\createformdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{77717707-0B6E-407A-A160-B3A588DEDC54}|FormsAPI\\FormsAPI.csproj|solutionrelative:formsapi\\modelsdto\\forms\\crud\\createformdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{77717707-0B6E-407A-A160-B3A588DEDC54}|FormsAPI\\FormsAPI.csproj|d:\\summercourse\\courseproject\\formsapi\\formsapi\\modelsdto\\forms\\crud\\formdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{77717707-0B6E-407A-A160-B3A588DEDC54}|FormsAPI\\FormsAPI.csproj|solutionrelative:formsapi\\modelsdto\\forms\\crud\\formdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{B01A1809-7990-468F-8838-8D3050B21362}|Models\\Models.csproj|d:\\summercourse\\courseproject\\formsapi\\models\\formanswer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B01A1809-7990-468F-8838-8D3050B21362}|Models\\Models.csproj|solutionrelative:models\\formanswer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{228F8D23-D77E-44C8-BAA8-769BBE77492C}|Repositories\\Repositories.csproj|d:\\summercourse\\courseproject\\formsapi\\repositories\\tagsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{228F8D23-D77E-44C8-BAA8-769BBE77492C}|Repositories\\Repositories.csproj|solutionrelative:repositories\\tagsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{77717707-0B6E-407A-A160-B3A588DEDC54}|FormsAPI\\FormsAPI.csproj|d:\\summercourse\\courseproject\\formsapi\\formsapi\\modelsdto\\forms\\accessformuserdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{77717707-0B6E-407A-A160-B3A588DEDC54}|FormsAPI\\FormsAPI.csproj|solutionrelative:formsapi\\modelsdto\\forms\\accessformuserdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B01A1809-7990-468F-8838-8D3050B21362}|Models\\Models.csproj|d:\\summercourse\\courseproject\\formsapi\\models\\form.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B01A1809-7990-468F-8838-8D3050B21362}|Models\\Models.csproj|solutionrelative:models\\form.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{B01A1809-7990-468F-8838-8D3050B21362}|Models\\Models.csproj|d:\\summercourse\\courseproject\\formsapi\\models\\accessformuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B01A1809-7990-468F-8838-8D3050B21362}|Models\\Models.csproj|solutionrelative:models\\accessformuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B01A1809-7990-468F-8838-8D3050B21362}|Models\\Models.csproj|d:\\summercourse\\courseproject\\formsapi\\models\\formtag.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B01A1809-7990-468F-8838-8D3050B21362}|Models\\Models.csproj|solutionrelative:models\\formtag.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{228F8D23-D77E-44C8-BAA8-769BBE77492C}|Repositories\\Repositories.csproj|d:\\summercourse\\courseproject\\formsapi\\repositories\\baserepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -215,10 +239,6 @@
       "RelativeMoniker": "D:0:0:{77717707-0B6E-407A-A160-B3A588DEDC54}|FormsAPI\\FormsAPI.csproj|solutionrelative:formsapi\\modelprofiles\\userprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{77717707-0B6E-407A-A160-B3A588DEDC54}|FormsAPI\\FormsAPI.csproj|d:\\summercourse\\courseproject\\formsapi\\formsapi\\services\\elasticsearchservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{77717707-0B6E-407A-A160-B3A588DEDC54}|FormsAPI\\FormsAPI.csproj|solutionrelative:formsapi\\services\\elasticsearchservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{228F8D23-D77E-44C8-BAA8-769BBE77492C}|Repositories\\Repositories.csproj|d:\\summercourse\\courseproject\\formsapi\\repositories\\shorttextanswersrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{228F8D23-D77E-44C8-BAA8-769BBE77492C}|Repositories\\Repositories.csproj|solutionrelative:repositories\\shorttextanswersrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -233,10 +253,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{228F8D23-D77E-44C8-BAA8-769BBE77492C}|Repositories\\Repositories.csproj|d:\\summercourse\\courseproject\\formsapi\\repositories\\integeranswersrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{228F8D23-D77E-44C8-BAA8-769BBE77492C}|Repositories\\Repositories.csproj|solutionrelative:repositories\\integeranswersrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B01A1809-7990-468F-8838-8D3050B21362}|Models\\Models.csproj|d:\\summercourse\\courseproject\\formsapi\\models\\comment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B01A1809-7990-468F-8838-8D3050B21362}|Models\\Models.csproj|solutionrelative:models\\comment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B01A1809-7990-468F-8838-8D3050B21362}|Models\\Models.csproj|d:\\summercourse\\courseproject\\formsapi\\models\\topic.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -270,33 +286,34 @@
       "DocumentGroups": [
         {
           "DockedWidth": 1692,
-          "SelectedChildIndex": 9,
+          "SelectedChildIndex": 13,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 42,
+              "DocumentIndex": 12,
               "Title": "Form.cs",
               "DocumentMoniker": "D:\\SummerCourse\\CourseProject\\FormsAPI\\Models\\Form.cs",
               "RelativeDocumentMoniker": "Models\\Form.cs",
               "ToolTip": "D:\\SummerCourse\\CourseProject\\FormsAPI\\Models\\Form.cs",
               "RelativeToolTip": "Models\\Form.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAA8wBoAAAAeAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-15T17:23:46.532Z",
               "IsPinned": true
             },
             {
               "$type": "Document",
-              "DocumentIndex": 53,
+              "DocumentIndex": 2,
               "Title": "ElasticsearchService.cs",
-              "DocumentMoniker": "D:\\SummerCourse\\CourseProject\\FormsAPI\\FormsAPI\\Services\\ElasticsearchService.cs",
-              "RelativeDocumentMoniker": "FormsAPI\\Services\\ElasticsearchService.cs",
-              "ToolTip": "D:\\SummerCourse\\CourseProject\\FormsAPI\\FormsAPI\\Services\\ElasticsearchService.cs",
-              "RelativeToolTip": "FormsAPI\\Services\\ElasticsearchService.cs",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAswCAAAAAMAAAAAAAAAA==",
+              "DocumentMoniker": "D:\\SummerCourse\\CourseProject\\FormsAPI\\FormsAPI\\Services\\Elastic\\ElasticsearchService.cs",
+              "RelativeDocumentMoniker": "FormsAPI\\Services\\Elastic\\ElasticsearchService.cs",
+              "ToolTip": "D:\\SummerCourse\\CourseProject\\FormsAPI\\FormsAPI\\Services\\Elastic\\ElasticsearchService.cs",
+              "RelativeToolTip": "FormsAPI\\Services\\Elastic\\ElasticsearchService.cs",
+              "ViewState": "AgIAABUAAAAAAAAAAAAYwGEAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-22T15:59:02.795Z",
-              "IsPinned": true
+              "IsPinned": true,
+              "EditorCaption": ""
             },
             {
               "$type": "Bookmark",
@@ -308,7 +325,56 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 16,
+              "Title": "CommentsRepository.cs",
+              "DocumentMoniker": "D:\\SummerCourse\\CourseProject\\FormsAPI\\Repositories\\CommentsRepository.cs",
+              "RelativeDocumentMoniker": "Repositories\\CommentsRepository.cs",
+              "ToolTip": "D:\\SummerCourse\\CourseProject\\FormsAPI\\Repositories\\CommentsRepository.cs",
+              "RelativeToolTip": "Repositories\\CommentsRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-03T18:01:51.761Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "ElasticSettings.cs",
+              "DocumentMoniker": "D:\\SummerCourse\\CourseProject\\FormsAPI\\FormsAPI\\Services\\Elastic\\ElasticSettings.cs",
+              "RelativeDocumentMoniker": "FormsAPI\\Services\\Elastic\\ElasticSettings.cs",
+              "ToolTip": "D:\\SummerCourse\\CourseProject\\FormsAPI\\FormsAPI\\Services\\Elastic\\ElasticSettings.cs",
+              "RelativeToolTip": "FormsAPI\\Services\\Elastic\\ElasticSettings.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-03T16:25:47.979Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "IElasticService.cs",
+              "DocumentMoniker": "D:\\SummerCourse\\CourseProject\\FormsAPI\\FormsAPI\\Services\\Elastic\\IElasticService.cs",
+              "RelativeDocumentMoniker": "FormsAPI\\Services\\Elastic\\IElasticService.cs",
+              "ToolTip": "D:\\SummerCourse\\CourseProject\\FormsAPI\\FormsAPI\\Services\\Elastic\\IElasticService.cs",
+              "RelativeToolTip": "FormsAPI\\Services\\Elastic\\IElasticService.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAUwBQAAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-03T16:17:36.543Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "FormsAPI.csproj",
+              "DocumentMoniker": "D:\\SummerCourse\\CourseProject\\FormsAPI\\FormsAPI\\FormsAPI.csproj",
+              "RelativeDocumentMoniker": "FormsAPI\\FormsAPI.csproj",
+              "ToolTip": "D:\\SummerCourse\\CourseProject\\FormsAPI\\FormsAPI\\FormsAPI.csproj",
+              "RelativeToolTip": "FormsAPI\\FormsAPI.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-07-03T16:10:04.558Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
               "Title": "FormsDbContextModelSnapshot.cs",
               "DocumentMoniker": "D:\\SummerCourse\\CourseProject\\FormsAPI\\Repositories\\Migrations\\FormsDbContextModelSnapshot.cs",
               "RelativeDocumentMoniker": "Repositories\\Migrations\\FormsDbContextModelSnapshot.cs",
@@ -320,19 +386,19 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 23,
               "Title": "20250702182950_initialDb.cs",
               "DocumentMoniker": "D:\\SummerCourse\\CourseProject\\FormsAPI\\Repositories\\Migrations\\20250702182950_initialDb.cs",
               "RelativeDocumentMoniker": "Repositories\\Migrations\\20250702182950_initialDb.cs",
               "ToolTip": "D:\\SummerCourse\\CourseProject\\FormsAPI\\Repositories\\Migrations\\20250702182950_initialDb.cs",
               "RelativeToolTip": "Repositories\\Migrations\\20250702182950_initialDb.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAIBJwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-02T18:29:50.839Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 25,
               "Title": "FormQuestionOptionsRepository.cs",
               "DocumentMoniker": "D:\\SummerCourse\\CourseProject\\FormsAPI\\Repositories\\FormQuestionOptionsRepository.cs",
               "RelativeDocumentMoniker": "Repositories\\FormQuestionOptionsRepository.cs",
@@ -344,7 +410,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 26,
               "Title": "FormQuestionRepository.cs",
               "DocumentMoniker": "D:\\SummerCourse\\CourseProject\\FormsAPI\\Repositories\\FormQuestionRepository.cs",
               "RelativeDocumentMoniker": "Repositories\\FormQuestionRepository.cs",
@@ -356,7 +422,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 33,
               "Title": "ExceptionMiddleware.cs",
               "DocumentMoniker": "D:\\SummerCourse\\CourseProject\\FormsAPI\\FormsAPI\\Middlewares\\ExceptionMiddleware.cs",
               "RelativeDocumentMoniker": "FormsAPI\\Middlewares\\ExceptionMiddleware.cs",
@@ -374,14 +440,14 @@
               "RelativeDocumentMoniker": "FormsAPI\\appsettings.json",
               "ToolTip": "D:\\SummerCourse\\CourseProject\\FormsAPI\\FormsAPI\\appsettings.json",
               "RelativeToolTip": "FormsAPI\\appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAxAAAAAAAAAA==",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAswBsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
               "WhenOpened": "2025-07-01T20:26:48.419Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 37,
               "Title": "appsettings.Development.json",
               "DocumentMoniker": "D:\\SummerCourse\\CourseProject\\FormsAPI\\FormsAPI\\appsettings.Development.json",
               "RelativeDocumentMoniker": "FormsAPI\\appsettings.Development.json",
@@ -393,7 +459,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 38,
               "Title": "FormAnswerDTO.cs",
               "DocumentMoniker": "D:\\SummerCourse\\CourseProject\\FormsAPI\\FormsAPI\\ModelsDTO\\FormAnswers\\CRUD\\FormAnswerDTO.cs",
               "RelativeDocumentMoniker": "FormsAPI\\ModelsDTO\\FormAnswers\\CRUD\\FormAnswerDTO.cs",
@@ -405,7 +471,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 40,
               "Title": "FormStatisticsDTO.cs",
               "DocumentMoniker": "D:\\SummerCourse\\CourseProject\\FormsAPI\\FormsAPI\\ModelsDTO\\FormAnswers\\FormStatisticsDTO.cs",
               "RelativeDocumentMoniker": "FormsAPI\\ModelsDTO\\FormAnswers\\FormStatisticsDTO.cs",
@@ -417,7 +483,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 41,
               "Title": "AnsweredFormTemplateDTO.cs",
               "DocumentMoniker": "D:\\SummerCourse\\CourseProject\\FormsAPI\\FormsAPI\\ModelsDTO\\FormAnswers\\CRUD\\AnsweredFormTemplateDTO.cs",
               "RelativeDocumentMoniker": "FormsAPI\\ModelsDTO\\FormAnswers\\CRUD\\AnsweredFormTemplateDTO.cs",
@@ -429,43 +495,43 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 5,
               "Title": "UpdateFormDTO.cs",
               "DocumentMoniker": "D:\\SummerCourse\\CourseProject\\FormsAPI\\FormsAPI\\ModelsDTO\\Forms\\CRUD\\UpdateFormDTO.cs",
               "RelativeDocumentMoniker": "FormsAPI\\ModelsDTO\\Forms\\CRUD\\UpdateFormDTO.cs",
               "ToolTip": "D:\\SummerCourse\\CourseProject\\FormsAPI\\FormsAPI\\ModelsDTO\\Forms\\CRUD\\UpdateFormDTO.cs",
               "RelativeToolTip": "FormsAPI\\ModelsDTO\\Forms\\CRUD\\UpdateFormDTO.cs",
-              "ViewState": "AgIAABEAAAAAAAAAAAA9wCgAAABiAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-28T16:04:56.638Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 37,
+              "DocumentIndex": 6,
               "Title": "CreateFormDTO.cs",
               "DocumentMoniker": "D:\\SummerCourse\\CourseProject\\FormsAPI\\FormsAPI\\ModelsDTO\\Forms\\CRUD\\CreateFormDTO.cs",
               "RelativeDocumentMoniker": "FormsAPI\\ModelsDTO\\Forms\\CRUD\\CreateFormDTO.cs",
               "ToolTip": "D:\\SummerCourse\\CourseProject\\FormsAPI\\FormsAPI\\ModelsDTO\\Forms\\CRUD\\CreateFormDTO.cs",
               "RelativeToolTip": "FormsAPI\\ModelsDTO\\Forms\\CRUD\\CreateFormDTO.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAARAAAAAAAAAA==",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAcAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-28T15:49:06.64Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 39,
               "Title": "FormAnswersProfile.cs",
               "DocumentMoniker": "D:\\SummerCourse\\CourseProject\\FormsAPI\\FormsAPI\\ModelProfiles\\FormAnswersProfile.cs",
               "RelativeDocumentMoniker": "FormsAPI\\ModelProfiles\\FormAnswersProfile.cs",
               "ToolTip": "D:\\SummerCourse\\CourseProject\\FormsAPI\\FormsAPI\\ModelProfiles\\FormAnswersProfile.cs",
               "RelativeToolTip": "FormsAPI\\ModelProfiles\\FormAnswersProfile.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAAABUAAABjAAAAAAAAAA==",
+              "ViewState": "AgIAAAYAAAAAAAAAAIBJwBUAAABjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-28T15:48:21.961Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 32,
+              "DocumentIndex": 43,
               "Title": "AnsweredFormDTO.cs",
               "DocumentMoniker": "D:\\SummerCourse\\CourseProject\\FormsAPI\\FormsAPI\\ModelsDTO\\FormAnswers\\AnsweredFormDTO.cs",
               "RelativeDocumentMoniker": "FormsAPI\\ModelsDTO\\FormAnswers\\AnsweredFormDTO.cs",
@@ -477,19 +543,19 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 36,
               "Title": "FormAnswersRepository.cs",
               "DocumentMoniker": "D:\\SummerCourse\\CourseProject\\FormsAPI\\Repositories\\FormAnswersRepository.cs",
               "RelativeDocumentMoniker": "Repositories\\FormAnswersRepository.cs",
               "ToolTip": "D:\\SummerCourse\\CourseProject\\FormsAPI\\Repositories\\FormAnswersRepository.cs",
               "RelativeToolTip": "Repositories\\FormAnswersRepository.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAABgAAAAkAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAIBJwBgAAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-27T16:41:55.159Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 39,
+              "DocumentIndex": 48,
               "Title": "FormAnswer.cs",
               "DocumentMoniker": "D:\\SummerCourse\\CourseProject\\FormsAPI\\Models\\FormAnswer.cs",
               "RelativeDocumentMoniker": "Models\\FormAnswer.cs",
@@ -501,7 +567,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 36,
+              "DocumentIndex": 47,
               "Title": "FormTemplateDTO.cs",
               "DocumentMoniker": "D:\\SummerCourse\\CourseProject\\FormsAPI\\FormsAPI\\ModelsDTO\\FormAnswers\\FormTemplateDTO.cs",
               "RelativeDocumentMoniker": "FormsAPI\\ModelsDTO\\FormAnswers\\FormTemplateDTO.cs",
@@ -513,7 +579,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 47,
+              "DocumentIndex": 53,
               "Title": "UserRole.cs",
               "DocumentMoniker": "D:\\SummerCourse\\CourseProject\\FormsAPI\\Models\\Enums\\UserRole.cs",
               "RelativeDocumentMoniker": "Models\\Enums\\UserRole.cs",
@@ -525,7 +591,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 35,
+              "DocumentIndex": 46,
               "Title": "CreateFormAnswerDTO.cs",
               "DocumentMoniker": "D:\\SummerCourse\\CourseProject\\FormsAPI\\FormsAPI\\ModelsDTO\\FormAnswers\\CRUD\\CreateFormAnswerDTO.cs",
               "RelativeDocumentMoniker": "FormsAPI\\ModelsDTO\\FormAnswers\\CRUD\\CreateFormAnswerDTO.cs",
@@ -537,19 +603,19 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 48,
+              "DocumentIndex": 54,
               "Title": "IntegerAnswer.cs",
               "DocumentMoniker": "D:\\SummerCourse\\CourseProject\\FormsAPI\\Models\\IntegerAnswer.cs",
               "RelativeDocumentMoniker": "Models\\IntegerAnswer.cs",
               "ToolTip": "D:\\SummerCourse\\CourseProject\\FormsAPI\\Models\\IntegerAnswer.cs",
               "RelativeToolTip": "Models\\IntegerAnswer.cs",
-              "ViewState": "AgIAABMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAABAAAAAAAAAAAIBQwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-25T17:19:21.803Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 49,
+              "DocumentIndex": 55,
               "Title": "ShortTextAnswer.cs",
               "DocumentMoniker": "D:\\SummerCourse\\CourseProject\\FormsAPI\\Models\\ShortTextAnswer.cs",
               "RelativeDocumentMoniker": "Models\\ShortTextAnswer.cs",
@@ -561,7 +627,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 51,
+              "DocumentIndex": 57,
               "Title": "CheckboxAnswer.cs",
               "DocumentMoniker": "D:\\SummerCourse\\CourseProject\\FormsAPI\\Models\\CheckboxAnswer.cs",
               "RelativeDocumentMoniker": "Models\\CheckboxAnswer.cs",
@@ -573,19 +639,19 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 20,
               "Title": "ImageService.cs",
               "DocumentMoniker": "D:\\SummerCourse\\CourseProject\\FormsAPI\\FormsAPI\\Services\\ImageService.cs",
               "RelativeDocumentMoniker": "FormsAPI\\Services\\ImageService.cs",
               "ToolTip": "D:\\SummerCourse\\CourseProject\\FormsAPI\\FormsAPI\\Services\\ImageService.cs",
               "RelativeToolTip": "FormsAPI\\Services\\ImageService.cs",
-              "ViewState": "AgIAACwAAAAAAAAAAAAgwCcAAAAoAAAAAAAAAA==",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAlwBcAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-23T16:47:07.494Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 9,
               "Title": "FilterUserDTO.cs",
               "DocumentMoniker": "D:\\SummerCourse\\CourseProject\\FormsAPI\\FormsAPI\\ModelsDTO\\Forms\\FilterUserDTO.cs",
               "RelativeDocumentMoniker": "FormsAPI\\ModelsDTO\\Forms\\FilterUserDTO.cs",
@@ -597,43 +663,43 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 10,
               "Title": "FilterTagDTO.cs",
               "DocumentMoniker": "D:\\SummerCourse\\CourseProject\\FormsAPI\\FormsAPI\\ModelsDTO\\Forms\\FilterTagDTO.cs",
               "RelativeDocumentMoniker": "FormsAPI\\ModelsDTO\\Forms\\FilterTagDTO.cs",
               "ToolTip": "D:\\SummerCourse\\CourseProject\\FormsAPI\\FormsAPI\\ModelsDTO\\Forms\\FilterTagDTO.cs",
               "RelativeToolTip": "FormsAPI\\ModelsDTO\\Forms\\FilterTagDTO.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAIAAAARAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-23T13:28:55.705Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 58,
+              "DocumentIndex": 17,
               "Title": "Comment.cs",
               "DocumentMoniker": "D:\\SummerCourse\\CourseProject\\FormsAPI\\Models\\Comment.cs",
               "RelativeDocumentMoniker": "Models\\Comment.cs",
               "ToolTip": "D:\\SummerCourse\\CourseProject\\FormsAPI\\Models\\Comment.cs",
               "RelativeToolTip": "Models\\Comment.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAUAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-19T18:11:29.668Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 38,
+              "DocumentIndex": 7,
               "Title": "FormDTO.cs",
               "DocumentMoniker": "D:\\SummerCourse\\CourseProject\\FormsAPI\\FormsAPI\\ModelsDTO\\Forms\\CRUD\\FormDTO.cs",
               "RelativeDocumentMoniker": "FormsAPI\\ModelsDTO\\Forms\\CRUD\\FormDTO.cs",
               "ToolTip": "D:\\SummerCourse\\CourseProject\\FormsAPI\\FormsAPI\\ModelsDTO\\Forms\\CRUD\\FormDTO.cs",
               "RelativeToolTip": "FormsAPI\\ModelsDTO\\Forms\\CRUD\\FormDTO.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAuwA0AAAAVAAAAAAAAAA==",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAUAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-19T17:56:32.89Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 61,
+              "DocumentIndex": 65,
               "Title": "Tag.cs",
               "DocumentMoniker": "D:\\SummerCourse\\CourseProject\\FormsAPI\\Models\\Tag.cs",
               "RelativeDocumentMoniker": "Models\\Tag.cs",
@@ -645,7 +711,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 41,
+              "DocumentIndex": 49,
               "Title": "AccessformUserDTO.cs",
               "DocumentMoniker": "D:\\SummerCourse\\CourseProject\\FormsAPI\\FormsAPI\\ModelsDTO\\Forms\\AccessformUserDTO.cs",
               "RelativeDocumentMoniker": "FormsAPI\\ModelsDTO\\Forms\\AccessformUserDTO.cs",
@@ -657,7 +723,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 29,
               "Title": "FormQuestionOptionDTO.cs",
               "DocumentMoniker": "D:\\SummerCourse\\CourseProject\\FormsAPI\\FormsAPI\\ModelsDTO\\Forms\\FormQuestionOptionDTO.cs",
               "RelativeDocumentMoniker": "FormsAPI\\ModelsDTO\\Forms\\FormQuestionOptionDTO.cs",
@@ -669,19 +735,19 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 8,
               "Title": "FormQuestionDTO.cs",
               "DocumentMoniker": "D:\\SummerCourse\\CourseProject\\FormsAPI\\FormsAPI\\ModelsDTO\\Forms\\FormQuestionDTO.cs",
               "RelativeDocumentMoniker": "FormsAPI\\ModelsDTO\\Forms\\FormQuestionDTO.cs",
               "ToolTip": "D:\\SummerCourse\\CourseProject\\FormsAPI\\FormsAPI\\ModelsDTO\\Forms\\FormQuestionDTO.cs",
               "RelativeToolTip": "FormsAPI\\ModelsDTO\\Forms\\FormQuestionDTO.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAIAAAARAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAATAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-18T14:30:08.229Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 43,
+              "DocumentIndex": 50,
               "Title": "AccessformUser.cs",
               "DocumentMoniker": "D:\\SummerCourse\\CourseProject\\FormsAPI\\Models\\AccessformUser.cs",
               "RelativeDocumentMoniker": "Models\\AccessformUser.cs",
@@ -693,19 +759,19 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 50,
+              "DocumentIndex": 56,
               "Title": "FormQuestion.cs",
               "DocumentMoniker": "D:\\SummerCourse\\CourseProject\\FormsAPI\\Models\\FormQuestion.cs",
               "RelativeDocumentMoniker": "Models\\FormQuestion.cs",
               "ToolTip": "D:\\SummerCourse\\CourseProject\\FormsAPI\\Models\\FormQuestion.cs",
               "RelativeToolTip": "Models\\FormQuestion.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAuwBAAAAAYAAAAAAAAAA==",
+              "ViewState": "AgIAAAYAAAAAAAAAAAA+wBAAAAAYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-18T14:00:13.409Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 62,
+              "DocumentIndex": 66,
               "Title": "FormQuestionOption.cs",
               "DocumentMoniker": "D:\\SummerCourse\\CourseProject\\FormsAPI\\Models\\FormQuestionOption.cs",
               "RelativeDocumentMoniker": "Models\\FormQuestionOption.cs",
@@ -717,31 +783,31 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 44,
+              "DocumentIndex": 13,
               "Title": "FormTag.cs",
               "DocumentMoniker": "D:\\SummerCourse\\CourseProject\\FormsAPI\\Models\\FormTag.cs",
               "RelativeDocumentMoniker": "Models\\FormTag.cs",
               "ToolTip": "D:\\SummerCourse\\CourseProject\\FormsAPI\\Models\\FormTag.cs",
               "RelativeToolTip": "Models\\FormTag.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAUAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-18T13:44:57.642Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 15,
               "Title": "FormsProfile.cs",
               "DocumentMoniker": "D:\\SummerCourse\\CourseProject\\FormsAPI\\FormsAPI\\ModelProfiles\\FormsProfile.cs",
               "RelativeDocumentMoniker": "FormsAPI\\ModelProfiles\\FormsProfile.cs",
               "ToolTip": "D:\\SummerCourse\\CourseProject\\FormsAPI\\FormsAPI\\ModelProfiles\\FormsProfile.cs",
               "RelativeToolTip": "FormsAPI\\ModelProfiles\\FormsProfile.cs",
-              "ViewState": "AgIAAGYAAAAAAAAAAAAAAH4AAABMAAAAAAAAAA==",
+              "ViewState": "AgIAABwAAAAAAAAAAAAQwDAAAABRAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-18T13:39:42.326Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 59,
+              "DocumentIndex": 63,
               "Title": "Topic.cs",
               "DocumentMoniker": "D:\\SummerCourse\\CourseProject\\FormsAPI\\Models\\Topic.cs",
               "RelativeDocumentMoniker": "Models\\Topic.cs",
@@ -753,19 +819,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 1,
               "Title": "FormsController.cs",
               "DocumentMoniker": "D:\\SummerCourse\\CourseProject\\FormsAPI\\FormsAPI\\Controllers\\FormsController.cs",
               "RelativeDocumentMoniker": "FormsAPI\\Controllers\\FormsController.cs",
               "ToolTip": "D:\\SummerCourse\\CourseProject\\FormsAPI\\FormsAPI\\Controllers\\FormsController.cs",
               "RelativeToolTip": "FormsAPI\\Controllers\\FormsController.cs",
-              "ViewState": "AgIAAGUAAAAAAAAAAAAAAE0AAAAyAAAAAAAAAA==",
+              "ViewState": "AgIAAFUAAAAAAAAAAAAgwGYAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-17T16:19:23.815Z"
+              "WhenOpened": "2025-06-17T16:19:23.815Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 34,
+              "DocumentIndex": 45,
               "Title": "UserDTO.cs",
               "DocumentMoniker": "D:\\SummerCourse\\CourseProject\\FormsAPI\\FormsAPI\\ModelsDTO\\Users\\UserDTO.cs",
               "RelativeDocumentMoniker": "FormsAPI\\ModelsDTO\\Users\\UserDTO.cs",
@@ -777,31 +844,31 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 24,
               "Title": "FormsDbContext.cs",
               "DocumentMoniker": "D:\\SummerCourse\\CourseProject\\FormsAPI\\Repositories\\Data\\FormsDbContext.cs",
               "RelativeDocumentMoniker": "Repositories\\Data\\FormsDbContext.cs",
               "ToolTip": "D:\\SummerCourse\\CourseProject\\FormsAPI\\Repositories\\Data\\FormsDbContext.cs",
               "RelativeToolTip": "Repositories\\Data\\FormsDbContext.cs",
-              "ViewState": "AgIAAKwAAAAAAAAAAAAAALgAAAA7AAAAAAAAAA==",
+              "ViewState": "AgIAAKkAAAAAAAAAAIBJwLgAAAA7AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-14T16:15:50.295Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 46,
+              "DocumentIndex": 52,
               "Title": "User.cs",
               "DocumentMoniker": "D:\\SummerCourse\\CourseProject\\FormsAPI\\Models\\User.cs",
               "RelativeDocumentMoniker": "Models\\User.cs",
               "ToolTip": "D:\\SummerCourse\\CourseProject\\FormsAPI\\Models\\User.cs",
               "RelativeToolTip": "Models\\User.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAA5wCQAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAgwCQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-14T16:12:07.035Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 45,
+              "DocumentIndex": 51,
               "Title": "BaseRepository.cs",
               "DocumentMoniker": "D:\\SummerCourse\\CourseProject\\FormsAPI\\Repositories\\BaseRepository.cs",
               "RelativeDocumentMoniker": "Repositories\\BaseRepository.cs",
@@ -813,7 +880,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 32,
               "Title": "UsersController.cs",
               "DocumentMoniker": "D:\\SummerCourse\\CourseProject\\FormsAPI\\FormsAPI\\Controllers\\UsersController.cs",
               "RelativeDocumentMoniker": "FormsAPI\\Controllers\\UsersController.cs",
@@ -825,7 +892,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 52,
+              "DocumentIndex": 58,
               "Title": "UserProfile.cs",
               "DocumentMoniker": "D:\\SummerCourse\\CourseProject\\FormsAPI\\FormsAPI\\ModelProfiles\\UserProfile.cs",
               "RelativeDocumentMoniker": "FormsAPI\\ModelProfiles\\UserProfile.cs",
@@ -837,19 +904,19 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 21,
               "Title": "MigrationExtension.cs",
               "DocumentMoniker": "D:\\SummerCourse\\CourseProject\\FormsAPI\\FormsAPI\\Extensions\\MigrationExtension.cs",
               "RelativeDocumentMoniker": "FormsAPI\\Extensions\\MigrationExtension.cs",
               "ToolTip": "D:\\SummerCourse\\CourseProject\\FormsAPI\\FormsAPI\\Extensions\\MigrationExtension.cs",
               "RelativeToolTip": "FormsAPI\\Extensions\\MigrationExtension.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAYAAAAFAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-14T12:38:55.026Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 60,
+              "DocumentIndex": 64,
               "Title": "FormAccessibility.cs",
               "DocumentMoniker": "D:\\SummerCourse\\CourseProject\\FormsAPI\\Models\\Enums\\FormAccessibility.cs",
               "RelativeDocumentMoniker": "Models\\Enums\\FormAccessibility.cs",
@@ -861,19 +928,19 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 4,
               "Title": "Program.cs",
               "DocumentMoniker": "D:\\SummerCourse\\CourseProject\\FormsAPI\\FormsAPI\\Program.cs",
               "RelativeDocumentMoniker": "FormsAPI\\Program.cs",
               "ToolTip": "D:\\SummerCourse\\CourseProject\\FormsAPI\\FormsAPI\\Program.cs",
               "RelativeToolTip": "FormsAPI\\Program.cs",
-              "ViewState": "AgIAACIAAAAAAAAAAAAAADkAAABEAAAAAAAAAA==",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAswB0AAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-13T17:38:20.723Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 63,
+              "DocumentIndex": 67,
               "Title": "EmailService.cs",
               "DocumentMoniker": "D:\\SummerCourse\\CourseProject\\FormsAPI\\FormsAPI\\Services\\EmailService.cs",
               "RelativeDocumentMoniker": "FormsAPI\\Services\\EmailService.cs",
@@ -885,7 +952,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 28,
               "Title": "AccessFormUsersRepository.cs",
               "DocumentMoniker": "D:\\SummerCourse\\CourseProject\\FormsAPI\\Repositories\\AccessFormUsersRepository.cs",
               "RelativeDocumentMoniker": "Repositories\\AccessFormUsersRepository.cs",
@@ -897,7 +964,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 64,
+              "DocumentIndex": 68,
               "Title": "TopicsRepository.cs",
               "DocumentMoniker": "D:\\SummerCourse\\CourseProject\\FormsAPI\\Repositories\\TopicsRepository.cs",
               "RelativeDocumentMoniker": "Repositories\\TopicsRepository.cs",
@@ -909,19 +976,19 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 14,
               "Title": "FormsRepository.cs",
               "DocumentMoniker": "D:\\SummerCourse\\CourseProject\\FormsAPI\\Repositories\\FormsRepository.cs",
               "RelativeDocumentMoniker": "Repositories\\FormsRepository.cs",
               "ToolTip": "D:\\SummerCourse\\CourseProject\\FormsAPI\\Repositories\\FormsRepository.cs",
               "RelativeToolTip": "Repositories\\FormsRepository.cs",
-              "ViewState": "AgIAAAsAAAAAAAAAAIA5wBwAAAAjAAAAAAAAAA==",
+              "ViewState": "AgIAADAAAAAAAAAAAAAEwEYAAABVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-13T16:27:33.486Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 27,
               "Title": "FormTagsRepository.cs",
               "DocumentMoniker": "D:\\SummerCourse\\CourseProject\\FormsAPI\\Repositories\\FormTagsRepository.cs",
               "RelativeDocumentMoniker": "Repositories\\FormTagsRepository.cs",
@@ -933,7 +1000,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 57,
+              "DocumentIndex": 62,
               "Title": "IntegerAnswersRepository.cs",
               "DocumentMoniker": "D:\\SummerCourse\\CourseProject\\FormsAPI\\Repositories\\IntegerAnswersRepository.cs",
               "RelativeDocumentMoniker": "Repositories\\IntegerAnswersRepository.cs",
@@ -945,19 +1012,19 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 34,
               "Title": "LikesRepository.cs",
               "DocumentMoniker": "D:\\SummerCourse\\CourseProject\\FormsAPI\\Repositories\\LikesRepository.cs",
               "RelativeDocumentMoniker": "Repositories\\LikesRepository.cs",
               "ToolTip": "D:\\SummerCourse\\CourseProject\\FormsAPI\\Repositories\\LikesRepository.cs",
               "RelativeToolTip": "Repositories\\LikesRepository.cs",
-              "ViewState": "AgIAAAsAAAAAAAAAAIA5wB0AAAAhAAAAAAAAAA==",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAhwB0AAAAhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-13T16:19:08.244Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 56,
+              "DocumentIndex": 61,
               "Title": "LongTextAnswersRepository.cs",
               "DocumentMoniker": "D:\\SummerCourse\\CourseProject\\FormsAPI\\Repositories\\LongTextAnswersRepository.cs",
               "RelativeDocumentMoniker": "Repositories\\LongTextAnswersRepository.cs",
@@ -969,7 +1036,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 55,
+              "DocumentIndex": 60,
               "Title": "QuestionTypesRepository.cs",
               "DocumentMoniker": "D:\\SummerCourse\\CourseProject\\FormsAPI\\Repositories\\QuestionTypesRepository.cs",
               "RelativeDocumentMoniker": "Repositories\\QuestionTypesRepository.cs",
@@ -981,7 +1048,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 54,
+              "DocumentIndex": 59,
               "Title": "ShortTextAnswersRepository.cs",
               "DocumentMoniker": "D:\\SummerCourse\\CourseProject\\FormsAPI\\Repositories\\ShortTextAnswersRepository.cs",
               "RelativeDocumentMoniker": "Repositories\\ShortTextAnswersRepository.cs",
@@ -993,19 +1060,19 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 40,
+              "DocumentIndex": 11,
               "Title": "TagsRepository.cs",
               "DocumentMoniker": "D:\\SummerCourse\\CourseProject\\FormsAPI\\Repositories\\TagsRepository.cs",
               "RelativeDocumentMoniker": "Repositories\\TagsRepository.cs",
               "ToolTip": "D:\\SummerCourse\\CourseProject\\FormsAPI\\Repositories\\TagsRepository.cs",
               "RelativeToolTip": "Repositories\\TagsRepository.cs",
-              "ViewState": "AgIAACkAAAAAAAAAAAAAACkAAAA4AAAAAAAAAA==",
+              "ViewState": "AgIAABsAAAAAAAAAAAAxwCsAAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-13T16:18:37.519Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 31,
               "Title": "UsersRepository.cs",
               "DocumentMoniker": "D:\\SummerCourse\\CourseProject\\FormsAPI\\Repositories\\UsersRepository.cs",
               "RelativeDocumentMoniker": "Repositories\\UsersRepository.cs",
@@ -1017,7 +1084,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 31,
+              "DocumentIndex": 42,
               "Title": "JwtAuthenticationService.cs",
               "DocumentMoniker": "D:\\SummerCourse\\CourseProject\\FormsAPI\\FormsAPI\\Services\\Auth\\JwtAuthenticationService.cs",
               "RelativeDocumentMoniker": "FormsAPI\\Services\\Auth\\JwtAuthenticationService.cs",
@@ -1029,19 +1096,19 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 35,
               "Title": "JwtAuthAttribute.cs",
               "DocumentMoniker": "D:\\SummerCourse\\CourseProject\\FormsAPI\\FormsAPI\\Services\\Auth\\JwtAuthAttribute.cs",
               "RelativeDocumentMoniker": "FormsAPI\\Services\\Auth\\JwtAuthAttribute.cs",
               "ToolTip": "D:\\SummerCourse\\CourseProject\\FormsAPI\\FormsAPI\\Services\\Auth\\JwtAuthAttribute.cs",
               "RelativeToolTip": "FormsAPI\\Services\\Auth\\JwtAuthAttribute.cs",
-              "ViewState": "AgIAAEYAAAAAAAAAAAA/wGQAAAAHAAAAAAAAAA==",
+              "ViewState": "AgIAAEcAAAAAAAAAAAAswGQAAAAHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-13T15:53:35.717Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 33,
+              "DocumentIndex": 44,
               "Title": "EncryptionService.cs",
               "DocumentMoniker": "D:\\SummerCourse\\CourseProject\\FormsAPI\\FormsAPI\\Services\\EncryptionService.cs",
               "RelativeDocumentMoniker": "FormsAPI\\Services\\EncryptionService.cs",
@@ -1053,7 +1120,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 30,
               "Title": "AccountController.cs",
               "DocumentMoniker": "D:\\SummerCourse\\CourseProject\\FormsAPI\\FormsAPI\\Controllers\\AccountController.cs",
               "RelativeDocumentMoniker": "FormsAPI\\Controllers\\AccountController.cs",

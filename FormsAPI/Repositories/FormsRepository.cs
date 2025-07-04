@@ -68,7 +68,7 @@ namespace Repositories
 
         public override async Task<Form?> GetById(int id)
         {
-            return await _context.Forms.FirstOrDefaultAsync(x => x.Id == id);
+            return await _context.Forms.Include(f=>f.FormTags).ThenInclude(ft=>ft.Tag).FirstOrDefaultAsync(x => x.Id == id);
         }
 
     }

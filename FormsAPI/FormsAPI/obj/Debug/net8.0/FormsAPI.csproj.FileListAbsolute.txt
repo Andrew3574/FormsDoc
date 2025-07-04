@@ -166,3 +166,5 @@ D:\SummerCourse\CourseProject\FormsAPI\FormsAPI\bin\Debug\net8.0\Elastic.Clients
 D:\SummerCourse\CourseProject\FormsAPI\FormsAPI\bin\Debug\net8.0\Elastic.Transport.dll
 D:\SummerCourse\CourseProject\FormsAPI\FormsAPI\bin\Debug\net8.0\AWSSDK.Core.dll
 D:\SummerCourse\CourseProject\FormsAPI\FormsAPI\bin\Debug\net8.0\AWSSDK.S3.dll
+D:\SummerCourse\CourseProject\FormsAPI\FormsAPI\bin\Debug\net8.0\Elasticsearch.Net.dll
+D:\SummerCourse\CourseProject\FormsAPI\FormsAPI\bin\Debug\net8.0\Nest.dll

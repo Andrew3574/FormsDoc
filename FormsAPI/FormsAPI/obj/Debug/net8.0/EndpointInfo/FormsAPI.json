@@ -247,6 +247,82 @@
         }
       }
     },
+    "/api/Forms/CreateIndex": {
+      "post": {
+        "tags": [
+          "Forms"
+        ],
+        "parameters": [
+          {
+            "name": "indexName",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Forms/SearchForm/{key}": {
+      "get": {
+        "tags": [
+          "Forms"
+        ],
+        "parameters": [
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Forms/GetAllForms": {
+      "get": {
+        "tags": [
+          "Forms"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Forms/FullTextSearch": {
+      "get": {
+        "tags": [
+          "Forms"
+        ],
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Forms/GetByBatch/{batch}": {
       "get": {
         "tags": [
@@ -1244,7 +1320,8 @@
           },
           "tagId": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "name": {
             "type": "string",
@@ -1262,7 +1339,8 @@
           },
           "userId": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "email": {
             "type": "string",
@@ -1298,7 +1376,8 @@
           },
           "position": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "options": {
             "type": "array",

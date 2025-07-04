@@ -173,7 +173,10 @@
             <a class="btn btn-primary" asp-action="CreateForm">Create New</a>
         </p>        
     }
-
+    <form asp-action="FullTextSearch">
+        <input class="input-group-text rounded-5 shadow-sm" style="margin-left:35%; width:300px;" type="text" name="query" placeholder="Full-text search..."/>
+        <input type="submit" hidden/>
+    </form>
     @if (!string.IsNullOrEmpty(TempData["ErrorMessage"]?.ToString()))
     {
         <div class="alert alert-danger" role="alert">

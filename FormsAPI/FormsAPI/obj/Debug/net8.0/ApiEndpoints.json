@@ -219,6 +219,22 @@
   },
   {
     "ContainingType": "FormsAPI.Controllers.FormsController",
+    "Method": "CreateIndex",
+    "RelativePath": "api/Forms/CreateIndex",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "indexName",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FormsAPI.Controllers.FormsController",
     "Method": "FilterTagsByName",
     "RelativePath": "api/Forms/FilterTagsByName",
     "HttpMethod": "GET",
@@ -297,6 +313,32 @@
   },
   {
     "ContainingType": "FormsAPI.Controllers.FormsController",
+    "Method": "FullTextSearch",
+    "RelativePath": "api/Forms/FullTextSearch",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "query",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FormsAPI.Controllers.FormsController",
+    "Method": "GetAllFormsByKey",
+    "RelativePath": "api/Forms/GetAllForms",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FormsAPI.Controllers.FormsController",
     "Method": "GetFormsByBatch",
     "RelativePath": "api/Forms/GetByBatch/{batch}",
     "HttpMethod": "GET",
@@ -364,6 +406,22 @@
       {
         "Name": "likeDto",
         "Type": "FormsAPI.ModelsDTO.Forms.LikeDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FormsAPI.Controllers.FormsController",
+    "Method": "GetFormByKey",
+    "RelativePath": "api/Forms/SearchForm/{key}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "key",
+        "Type": "System.String",
         "IsRequired": true
       }
     ],

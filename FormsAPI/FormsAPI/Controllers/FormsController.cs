@@ -5,8 +5,10 @@ using FormsAPI.ModelsDTO.Forms;
 using FormsAPI.ModelsDTO.Forms.CRUD_DTO;
 using FormsAPI.Services;
 using FormsAPI.Services.Auth;
+using FormsAPI.Services.Elastic;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Writers;
 using Models;
 using Models.Enums;
 using OnixLabs.Core.Linq;
@@ -20,7 +22,7 @@ namespace FormsAPI.Controllers
     public class FormsController : ControllerBase
     {
         private readonly IMapper _mapper;
-        private readonly ElasticsearchService _elasticsearchService;
+        private readonly IElasticService _elasticsearchService;
         private readonly ImageService _imageService;
         private readonly FormsRepository _formsRepository;
         private readonly UsersRepository _usersRepository;
@@ -33,9 +35,9 @@ namespace FormsAPI.Controllers
         private readonly FormQuestionRepository _formQuestionRepository;
         private readonly FormQuestionOptionsRepository _formQuestionOptionsRepository;
 
-        public FormsController(IMapper mapper, ElasticsearchService elasticsearchService,FormsRepository formsRepository,
+        public FormsController(IMapper mapper, IElasticService elasticsearchService, FormsRepository formsRepository,
             UsersRepository usersRepository, TagsRepository tagsRepository, LikesRepository likesRepository,
-            CommentsRepository commentsRepository,ImageService imageService, FormAnswersRepository formAnswersRepository,
+            CommentsRepository commentsRepository, ImageService imageService, FormAnswersRepository formAnswersRepository,
             AccessFormUsersRepository accessFormUsersRepository, FormTagsRepository formTagsRepository,
             FormQuestionRepository formQuestionRepository, FormQuestionOptionsRepository formQuestionOptionsRepository)
         {
@@ -54,6 +56,34 @@ namespace FormsAPI.Controllers
             _formQuestionOptionsRepository = formQuestionOptionsRepository;
         }
 
+        [HttpPost("CreateIndex")]
+        public async Task<IActionResult> CreateIndex(string indexName)
+        {
+            await _elasticsearchService.CreateIndexIfNotExists(indexName);
+            return Ok($"{indexName} index created");
+        }
+
+        [HttpGet("SearchForm/{key}")]
+        public async Task<IActionResult> GetFormByKey(string key)
+        {
+            var form = await _elasticsearchService.Get(key);
+            return Ok(form);
+        }
+
+        [HttpGet("GetAllForms")]
+        public async Task<IActionResult> GetAllFormsByKey()
+        {
+            var form = await _elasticsearchService.GetAll();
+            return Ok(form);
+        }
+
+        [HttpGet("FullTextSearch")]
+        public async Task<IActionResult> FullTextSearch([FromQuery]string query)
+        {
+            if (!string.IsNullOrEmpty(query)) return Ok(await _elasticsearchService.SearchFormsByQuery(query));
+            return BadRequest("invalid filter input");
+        }
+
         [HttpGet("GetByBatch/{batch:int}")]
         public async Task<ActionResult> GetFormsByBatch(int batch)
         {
@@ -68,6 +98,7 @@ namespace FormsAPI.Controllers
             if (form is null) return BadRequest("form not found");
             await InsertOrCreateTags(form, formDTO.Tags);
             await _formsRepository.Create(form);
+            await _elasticsearchService.AddOrUpdate(_mapper.Map<FormDTO>(await _formsRepository.GetById(form.Id)));
             return Ok(_mapper.Map<FormDTO>(form));
         }
 
@@ -80,16 +111,9 @@ namespace FormsAPI.Controllers
             await InsertOrCreateTags(form,formDTO.NewTags);
             MarkDeletingEntities(formDTO);
             await _formsRepository.Update(form);
+            await _elasticsearchService.AddOrUpdate(_mapper.Map<FormDTO>(await _formsRepository.GetById(form.Id)));
             return Ok("Form successfully updated");          
-        }
-
-        private void MarkDeletingEntities(UpdateFormDTO formDTO)
-        {
-            if (formDTO.DeletedAccessFormUsers.Any()) _accessFormUsersRepository.MarkDelete(_mapper.Map<IEnumerable<AccessformUser>>(formDTO.DeletedAccessFormUsers));
-            if (formDTO.DeletedFormTags.Any()) _formTagsRepository.MarkDelete(_mapper.Map<IEnumerable<FormTag>>(formDTO.DeletedFormTags));
-            if (formDTO.DeletedQuestions.Any()) _formQuestionRepository.MarkDelete(_mapper.Map<IEnumerable<FormQuestion>>(formDTO.DeletedQuestions));
-            if (formDTO.DeletedQuestionOptions.Any()) _formQuestionOptionsRepository.MarkDelete(_mapper.Map<IEnumerable<FormQuestionOption>>(formDTO.DeletedQuestionOptions));
-        }
+        }        
 
         [JwtAuth]
         [HttpPost("CreateAnswer")]
@@ -169,7 +193,8 @@ namespace FormsAPI.Controllers
         {
             if (commentDto is null) return BadRequest("invalid data input");
             var comment = _mapper.Map<Comment>(commentDto);
-            await _commentsRepository.Create(comment);       
+            await _commentsRepository.Create(comment);            
+            await _elasticsearchService.AddOrUpdate(_mapper.Map<FormDTO>(await _formsRepository.GetById(commentDto.FormId)));
             return Ok(_mapper.Map<CommentDTO>(comment));
         }
 
@@ -218,10 +243,17 @@ namespace FormsAPI.Controllers
             if (like is null) await _likesRepository.Create(_mapper.Map<Like>(likeDto));
             else await _likesRepository.Delete(like);
         }
-
-        private async Task InsertOrCreateTags(Form form, List<string> insertTags)
+        private void MarkDeletingEntities(UpdateFormDTO formDTO)
         {
-            if (insertTags.Any())
+            if (formDTO.DeletedAccessFormUsers.Any()) _accessFormUsersRepository.MarkDelete(_mapper.Map<IEnumerable<AccessformUser>>(formDTO.DeletedAccessFormUsers));
+            if (formDTO.DeletedFormTags.Any()) _formTagsRepository.MarkDelete(_mapper.Map<IEnumerable<FormTag>>(formDTO.DeletedFormTags));
+            if (formDTO.DeletedQuestions.Any()) _formQuestionRepository.MarkDelete(_mapper.Map<IEnumerable<FormQuestion>>(formDTO.DeletedQuestions));
+            if (formDTO.DeletedQuestionOptions.Any()) _formQuestionOptionsRepository.MarkDelete(_mapper.Map<IEnumerable<FormQuestionOption>>(formDTO.DeletedQuestionOptions));
+        }
+
+        private async Task InsertOrCreateTags(Form form, List<string>? insertTags)
+        {            
+            if (insertTags is not null && insertTags.Any())
             {
                 var tags = await _tagsRepository.GetOrCreateByName(insertTags);
                 tags.ForEach(t => form.FormTags.Add(new FormTag { Tag = t }));

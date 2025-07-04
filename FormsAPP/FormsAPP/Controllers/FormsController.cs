@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using System.Reflection;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Threading.Tasks.Dataflow;
 
@@ -31,6 +32,13 @@ namespace FormsAPP.Controllers
         public async Task<IActionResult> Index()
         {             
             return View(await _httpClient.GetFromJsonAsync<IEnumerable<FormModel>>("Forms/GetByBatch/0"));
+        }
+
+        public async Task<IActionResult> FullTextSearch(string query)
+        {
+            var response = await _httpClient.GetAsync($"Forms/FullTextSearch?query={query}");
+            if (response.IsSuccessStatusCode) return View("Index", await response.Content.ReadFromJsonAsync<IEnumerable<FormModel>>());
+                return RedirectToAction("Index");
         }
 
         public IActionResult CreateForm()

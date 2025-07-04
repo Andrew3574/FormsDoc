@@ -4,6 +4,7 @@ using FormsAPP.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
+builder.WebHost.UseUrls("http://0.0.0.0:5873");
 builder.Services.AddControllersWithViews();
 builder.Services.AddHttpClient();
 builder.Services.AddSession();
@@ -12,7 +13,6 @@ builder.Services.AddAutoMapper(typeof(AccountProfile));
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddTransient<HttpClientService>();
 var app = builder.Build();
-
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

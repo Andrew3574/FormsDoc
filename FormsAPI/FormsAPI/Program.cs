@@ -2,6 +2,7 @@ using FormsAPI.Extensions;
 using FormsAPI.Middlewares;
 using FormsAPI.ModelProfiles;
 using FormsAPI.Services;
+using FormsAPI.Services.Elastic;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualBasic;
@@ -59,10 +60,14 @@ public class Program
         builder.Services.AddMemoryCache();
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
+
+        builder.Services.Configure<ElasticSettings>(builder.Configuration.GetSection("ElasticSettings"));
+
         builder.Services.AddScoped<EmailService>(); 
         builder.Services.AddSingleton<ImageService>(); 
         builder.Services.AddSingleton<EncryptionService>();
-        builder.Services.AddSingleton<ElasticsearchService>();
+        builder.Services.AddSingleton<IElasticService, ElasticsearchService>();
+
         builder.Services.AddScoped<AccessFormUsersRepository>();
         builder.Services.AddScoped<CheckBoxesRepository>();
         builder.Services.AddScoped<CommentsRepository>();

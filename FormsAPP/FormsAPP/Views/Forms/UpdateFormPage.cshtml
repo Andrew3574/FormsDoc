@@ -39,6 +39,11 @@
             margin-left: 5px;
         }
 
+        .tag-remove-new {
+            cursor: pointer;
+            margin-left: 5px;
+        }
+
         .question-card {
             border: 1px solid #dee2e6;
             border-radius: 5px;
@@ -99,10 +104,6 @@
 <body>
     <div class="container mt-4 mb-4" >
         <h2>Edit Form</h2>
-        <input type="hidden" name="DeletedFormTagsJson" id="deletedFormTagsInput">
-        <input type="hidden" name="DeletedAccessFormUsersJson" id="deletedAccessFormUsersInput">
-        <input type="hidden" name="DeletedQuestionsJson" id="deletedQuestionsInput">
-        <input type="hidden" name="DeletedQuestionOptionsJson" id="deletedQuestionOptionsInput">
 
         @if (!string.IsNullOrEmpty(ViewData["ErrorMessage"]?.ToString()))
         {
@@ -112,11 +113,16 @@
         }
 
         <form asp-action="UpdateForm" method="post" enctype="multipart/form-data" id="updateForm">
+            <div hidden id="deletedFormTagsInput"></div>
+            <div hidden id="deletedAccessFormUsersInput"></div>
+            <div hidden id="deletedQuestionsInput"></div>
+            <div hidden id="deletedQuestionOptionsInput"></div>
+
             <input type="hidden" asp-for="Id" />
             <input type="hidden" asp-for="UserId" />
             <input type="hidden" name="CreatedAt" value="@Model.CreatedAt.ToString("O")" />
             <input type="hidden" asp-for="Version" />
-            <input type="hidden" id="newTagsInput" asp-for="NewTags" />
+            
 
             <div class="mb-3">
                 <label class="form-label">Title</label>
@@ -190,7 +196,10 @@
                             <input type="hidden" name="FormTags[@i].Name" value="@Model.FormTags[i].Name">
                             <span class="tag-remove" data-index="@i"><i class="fas fa-times"></i></span>
                         </div>
+
+                        
                     }
+                    <div style="display:none;" id="newTagsHiddenInputs"></div>
                 </div>
             </div>
 
@@ -204,7 +213,7 @@
                             <div class="d-flex justify-content-between mb-3">
                                 <div class="d-flex align-items-center">
                                     <i class="fas fa-grip-vertical drag-handle"></i>
-                                    <h5 class="question-title mb-0">Question @(i + 1) <span class="question-type-badge">@QuestionTypes[question.QuestionTypeId]</span></h5>
+                                    <h5 class="question-title mb-0">Question @(i + 1) <span class="question-type-badge">@QuestionTypes[(int)question.QuestionTypeId]</span></h5>
                                 </div>
                                 <button type="button" class="btn btn-sm btn-danger delete-question"><i class="fas fa-trash"></i></button>
                             </div>
@@ -233,9 +242,6 @@
                                             <input type="hidden" asp-for="Questions[i].Options[j].Id" />
                                             <input type="text" class="form-control option-value"
                                                    asp-for="Questions[i].Options[j].OptionValue" required>
-                                            <button type="button" class="btn btn-sm btn-outline-danger remove-option">
-                                                <i class="fas fa-times"></i>
-                                            </button>
                                         </div>
                                     }
                                 }
@@ -317,20 +323,23 @@
             @Html.Raw($"{item.Value}: '{item.Text}',")
         }
             };
-
-            // Ensure property names match throughout
+           
+            let allowedUsers = @Html.Raw(Json.Serialize(Model.AccessFormUsers.Select(u => new { Id = u.Id, UserId = u.Userid, Email = u.Email })));
             let existingTags = @Html.Raw(Json.Serialize(Model.FormTags.Select(t => new { Id = t.Id, TagId = t.TagId, Name = t.Name })));
             let tags = [...existingTags];
             let newTags = [];
-            let allowedUsers = @Html.Raw(Json.Serialize(Model.AccessFormUsers.Select(u => new { Id = u.Id, UserId = u.Userid, Email = u.Email })));
-
+            let index = 0;
+            let deletedFormTagsIndex = 0;
+            let deletedAccessUsersIndex = 0;
+            let deletedQuestionsIndex = 0;
+            let deletedOptionsIndex = 0;
             let deletedFormTags = @Html.Raw(Json.Serialize(Model.DeletedFormTags ?? new List<FilterTagModel>()));
             let deletedAccessFormUsers = @Html.Raw(Json.Serialize(Model.DeletedAccessFormUsers ?? new List<FilterUserModel>()));
             let deletedQuestions = @Html.Raw(Json.Serialize(Model.DeletedQuestions ?? new List<FormQuestionModel>()));
             let deletedQuestionOptions = @Html.Raw(Json.Serialize(Model.DeletedQuestionOptions ?? new List<FormQuestionOptionModel>()));
             let questionCounter = @Model.Questions.Count;
 
-            $('#newTagsInput').val(JSON.stringify(newTags));
+            const tagsHiddenInputs = $('#newTagsHiddenInputs');
 
             $('#updateForm').on('submit', function () {
                 $('#deletedFormTagsInput').val(JSON.stringify(deletedFormTags));
@@ -360,18 +369,40 @@
                 }
             }, 300));
 
-            $('#tagInput').on('keydown', function (e) {
-                if (e.key === 'Enter') {
+                    $('#tagInput').on('keydown', function (e) {
+            if (e.key === 'Enter') {
                     e.preventDefault();
                     const tagText = $(this).val().trim();
                     if (tagText && !tags.some(t => t.Name === tagText)) {
+                        tagsHiddenInputs.show();
+                        const hiddenInput = $(`<div class="tag-item"><input style="background: none;max-width:50px;word-break:break-word; border: none; outline: none; box-shadow: none;" type="text" name="NewTags[${index}]" value="${tagText}"><span class="tag-remove-new" data-index="${index++}"><i class="fas fa-times"></i></span></div>`);
+                        tagsHiddenInputs.append(hiddenInput);
                         newTags.push(tagText);
-                        tags.push({ Id: 0, TagId: 0, Name: tagText }); // Ensure all fields are present
-                        updateTagsDisplay();
                         $(this).val('');
                         $('#tagSuggestions').hide().empty();
                     }
                 }
+            });
+
+            $('#tagsContainer').on('click', '.tag-remove-new', function () {
+                const indexToRemove = $(this).data('index');
+
+                const tagItem = $(this).closest('.tag-item');
+                tagItem.hide();
+
+                newTags.splice(indexToRemove, 1);
+
+                $('.tag-remove-new').each(function() {
+                    const currentIndex = $(this).data('index');
+                    if (currentIndex > indexToRemove) {
+                        $(this).data('index', currentIndex - 1);
+
+                        const input = $(this).siblings('input');
+                        const newName = input.attr('name').replace(/\[\d+\]/, `[${currentIndex - 1}]`);
+                        input.attr('name', newName);
+                    }
+                });
+                index--;
             });
 
             function fetchTagSuggestions(query) {
@@ -422,8 +453,10 @@
                             <span class="tag-remove" data-index="${index}"><i class="fas fa-times"></i></span>
                         </div>
                     `);
+                    
                 });
             }
+           
 
             $('#tagsContainer').on('click', '.tag-remove', function () {
                 const index = $(this).data('index');
@@ -433,7 +466,10 @@
                     newTags = newTags.filter(t => t !== tag.Name);
                     $('#newTagsInput').val(JSON.stringify(newTags));
                 } else {
-                    deletedFormTags.push(tag);
+                    $('#deletedFormTagsInput').append(
+                        `<input type="hidden" name="DeletedFormTags[${deletedFormTagsIndex}].Id" value="${tag.id}" />`
+                    );
+                    deletedFormTagsIndex++;
                 }
                 tags.splice(index, 1);
                 updateTagsDisplay();
@@ -511,10 +547,14 @@
                 const removedUser = allowedUsers.splice(index, 1)[0];
 
                 if (removedUser.Id !== 0) {
-                    deletedAccessFormUsers.push(removedUser);
+                    $('#deletedAccessFormUsersInput').append(
+                        `<input type="hidden" name="DeletedAccessFormUsers[${deletedAccessUsersIndex}].Id" value="${removedUser.id}" />`
+                    );
+                    deletedAccessUsersIndex++;
                 }
                 updateAllowedUsersDisplay();
             });
+
                     // Questions functionality
         $('.dropdown-item[data-type]').click(function(e) {
             e.preventDefault();
@@ -584,22 +624,15 @@
                 const optionIndex = $card.find('.option-item').length;
                 addOption($card.find('.options-container'), questionIndex, optionIndex);
             })
-            .on('click', '.remove-option', function() {
-                const $option = $(this).closest('.option-item');
-                const optionId = parseInt($option.find('[name$=".Id"]').val());
-
-                if (!isNaN(optionId) && optionId !== 0) {
-                    deletedQuestionOptions.push({ Id: optionId });
-                }
-
-                $option.remove();
-            })
             .on('click', '.delete-question', function() {
                 const $questionCard = $(this).closest('.question-card');
                 const questionId = parseInt($questionCard.find('[name$=".Id"]').val());
 
                 if (!isNaN(questionId) && questionId !== 0) {
-                    deletedQuestions.push({ Id: questionId });
+                    $('#deletedQuestionsInput').append(
+                    `<input type="hidden" name="DeletedQuestions[${deletedQuestionsIndex}].Id" value="${questionId}" />`
+                    );
+                    deletedQuestionsIndex++;
                 }
 
                 $questionCard.remove();
