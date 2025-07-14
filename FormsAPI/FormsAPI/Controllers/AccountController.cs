@@ -1,24 +1,31 @@
-﻿using AutoMapper;
+﻿using Asp.Versioning;
+using AutoMapper;
 using FormsAPI.ModelsDTO.Account;
+using FormsAPI.ModelsDTO.Account.Salesforce;
 using FormsAPI.ModelsDTO.FormAnswers;
 using FormsAPI.ModelsDTO.Forms.CRUD_DTO;
 using FormsAPI.ModelsDTO.Users;
 using FormsAPI.Services;
 using FormsAPI.Services.Auth;
+using FormsAPI.Services.DropboxAPIService;
+using FormsAPI.Services.SalesForce;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using Models;
 using Models.Enums;
 using OnixLabs.Core.Text;
+using Org.BouncyCastle.Utilities.IO;
 using Repositories;
 using System.Security.Claims;
 
 
 namespace FormsAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [ApiVersion(1.0)]
+    [ApiVersion(2.0)]
     [ApiController]
+    [Route("api/v{version:apiVersion}/[controller]")]
     public class AccountController : ControllerBase
     {
         private readonly UsersRepository _usersRepository;
@@ -27,19 +34,41 @@ namespace FormsAPI.Controllers
         private readonly EncryptionService _encryptionService;
         private readonly IMapper _mapper;
         private readonly EmailService _emailService;
+        private readonly ISalesforceService _salesforceService;
+        private readonly IDropboxAPIService _dropboxAPIService;
         private readonly IMemoryCache _memoryCache;
 
-        public AccountController(UsersRepository usersRepository, IMapper mapper, EncryptionService encryptionService,
+        public AccountController(UsersRepository usersRepository, ISalesforceService salesforceService,IDropboxAPIService dropboxAPIService, IMapper mapper, EncryptionService encryptionService,
             EmailService emailService, IMemoryCache memoryCache, FormAnswersRepository formAnswersRepository,
             FormsRepository formsRepository)
         {
             _usersRepository = usersRepository;
+            _salesforceService = salesforceService;
+            _dropboxAPIService = dropboxAPIService;
             _mapper = mapper;
             _encryptionService = encryptionService;
             _emailService = emailService;
             _memoryCache = memoryCache;
             _formAnswersRepository = formAnswersRepository;
             _formsRepository = formsRepository;
+        }
+
+        [MapToApiVersion(2.0)]
+        [HttpPost("ReportBug")]
+        public async Task<IActionResult> ReportBug(BugReportDTO bugReport)
+        {
+            if (bugReport is null) return BadRequest("invalid bug report");
+            bugReport.AdminEmails = _usersRepository.GetAdminEmails();
+            if(await _dropboxAPIService.UploadToDropbox(bugReport)) return Ok("report sent");
+            return BadRequest("error occured while sending bug report");
+        }
+
+        [MapToApiVersion(2.0)]
+        [HttpPost("CreateSalesforceContact")]
+        public async Task<IActionResult> CreateSalesforceContact([FromBody] SalesforceContact contact)
+        {
+            if (await _salesforceService.CreateContact(contact)) return Ok("salesforce contact created");
+            return BadRequest("error occured while creating contact");
         }
 
         [HttpPost("Register")]

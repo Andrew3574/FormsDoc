@@ -123,8 +123,13 @@
                 <a class="action-card btn btn-outline-primary" href="~/Account/GetUserFormsById?userId=@Model.Id">User Forms</a>
                 <a class="action-card btn btn-outline-primary" href="~/Account/GetAnsweredFormsById?userId=@Model.Id">User Answers</a>
             }
+            <form method="get" asp-action="CreateSFContact" asp-controller="Account">
+                <input type="hidden" asp-for="Name" value="@Model.Name" />
+                <input type="hidden" asp-for="Surname" value="@Model.Surname" />
+                <input type="hidden" asp-for="Email" value="@Model.Email" />
+                <button type="submit" class="action-card btn btn-warning" >Salesforce contact</button>
+            </form>
         </div>
     </div>
-
     <a class="logout-btn btn btn-outline-danger" asp-action="Logout">Log out</a>
 </div>

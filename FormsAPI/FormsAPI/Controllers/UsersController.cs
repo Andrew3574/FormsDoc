@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using Asp.Versioning;
+using AutoMapper;
 using FormsAPI.ModelsDTO.Users;
 using FormsAPI.Services.Auth;
 using Microsoft.AspNetCore.Http;
@@ -10,7 +11,9 @@ using Repositories;
 
 namespace FormsAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [ApiVersion(1.0)]
+    [ApiVersion(2.0)]
+    [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
     [JwtAuth("admin")]
     public class UsersController : ControllerBase

@@ -1,0 +1,87 @@
+﻿@using FormsAPP.Models.Account.Salesforce
+@model SalesforceContact
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <title>Salesforce Contact</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+            color: #333;
+        }
+
+        .form-container {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+            .form-input:focus {
+                border-color: #4a90e2;
+                outline: none;
+                box-shadow: 0 0 0 2px rgba(74,144,226,0.2);
+            }
+
+        .submit-btn {
+            background-color: #4a90e2;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+            .submit-btn:hover {
+                background-color: #3a7bc8;
+            }
+
+        h2 {
+            color: #444;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    @if (!string.IsNullOrEmpty(ViewData["ErrorMessage"]?.ToString()))
+    {
+        <div class="alert alert-danger" role="alert">
+            @ViewData["ErrorMessage"]
+        </div>
+    }
+    <div class="form-container">
+        <h2>Contact Information</h2>
+        <form method="post">
+            <input type="text" class="form-input" name="FirstName" value="@Model.FirstName" placeholder="First Name" required />
+            <input type="text" class="form-input" name="LastName" value="@Model.LastName" placeholder="Last Name" required />
+            <input type="email" class="form-input" name="Email" value="@Model.Email" placeholder="Email (example@domain.com)" required />
+            <input type="tel" class="form-input" name="Phone" value="@Model.Phone" placeholder="Phone (+123456789)" />
+            <input type="submit" class="submit-btn" value="Submit" />
+        </form>
+    </div>
+</body>
+</html>

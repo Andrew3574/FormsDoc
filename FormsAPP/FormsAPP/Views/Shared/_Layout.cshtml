@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@{
+    string link = $"{Context.Request.Scheme}://{Context.Request.Host}{Context.Request.Path}{Context.Request.QueryString}";
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -8,6 +12,130 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/FormsAPP.styles.css" asp-append-version="true" />
 </head>
+<style>
+    /* Основные стили формы */
+    .hiddenBugForm {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.5);
+        z-index: 1050;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .reportContainer {
+        background-color: lavender;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        width: 90%;
+        max-width: 500px;
+        min-width: 375px;
+        padding: 25px;
+        border-radius: 8px;
+        margin: 0 auto;
+    }
+
+    /* Центрирование содержимого формы */
+    .hiddenBugForm form {
+        width: 100%;
+    }
+
+    /* Стили для заголовка */
+    .reportContainer h3 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    /* Стили для полей ввода */
+    .hiddenBugForm input[type="text"],
+    .hiddenBugForm select,
+    .hiddenBugForm textarea {
+        width: 100%;
+        padding: 10px;
+        margin: 8px 0 15px 0;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    .hiddenBugForm textarea {
+        height: 120px;
+        resize: vertical;
+    }
+
+    /* Стили для кнопок */
+    .hiddenBugForm button,
+    .hiddenBugForm input[type="submit"] {
+        padding: 8px 16px;
+        margin-top: 10px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+    }
+
+    /* Кнопка Submit */
+    .hiddenBugForm input[type="submit"] {
+        background-color: #4CAF50;
+        color: white;
+    }
+
+    /* Кнопка Cancel */
+    .hiddenBugForm button {
+        background-color: #e9ecef;
+        color: #495057;
+        margin-right: 10px;
+        border: 1px solid #ced4da;
+    }
+
+    /* Эффекты при наведении */
+    .hiddenBugForm input[type="submit"]:hover {
+        background-color: #45a049;
+    }
+
+    .hiddenBugForm button:hover {
+        background-color: #d6d8db;
+    }
+
+    /* Стили для меток */
+    .hiddenBugForm label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: 500;
+        color: #495057;
+    }
+
+    /* Контейнер кнопок */
+    .button-container {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 15px;
+    }
+
+    /* Остальные стили */
+    .navbar {
+        min-height: 60px;
+    }
+
+    .navbar-brand-container {
+        margin-right: 1rem;
+    }
+
+    .navbar-nav .nav-item {
+        margin: 0 0.25rem;
+    }
+
+    .container {
+        max-width: 1200px;
+        min-width: 330px;
+        padding: 0 15px;
+    }
+</style>
+
 <body>
     <header style="z-index:10;top:0;position:sticky;">
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3 py-2" style="z-index:10;top:0;position:sticky;
@@ -31,49 +159,68 @@
                             </li>                            
                         }
                     </ul>
-                    @if(Context.Request.Cookies.TryGetValue("jwt",out var token))
-                    {
-                        <div class="d-flex align-items-center ms-auto">
-                            <a asp-controller="Account" asp-action="UserProfile" class="text-decoration-none text-black">
-                                Account manager
-                                <img src="~/images/profile_icon.png"
-                                class="rounded-circle object-fit-cover border border-light"
-                                width="36"
-                                height="36"
-                                alt="Profile" />
-                            </a>
-                        </div>
-                    }
-                    else
-                    {
-                        <div class="d-flex align-items-center ms-auto btn border-primary">
-                            <a class="nav-link text-dark px-2 " asp-area="" asp-controller="Account" asp-action="Login">Login</a>
-                        </div>
-                    }
+
+                    <div class="d-flex align-items-center ms-auto gap-3">
+
+                        <button class=" rounded-2 btn btn-outline-warning border-0" onclick="ReportBugDisplay()">
+                            <i class="fa fa-bug "></i>
+                        </button>
+
+                        @if (Context.Request.Cookies.TryGetValue("jwt", out var token))
+                        {
+                            <div class="d-flex align-items-center ms-auto">
+                                <a asp-controller="Account" asp-action="UserProfile" class="text-decoration-none text-black">
+                                    Account manager
+                                    <img src="~/images/profile_icon.png"
+                                         class="rounded-circle object-fit-cover border border-light"
+                                         width="36"
+                                         height="36"
+                                         alt="Profile" />
+                                </a>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="d-flex align-items-center ms-auto btn border-primary">
+                                <a class="nav-link text-dark px-2 " asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+                            </div>
+                        }
+                    </div>                   
+                    
                 </div>
             </div>
         </nav>
+
+        <form method="post" asp-action="ReportBug" asp-controller="Account">
+            <div class="hiddenBugForm">
+                <div class="reportContainer">
+                    <h3>Report a Bug</h3>
+                    <input type="hidden" name="Link" value="@(link)" />
+
+                    <label>Your Email:</label>
+                    <input required type="text" name="ReportedBy" value="@(Context.Session.GetString("Email") ?? string.Empty)" placeholder="your@email.com" />
+
+                    <label>Priority:</label>
+                    <select name="Priority">
+                        <option value="low">Low</option>
+                        <option value="average" selected>Medium</option>
+                        <option value="high">High</option>
+                    </select>
+
+                    <label>Issue Description:</label>
+                    <textarea required name="Issue" maxlength="400" placeholder="Describe the issue..."></textarea>
+
+                    <div class="button-container">
+                        <button type="button" onclick="ReportBugDisplay()">Cancel</button>
+                        <input type="submit" value="Submit" />
+                    </div>
+                </div>
+            </div>
+        </form>
+
+
     </header>
-
-    <style>
-        .navbar {
-            min-height: 60px; 
-        }
-
-        .navbar-brand-container {
-            margin-right: 1rem;
-        }
-
-        .navbar-nav .nav-item {
-            margin: 0 0.25rem;
-        }
-
-        .container {
-            max-width: 1200px;
-            min-width: 330px;
-            padding: 0 15px;
-        }
-    </style>
+   
 
     <div class="container">
         <main role="main" class="pb-3">
@@ -83,7 +230,18 @@
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>    
     @await RenderSectionAsync("Scripts", required: false)
+
+    <script>
+        function ReportBugDisplay(){
+            const hiddenBugForm = document.querySelector(".hiddenBugForm");
+            if(hiddenBugForm.style.display=="block")
+                hiddenBugForm.style.display="none";
+            else
+                hiddenBugForm.style.display="block";
+        }
+
+    </script>
 </body>
 </html>

@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using Asp.Versioning;
+using AutoMapper;
 using FormsAPI.ModelsDTO.FormAnswers;
 using FormsAPI.ModelsDTO.FormAnswers.CRUD;
 using FormsAPI.ModelsDTO.Forms;
@@ -6,6 +7,7 @@ using FormsAPI.ModelsDTO.Forms.CRUD_DTO;
 using FormsAPI.Services;
 using FormsAPI.Services.Auth;
 using FormsAPI.Services.Elastic;
+using FormsAPI.Services.SalesForce;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Writers;
@@ -17,7 +19,9 @@ using static Org.BouncyCastle.Bcpg.Attr.ImageAttrib;
 
 namespace FormsAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [ApiVersion(1.0)]
+    [ApiVersion(2.0)]
+    [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
     public class FormsController : ControllerBase
     {
@@ -55,6 +59,8 @@ namespace FormsAPI.Controllers
             _formQuestionRepository = formQuestionRepository;
             _formQuestionOptionsRepository = formQuestionOptionsRepository;
         }
+
+       
 
         [HttpPost("CreateIndex")]
         public async Task<IActionResult> CreateIndex(string indexName)

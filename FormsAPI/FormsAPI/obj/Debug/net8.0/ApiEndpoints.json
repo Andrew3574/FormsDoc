@@ -2,7 +2,7 @@
   {
     "ContainingType": "FormsAPI.Controllers.AccountController",
     "Method": "CheckRecoveryCode",
-    "RelativePath": "api/Account/CheckCode",
+    "RelativePath": "api/v1/Account/CheckCode",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -18,7 +18,7 @@
   {
     "ContainingType": "FormsAPI.Controllers.AccountController",
     "Method": "GetAnsweredForms",
-    "RelativePath": "api/Account/GetAnsweredForms",
+    "RelativePath": "api/v1/Account/GetAnsweredForms",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -34,7 +34,7 @@
   {
     "ContainingType": "FormsAPI.Controllers.AccountController",
     "Method": "SendRecoveryCode",
-    "RelativePath": "api/Account/GetCode",
+    "RelativePath": "api/v1/Account/GetCode",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -50,7 +50,7 @@
   {
     "ContainingType": "FormsAPI.Controllers.AccountController",
     "Method": "GetUserForms",
-    "RelativePath": "api/Account/GetUserForms",
+    "RelativePath": "api/v1/Account/GetUserForms",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -66,7 +66,7 @@
   {
     "ContainingType": "FormsAPI.Controllers.AccountController",
     "Method": "GetUserProfileInfo",
-    "RelativePath": "api/Account/GetUserProfileByToken",
+    "RelativePath": "api/v1/Account/GetUserProfileByToken",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -82,7 +82,7 @@
   {
     "ContainingType": "FormsAPI.Controllers.AccountController",
     "Method": "GetUserProfileInfo",
-    "RelativePath": "api/Account/GetUserProfileByUserId",
+    "RelativePath": "api/v1/Account/GetUserProfileByUserId",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -98,7 +98,7 @@
   {
     "ContainingType": "FormsAPI.Controllers.AccountController",
     "Method": "Login",
-    "RelativePath": "api/Account/Login",
+    "RelativePath": "api/v1/Account/Login",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -114,7 +114,7 @@
   {
     "ContainingType": "FormsAPI.Controllers.AccountController",
     "Method": "RecoverPassword",
-    "RelativePath": "api/Account/RecoverPassword",
+    "RelativePath": "api/v1/Account/RecoverPassword",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -130,7 +130,7 @@
   {
     "ContainingType": "FormsAPI.Controllers.AccountController",
     "Method": "Register",
-    "RelativePath": "api/Account/Register",
+    "RelativePath": "api/v1/Account/Register",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -146,7 +146,7 @@
   {
     "ContainingType": "FormsAPI.Controllers.FormsController",
     "Method": "AnsweredFormTemplateInfo",
-    "RelativePath": "api/Forms/AnsweredFormTemplateInfo",
+    "RelativePath": "api/v1/Forms/AnsweredFormTemplateInfo",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -172,7 +172,7 @@
   {
     "ContainingType": "FormsAPI.Controllers.FormsController",
     "Method": "CommentAction",
-    "RelativePath": "api/Forms/CommentAction",
+    "RelativePath": "api/v1/Forms/CommentAction",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -188,7 +188,7 @@
   {
     "ContainingType": "FormsAPI.Controllers.FormsController",
     "Method": "CreateAnswer",
-    "RelativePath": "api/Forms/CreateAnswer",
+    "RelativePath": "api/v1/Forms/CreateAnswer",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -204,7 +204,7 @@
   {
     "ContainingType": "FormsAPI.Controllers.FormsController",
     "Method": "CreateForm",
-    "RelativePath": "api/Forms/CreateForm",
+    "RelativePath": "api/v1/Forms/CreateForm",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -220,7 +220,7 @@
   {
     "ContainingType": "FormsAPI.Controllers.FormsController",
     "Method": "CreateIndex",
-    "RelativePath": "api/Forms/CreateIndex",
+    "RelativePath": "api/v1/Forms/CreateIndex",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -236,7 +236,7 @@
   {
     "ContainingType": "FormsAPI.Controllers.FormsController",
     "Method": "FilterTagsByName",
-    "RelativePath": "api/Forms/FilterTagsByName",
+    "RelativePath": "api/v1/Forms/FilterTagsByName",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -262,7 +262,7 @@
   {
     "ContainingType": "FormsAPI.Controllers.FormsController",
     "Method": "FilterUsersByEmail",
-    "RelativePath": "api/Forms/FilterUsersByEmail",
+    "RelativePath": "api/v1/Forms/FilterUsersByEmail",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -288,7 +288,7 @@
   {
     "ContainingType": "FormsAPI.Controllers.FormsController",
     "Method": "FormTemplateInfo",
-    "RelativePath": "api/Forms/FormTemplateInfo",
+    "RelativePath": "api/v1/Forms/FormTemplateInfo",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -314,7 +314,7 @@
   {
     "ContainingType": "FormsAPI.Controllers.FormsController",
     "Method": "FullTextSearch",
-    "RelativePath": "api/Forms/FullTextSearch",
+    "RelativePath": "api/v1/Forms/FullTextSearch",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -330,7 +330,7 @@
   {
     "ContainingType": "FormsAPI.Controllers.FormsController",
     "Method": "GetAllFormsByKey",
-    "RelativePath": "api/Forms/GetAllForms",
+    "RelativePath": "api/v1/Forms/GetAllForms",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -340,7 +340,7 @@
   {
     "ContainingType": "FormsAPI.Controllers.FormsController",
     "Method": "GetFormsByBatch",
-    "RelativePath": "api/Forms/GetByBatch/{batch}",
+    "RelativePath": "api/v1/Forms/GetByBatch/{batch}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -356,7 +356,7 @@
   {
     "ContainingType": "FormsAPI.Controllers.FormsController",
     "Method": "GetFormAnswers",
-    "RelativePath": "api/Forms/GetFormAnswers",
+    "RelativePath": "api/v1/Forms/GetFormAnswers",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -382,7 +382,7 @@
   {
     "ContainingType": "FormsAPI.Controllers.FormsController",
     "Method": "GetFormForUpdate",
-    "RelativePath": "api/Forms/GetFormForUpdate",
+    "RelativePath": "api/v1/Forms/GetFormForUpdate",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -398,7 +398,7 @@
   {
     "ContainingType": "FormsAPI.Controllers.FormsController",
     "Method": "LikeAction",
-    "RelativePath": "api/Forms/LikeAction",
+    "RelativePath": "api/v1/Forms/LikeAction",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -414,7 +414,7 @@
   {
     "ContainingType": "FormsAPI.Controllers.FormsController",
     "Method": "GetFormByKey",
-    "RelativePath": "api/Forms/SearchForm/{key}",
+    "RelativePath": "api/v1/Forms/SearchForm/{key}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -430,7 +430,7 @@
   {
     "ContainingType": "FormsAPI.Controllers.FormsController",
     "Method": "UpdateAnswer",
-    "RelativePath": "api/Forms/UpdateAnswer",
+    "RelativePath": "api/v1/Forms/UpdateAnswer",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -446,7 +446,7 @@
   {
     "ContainingType": "FormsAPI.Controllers.FormsController",
     "Method": "UpdateForm",
-    "RelativePath": "api/Forms/UpdateForm",
+    "RelativePath": "api/v1/Forms/UpdateForm",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -462,7 +462,7 @@
   {
     "ContainingType": "FormsAPI.Controllers.FormsController",
     "Method": "UploadImage",
-    "RelativePath": "api/Forms/UploadImage",
+    "RelativePath": "api/v1/Forms/UploadImage",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -488,7 +488,7 @@
   {
     "ContainingType": "FormsAPI.Controllers.UsersController",
     "Method": "Block",
-    "RelativePath": "api/Users/Block",
+    "RelativePath": "api/v1/Users/Block",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -504,7 +504,7 @@
   {
     "ContainingType": "FormsAPI.Controllers.UsersController",
     "Method": "Delete",
-    "RelativePath": "api/Users/Delete",
+    "RelativePath": "api/v1/Users/Delete",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -520,7 +520,7 @@
   {
     "ContainingType": "FormsAPI.Controllers.UsersController",
     "Method": "DemoteToUser",
-    "RelativePath": "api/Users/DemoteToUser",
+    "RelativePath": "api/v1/Users/DemoteToUser",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -536,7 +536,7 @@
   {
     "ContainingType": "FormsAPI.Controllers.UsersController",
     "Method": "FilterByEmail",
-    "RelativePath": "api/Users/FilterByEmail",
+    "RelativePath": "api/v1/Users/FilterByEmail",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -552,7 +552,7 @@
   {
     "ContainingType": "FormsAPI.Controllers.UsersController",
     "Method": "GetUsersByBatch",
-    "RelativePath": "api/Users/GetByBatch/{batch}",
+    "RelativePath": "api/v1/Users/GetByBatch/{batch}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -568,7 +568,7 @@
   {
     "ContainingType": "FormsAPI.Controllers.UsersController",
     "Method": "PromoteUser",
-    "RelativePath": "api/Users/PromoteToAdmin",
+    "RelativePath": "api/v1/Users/PromoteToAdmin",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -584,7 +584,637 @@
   {
     "ContainingType": "FormsAPI.Controllers.UsersController",
     "Method": "Unblock",
-    "RelativePath": "api/Users/Unblock",
+    "RelativePath": "api/v1/Users/Unblock",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "indexes",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FormsAPI.Controllers.AccountController",
+    "Method": "CheckRecoveryCode",
+    "RelativePath": "api/v2/Account/CheckCode",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userDto",
+        "Type": "FormsAPI.ModelsDTO.Account.RecoveryDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FormsAPI.Controllers.AccountController",
+    "Method": "CreateSalesforceContact",
+    "RelativePath": "api/v2/Account/CreateSalesforceContact",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "contact",
+        "Type": "FormsAPI.ModelsDTO.Account.Salesforce.SalesforceContact",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FormsAPI.Controllers.AccountController",
+    "Method": "GetAnsweredForms",
+    "RelativePath": "api/v2/Account/GetAnsweredForms",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FormsAPI.Controllers.AccountController",
+    "Method": "SendRecoveryCode",
+    "RelativePath": "api/v2/Account/GetCode",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "email",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FormsAPI.Controllers.AccountController",
+    "Method": "GetUserForms",
+    "RelativePath": "api/v2/Account/GetUserForms",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FormsAPI.Controllers.AccountController",
+    "Method": "GetUserProfileInfo",
+    "RelativePath": "api/v2/Account/GetUserProfileByToken",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "token",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FormsAPI.Controllers.AccountController",
+    "Method": "GetUserProfileInfo",
+    "RelativePath": "api/v2/Account/GetUserProfileByUserId",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FormsAPI.Controllers.AccountController",
+    "Method": "Login",
+    "RelativePath": "api/v2/Account/Login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userDto",
+        "Type": "FormsAPI.ModelsDTO.Account.LoginDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FormsAPI.Controllers.AccountController",
+    "Method": "RecoverPassword",
+    "RelativePath": "api/v2/Account/RecoverPassword",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userDto",
+        "Type": "FormsAPI.ModelsDTO.Account.LoginDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FormsAPI.Controllers.AccountController",
+    "Method": "Register",
+    "RelativePath": "api/v2/Account/Register",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userDto",
+        "Type": "FormsAPI.ModelsDTO.Account.RegisterDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FormsAPI.Controllers.AccountController",
+    "Method": "ReportBug",
+    "RelativePath": "api/v2/Account/ReportBug",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "bugReport",
+        "Type": "FormsAPI.ModelsDTO.Account.BugReportDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FormsAPI.Controllers.FormsController",
+    "Method": "AnsweredFormTemplateInfo",
+    "RelativePath": "api/v2/Forms/AnsweredFormTemplateInfo",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "answerId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "userId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "userRole",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FormsAPI.Controllers.FormsController",
+    "Method": "CommentAction",
+    "RelativePath": "api/v2/Forms/CommentAction",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "commentDto",
+        "Type": "FormsAPI.ModelsDTO.Forms.CreateCommentDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FormsAPI.Controllers.FormsController",
+    "Method": "CreateAnswer",
+    "RelativePath": "api/v2/Forms/CreateAnswer",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "answerDTO",
+        "Type": "FormsAPI.ModelsDTO.FormAnswers.CRUD.CreateFormAnswerDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FormsAPI.Controllers.FormsController",
+    "Method": "CreateForm",
+    "RelativePath": "api/v2/Forms/CreateForm",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "formDTO",
+        "Type": "FormsAPI.ModelsDTO.Forms.CRUD_DTO.CreateFormDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FormsAPI.Controllers.FormsController",
+    "Method": "CreateIndex",
+    "RelativePath": "api/v2/Forms/CreateIndex",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "indexName",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FormsAPI.Controllers.FormsController",
+    "Method": "FilterTagsByName",
+    "RelativePath": "api/v2/Forms/FilterTagsByName",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "query",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[FormsAPI.ModelsDTO.Forms.FilterTagDTO, FormsAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "FormsAPI.Controllers.FormsController",
+    "Method": "FilterUsersByEmail",
+    "RelativePath": "api/v2/Forms/FilterUsersByEmail",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "query",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[FormsAPI.ModelsDTO.Forms.FilterUserDTO, FormsAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "FormsAPI.Controllers.FormsController",
+    "Method": "FormTemplateInfo",
+    "RelativePath": "api/v2/Forms/FormTemplateInfo",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "formId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "userId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "userRole",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FormsAPI.Controllers.FormsController",
+    "Method": "FullTextSearch",
+    "RelativePath": "api/v2/Forms/FullTextSearch",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "query",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FormsAPI.Controllers.FormsController",
+    "Method": "GetAllFormsByKey",
+    "RelativePath": "api/v2/Forms/GetAllForms",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FormsAPI.Controllers.FormsController",
+    "Method": "GetFormsByBatch",
+    "RelativePath": "api/v2/Forms/GetByBatch/{batch}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "batch",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FormsAPI.Controllers.FormsController",
+    "Method": "GetFormAnswers",
+    "RelativePath": "api/v2/Forms/GetFormAnswers",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "formId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "userId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "userRole",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FormsAPI.Controllers.FormsController",
+    "Method": "GetFormForUpdate",
+    "RelativePath": "api/v2/Forms/GetFormForUpdate",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "formId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FormsAPI.Controllers.FormsController",
+    "Method": "LikeAction",
+    "RelativePath": "api/v2/Forms/LikeAction",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "likeDto",
+        "Type": "FormsAPI.ModelsDTO.Forms.LikeDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FormsAPI.Controllers.FormsController",
+    "Method": "GetFormByKey",
+    "RelativePath": "api/v2/Forms/SearchForm/{key}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "key",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FormsAPI.Controllers.FormsController",
+    "Method": "UpdateAnswer",
+    "RelativePath": "api/v2/Forms/UpdateAnswer",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "answerDTO",
+        "Type": "FormsAPI.ModelsDTO.FormAnswers.CRUD.AnsweredFormTemplateDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FormsAPI.Controllers.FormsController",
+    "Method": "UpdateForm",
+    "RelativePath": "api/v2/Forms/UpdateForm",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "formDTO",
+        "Type": "FormsAPI.ModelsDTO.Forms.CRUD_DTO.UpdateFormDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FormsAPI.Controllers.FormsController",
+    "Method": "UploadImage",
+    "RelativePath": "api/v2/Forms/UploadImage",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "file",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.String",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "FormsAPI.Controllers.UsersController",
+    "Method": "Block",
+    "RelativePath": "api/v2/Users/Block",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "indexes",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FormsAPI.Controllers.UsersController",
+    "Method": "Delete",
+    "RelativePath": "api/v2/Users/Delete",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "indexes",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FormsAPI.Controllers.UsersController",
+    "Method": "DemoteToUser",
+    "RelativePath": "api/v2/Users/DemoteToUser",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "indexes",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FormsAPI.Controllers.UsersController",
+    "Method": "FilterByEmail",
+    "RelativePath": "api/v2/Users/FilterByEmail",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "email",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FormsAPI.Controllers.UsersController",
+    "Method": "GetUsersByBatch",
+    "RelativePath": "api/v2/Users/GetByBatch/{batch}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "batch",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FormsAPI.Controllers.UsersController",
+    "Method": "PromoteUser",
+    "RelativePath": "api/v2/Users/PromoteToAdmin",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "indexes",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FormsAPI.Controllers.UsersController",
+    "Method": "Unblock",
+    "RelativePath": "api/v2/Users/Unblock",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,

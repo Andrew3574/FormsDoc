@@ -2,12 +2,12 @@
 {
     public class ElasticSettings
     {
-        public string Url { get; set; }
+        public string Url { get; set; } = null!;
 
-        public string DefaultIndex { get; set; }
+        public string DefaultIndex { get; set; } = null!;
 
-        public string Username { get; set; }
+        public string Username { get; set; } = null!;
 
-        public string Password { get; set; }
+        public string Password { get; set; } = null!;
     }
 }

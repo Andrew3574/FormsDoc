@@ -62,9 +62,21 @@
               "target": "Package",
               "version": "[4.0.2, )"
             },
+            "Asp.Versioning.Mvc.ApiExplorer": {
+              "target": "Package",
+              "version": "[8.1.0, )"
+            },
             "AutoMapper": {
               "target": "Package",
               "version": "[14.0.0, )"
+            },
+            "Azure.Identity": {
+              "target": "Package",
+              "version": "[1.14.2, )"
+            },
+            "Dropbox.Api": {
+              "target": "Package",
+              "version": "[7.0.0, )"
             },
             "Elastic.Clients.Elasticsearch": {
               "target": "Package",
@@ -94,6 +106,14 @@
               "target": "Package",
               "version": "[9.0.6, )"
             },
+            "Microsoft.Graph": {
+              "target": "Package",
+              "version": "[5.85.0, )"
+            },
+            "Microsoft.Identity.Client": {
+              "target": "Package",
+              "version": "[4.73.1, )"
+            },
             "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": {
               "target": "Package",
               "version": "[1.21.0, )"
@@ -113,6 +133,10 @@
             "OnixLabs.Security.Cryptography": {
               "target": "Package",
               "version": "[12.1.1, )"
+            },
+            "SalesforceSharp": {
+              "target": "Package",
+              "version": "[1.1.0, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",

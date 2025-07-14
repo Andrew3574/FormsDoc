@@ -1,13 +1,16 @@
 ﻿using AutoMapper;
 using FormsAPP.Models.Account;
+using FormsAPP.Models.Account.Salesforce;
 using FormsAPP.Models.FormAnswers;
 using FormsAPP.Models.Forms.CRUD;
 using FormsAPP.Models.Users;
 using FormsAPP.Profiles;
 using FormsAPP.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ActionConstraints;
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
+using System.Threading.Tasks;
 
 namespace FormsAPP.Controllers
 {
@@ -22,6 +25,31 @@ namespace FormsAPP.Controllers
             _mapper = mapper;
         }
 
+        [HttpPost]  
+        public async Task<IActionResult> ReportBug(BugReport report)
+        {
+            var response = await _httpClient.PostAsJsonAsync("Account/ReportBug",report);
+            if(response.IsSuccessStatusCode) TempData["SuccessMessage"] = await response.Content.ReadAsStringAsync();            
+            else TempData["ErrorMessage"] = await response.Content.ReadAsStringAsync();
+            return Redirect(report.Link);
+        }
+
+        public IActionResult CreateSFContact(UserModel model)
+        {
+            return View(_mapper.Map<SalesforceContact>(model));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateSFContact(SalesforceContact contact)
+        {
+            if(ModelState.IsValid)
+            {
+                var response = await _httpClient.PostAsJsonAsync("Account/CreateSalesforceContact", contact);
+                if (response.IsSuccessStatusCode) return RedirectToAction("UserProfile");
+                ViewData["ErrorMessage"] = await response.Content.ReadAsStringAsync();
+            }
+            return View(contact);
+        } 
         public IActionResult Register()
         {
             return View();

@@ -61,6 +61,11 @@ namespace Repositories
             return null;
         }
 
+        public IEnumerable<string> GetAdminEmails()
+        {
+            return _context.Users.Where(u=>u.Role==UserRole.admin).Select(u => u.Email);
+        }
+
         public async Task<IEnumerable<User>?> GetByEmail(IEnumerable<string> emails)
         {
             return await _context.Users.AsNoTracking().Where(u => emails.Contains(u.Email)).ToListAsync();
