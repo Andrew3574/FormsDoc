@@ -11,5 +11,6 @@
         public string ApiEndpoint { get; set; } = null!; 
         public string AccessToken {  get; set; } = null!;
         public string InstanceUrl { get; set; } = null!;
+        public DateTime TokenExpiration { get; set; }
     }
 }

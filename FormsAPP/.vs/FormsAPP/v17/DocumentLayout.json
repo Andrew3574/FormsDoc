@@ -291,8 +291,7 @@
               "RelativeToolTip": "FormsAPP\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAABIGgEAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-07-14T17:13:33.377Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-14T17:13:33.377Z"
             },
             {
               "$type": "Document",
@@ -304,8 +303,7 @@
               "RelativeToolTip": "FormsAPP\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
               "ViewState": "AgIAACoJAAAAAAAAAAD4vz0JAAA3AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-07-14T17:13:31.391Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-14T17:13:31.391Z"
             },
             {
               "$type": "Document",
@@ -317,8 +315,7 @@
               "RelativeToolTip": "FormsAPP\\Models\\Account\\BugReport.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAuwAcAAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-13T17:06:47.011Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-13T17:06:47.011Z"
             },
             {
               "$type": "Document",
@@ -402,8 +399,7 @@
               "RelativeToolTip": "FormsAPP\\Views\\Forms\\UpdateAnswerPage.cshtml",
               "ViewState": "AgIAAM0AAAAAAAAAAAAAAJEAAAAZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-30T15:23:51.44Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-30T15:23:51.44Z"
             },
             {
               "$type": "Document",
@@ -463,8 +459,7 @@
               "RelativeToolTip": "FormsAPP\\Views\\Forms\\UpdateFormPage.cshtml",
               "ViewState": "AgIAAGsCAAAAAAAAAAAAAPEBAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-28T15:19:13.835Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-28T15:19:13.835Z"
             },
             {
               "$type": "Document",
@@ -476,8 +471,7 @@
               "RelativeToolTip": "FormsAPP\\Views\\Account\\UserProfile.cshtml",
               "ViewState": "AgIAAGQAAAAAAAAAAAAAAH0AAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-28T14:59:24.787Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-28T14:59:24.787Z"
             },
             {
               "$type": "Document",
@@ -525,8 +519,7 @@
               "RelativeToolTip": "FormsAPP\\Views\\Account\\Register.cshtml",
               "ViewState": "AgIAABkAAAAAAAAAAAAAAAoAAABMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-27T15:43:53.485Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-27T15:43:53.485Z"
             },
             {
               "$type": "Document",
@@ -634,8 +627,7 @@
               "RelativeToolTip": "FormsAPP\\Views\\Forms\\CreateFormAnswer.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAH8AAAAxAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-25T16:25:54.191Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-25T16:25:54.191Z"
             },
             {
               "$type": "Document",
@@ -789,8 +781,7 @@
               "RelativeToolTip": "FormsAPP\\Views\\Forms\\CreateForm.cshtml",
               "ViewState": "AgIAALgBAAAAAAAAAAAAAM8BAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-19T17:17:29.168Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-19T17:17:29.168Z"
             },
             {
               "$type": "Document",
@@ -826,8 +817,7 @@
               "RelativeToolTip": "FormsAPP\\Views\\Forms\\Index.cshtml",
               "ViewState": "AgIAAGoAAAAAAAAAAAAIwH4AAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-17T18:13:52.285Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-17T18:13:52.285Z"
             },
             {
               "$type": "Document",
@@ -909,7 +899,7 @@
               "RelativeDocumentMoniker": "FormsAPP\\Views\\Shared\\_Layout.cshtml",
               "ToolTip": "D:\\SummerCourse\\CourseProject\\FormsAPP\\FormsAPP\\Views\\Shared\\_Layout.cshtml",
               "RelativeToolTip": "FormsAPP\\Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AgIAAM0AAAAAAAAAAAAAANwAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAM0AAAAAAAAAAAAAAN0AAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-06-16T14:13:00.39Z",
               "EditorCaption": ""
@@ -984,8 +974,7 @@
               "RelativeToolTip": "FormsAPP\\Controllers\\UsersController.cs",
               "ViewState": "AgIAAFQAAAAAAAAAAAAAABkAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-16T12:53:59.96Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-16T12:53:59.96Z"
             },
             {
               "$type": "Document",
@@ -997,8 +986,7 @@
               "RelativeToolTip": "FormsAPP\\Controllers\\AccountController.cs",
               "ViewState": "AgIAABEAAAAAAAAAAAAuwCoAAAAZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-16T12:53:42.792Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-16T12:53:42.792Z"
             },
             {
               "$type": "Document",

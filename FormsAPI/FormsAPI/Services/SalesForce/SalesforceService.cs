@@ -19,6 +19,7 @@ namespace FormsAPI.Services.SalesForce
 
         public async Task<bool> CreateContact(SalesforceContact contact)
         {
+            await IsValidToken();
             using var client = new HttpClient();
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _settings.AccessToken);
             var response = await client.PostAsJsonAsync($"{_settings.InstanceUrl}{_settings.ApiEndpoint}/sobjects/Contact/", contact);
@@ -31,11 +32,9 @@ namespace FormsAPI.Services.SalesForce
             using var htppclient = new HttpClient();
             var content = new FormUrlEncodedContent(new[]
             {
-                new KeyValuePair<string, string>("grant_type","password"),
+                new KeyValuePair<string, string>("grant_type","client_credentials"),
                 new KeyValuePair<string, string>("client_id", _settings.ClientId),
                 new KeyValuePair<string, string>("client_secret", _settings.ClientSecret),
-                new KeyValuePair<string, string>("username", _settings.Username),
-                new KeyValuePair<string, string>("password", $"{_settings.Password}{_settings.Token}"),
             });
             var request = new HttpRequestMessage
             {
@@ -47,6 +46,16 @@ namespace FormsAPI.Services.SalesForce
             var responseContent = await response.Content.ReadAsStringAsync();
             var authResponse = System.Text.Json.JsonSerializer.Deserialize<SFAuthResponse>(responseContent);
             return response.IsSuccessStatusCode ? authResponse! : null;
+        }
+
+
+        private async Task IsValidToken()
+        {
+            if (_settings.TokenExpiration > DateTime.UtcNow.AddMinutes(5)) return;
+            var authResponse = await Auth();
+            _settings.AccessToken = authResponse.access_token;
+            _settings.InstanceUrl = authResponse.instance_url;
+            _settings.TokenExpiration = DateTime.UtcNow.AddHours(2);
         }
     }
 }
