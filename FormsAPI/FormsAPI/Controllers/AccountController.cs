@@ -54,6 +54,13 @@ namespace FormsAPI.Controllers
         }
 
         [MapToApiVersion(2.0)]
+        [HttpPost("AuthDropbox")]
+        public async Task AuthDropbox(string code)
+        {
+            await _dropboxAPIService.Auth(code);
+        }
+
+        [MapToApiVersion(2.0)]
         [HttpPost("ReportBug")]
         public async Task<IActionResult> ReportBug(BugReportDTO bugReport)
         {

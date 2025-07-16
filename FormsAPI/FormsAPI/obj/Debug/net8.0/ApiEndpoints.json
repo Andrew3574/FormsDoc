@@ -599,6 +599,28 @@
   },
   {
     "ContainingType": "FormsAPI.Controllers.AccountController",
+    "Method": "AuthDropbox",
+    "RelativePath": "api/v2/Account/AuthDropbox",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "code",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "FormsAPI.Controllers.AccountController",
     "Method": "CheckRecoveryCode",
     "RelativePath": "api/v2/Account/CheckCode",
     "HttpMethod": "POST",

@@ -247,6 +247,27 @@
         }
       }
     },
+    "/api/v2/Account/AuthDropbox": {
+      "post": {
+        "tags": [
+          "Account"
+        ],
+        "parameters": [
+          {
+            "name": "code",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/v2/Account/ReportBug": {
       "post": {
         "tags": [
